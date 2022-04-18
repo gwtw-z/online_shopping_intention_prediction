@@ -37,6 +37,7 @@ class MainWindow(QMainWindow):
         self.ui.closeAppBtn.clicked.connect(QCoreApplication.instance().quit)
         self.ui.minimizeAppBtn.clicked.connect(self.showMinimized)
         self.ui.maximizeRestoreAppBtn.clicked.connect(self.maximize_page)
+        # test
 
     def mousePressEvent(self, QMouseEvent):
         # 改为拖动按钮
