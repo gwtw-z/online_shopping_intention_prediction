@@ -1,0 +1,1 @@
+Pyside6-uic main_PyDracula.ui -o main_PyDracula.py
