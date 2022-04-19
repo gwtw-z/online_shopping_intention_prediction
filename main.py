@@ -30,6 +30,7 @@ class MainWindow(QMainWindow):
         self.ui.btn_home.clicked.connect(self.home_page)
         self.ui.btn_widgets.clicked.connect(self.widget_page)
         self.ui.btn_chart.clicked.connect(self.plot_page)
+        self.ui.btn_save.clicked.connect(self.save_page)
         self.ui.closeAppBtn.clicked.connect(QCoreApplication.instance().quit)
         self.ui.minimizeAppBtn.clicked.connect(self.showMinimized)
         self.ui.maximizeRestoreAppBtn.clicked.connect(self.maximize_page)
@@ -64,6 +65,9 @@ class MainWindow(QMainWindow):
 
     def plot_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.chart_page)
+
+    def save_page(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.save_page)
 
     def choose_file(self):
         self.file_path = QFileDialog.getOpenFileName(

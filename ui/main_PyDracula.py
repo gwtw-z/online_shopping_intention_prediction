@@ -1310,13 +1310,23 @@ class Ui_MainWindow(object):
         self.btn_analysize_2.setFont(font)
         self.btn_analysize_2.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_analysize_2.setStyleSheet(u"background-color: rgb(52, 59, 72);")
-        self.btn_analysize_2.setIcon(icon5)
+        icon6 = QIcon()
+        icon6.addFile(u"images/icons/cil-chart.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_analysize_2.setIcon(icon6)
 
         self.horizontalLayout_7.addWidget(self.btn_analysize_2)
 
-        self.horizontalSpacer = QSpacerItem(240, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.btn_analysize_3 = QPushButton(self.frame_content_wid_2)
+        self.btn_analysize_3.setObjectName(u"btn_analysize_3")
+        self.btn_analysize_3.setMinimumSize(QSize(150, 30))
+        self.btn_analysize_3.setFont(font)
+        self.btn_analysize_3.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_analysize_3.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+        icon7 = QIcon()
+        icon7.addFile(u"images/icons/cil-camera.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_analysize_3.setIcon(icon7)
 
-        self.horizontalLayout_7.addItem(self.horizontalSpacer)
+        self.horizontalLayout_7.addWidget(self.btn_analysize_3)
 
 
         self.verticalLayout_20.addWidget(self.frame_content_wid_2)
@@ -1334,6 +1344,108 @@ class Ui_MainWindow(object):
         self.verticalLayout_22.addWidget(self.row_2)
 
         self.stackedWidget.addWidget(self.chart_page)
+        self.save_page = QWidget()
+        self.save_page.setObjectName(u"save_page")
+        self.verticalLayout_26 = QVBoxLayout(self.save_page)
+        self.verticalLayout_26.setObjectName(u"verticalLayout_26")
+        self.row_4 = QFrame(self.save_page)
+        self.row_4.setObjectName(u"row_4")
+        self.row_4.setFrameShape(QFrame.StyledPanel)
+        self.row_4.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_23 = QVBoxLayout(self.row_4)
+        self.verticalLayout_23.setSpacing(0)
+        self.verticalLayout_23.setObjectName(u"verticalLayout_23")
+        self.verticalLayout_23.setContentsMargins(0, 0, 0, 0)
+        self.frame_div_content_3 = QFrame(self.row_4)
+        self.frame_div_content_3.setObjectName(u"frame_div_content_3")
+        self.frame_div_content_3.setMinimumSize(QSize(0, 110))
+        self.frame_div_content_3.setMaximumSize(QSize(16777215, 110))
+        self.frame_div_content_3.setFrameShape(QFrame.NoFrame)
+        self.frame_div_content_3.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_24 = QVBoxLayout(self.frame_div_content_3)
+        self.verticalLayout_24.setSpacing(0)
+        self.verticalLayout_24.setObjectName(u"verticalLayout_24")
+        self.verticalLayout_24.setContentsMargins(0, 0, 0, 0)
+        self.frame_title_wid_3 = QFrame(self.frame_div_content_3)
+        self.frame_title_wid_3.setObjectName(u"frame_title_wid_3")
+        self.frame_title_wid_3.setMaximumSize(QSize(16777215, 35))
+        self.frame_title_wid_3.setFrameShape(QFrame.StyledPanel)
+        self.frame_title_wid_3.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_25 = QVBoxLayout(self.frame_title_wid_3)
+        self.verticalLayout_25.setObjectName(u"verticalLayout_25")
+        self.labelBoxBlenderInstalation_3 = QLabel(self.frame_title_wid_3)
+        self.labelBoxBlenderInstalation_3.setObjectName(u"labelBoxBlenderInstalation_3")
+        self.labelBoxBlenderInstalation_3.setFont(font)
+        self.labelBoxBlenderInstalation_3.setStyleSheet(u"")
+
+        self.verticalLayout_25.addWidget(self.labelBoxBlenderInstalation_3)
+
+
+        self.verticalLayout_24.addWidget(self.frame_title_wid_3)
+
+        self.frame_content_wid_3 = QFrame(self.frame_div_content_3)
+        self.frame_content_wid_3.setObjectName(u"frame_content_wid_3")
+        self.frame_content_wid_3.setFrameShape(QFrame.NoFrame)
+        self.frame_content_wid_3.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_9 = QHBoxLayout(self.frame_content_wid_3)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.labelVersion_6 = QLabel(self.frame_content_wid_3)
+        self.labelVersion_6.setObjectName(u"labelVersion_6")
+        self.labelVersion_6.setStyleSheet(u"color: rgb(113, 126, 149);")
+        self.labelVersion_6.setLineWidth(1)
+        self.labelVersion_6.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.horizontalLayout_9.addWidget(self.labelVersion_6)
+
+        self.line_file_path_2 = QLineEdit(self.frame_content_wid_3)
+        self.line_file_path_2.setObjectName(u"line_file_path_2")
+        self.line_file_path_2.setMinimumSize(QSize(0, 30))
+        self.line_file_path_2.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+
+        self.horizontalLayout_9.addWidget(self.line_file_path_2)
+
+        self.btn_open_file_2 = QPushButton(self.frame_content_wid_3)
+        self.btn_open_file_2.setObjectName(u"btn_open_file_2")
+        self.btn_open_file_2.setMinimumSize(QSize(150, 30))
+        self.btn_open_file_2.setFont(font)
+        self.btn_open_file_2.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_open_file_2.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+        self.btn_open_file_2.setIcon(icon4)
+
+        self.horizontalLayout_9.addWidget(self.btn_open_file_2)
+
+        self.btn_open_file_3 = QPushButton(self.frame_content_wid_3)
+        self.btn_open_file_3.setObjectName(u"btn_open_file_3")
+        self.btn_open_file_3.setMinimumSize(QSize(150, 30))
+        self.btn_open_file_3.setFont(font)
+        self.btn_open_file_3.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_open_file_3.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+        icon8 = QIcon()
+        icon8.addFile(u"images/icons/cil-save.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_open_file_3.setIcon(icon8)
+
+        self.horizontalLayout_9.addWidget(self.btn_open_file_3)
+
+
+        self.verticalLayout_24.addWidget(self.frame_content_wid_3)
+
+
+        self.verticalLayout_23.addWidget(self.frame_div_content_3)
+
+
+        self.verticalLayout_26.addWidget(self.row_4)
+
+        self.label_2 = QLabel(self.save_page)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_26.addWidget(self.label_2)
+
+        self.verticalSpacer = QSpacerItem(20, 471, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_26.addItem(self.verticalSpacer)
+
+        self.stackedWidget.addWidget(self.save_page)
 
         self.verticalLayout_15.addWidget(self.stackedWidget)
 
@@ -1475,7 +1587,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1585,7 +1697,15 @@ class Ui_MainWindow(object):
         self.comboBox_2.setItemText(2, QCoreApplication.translate("MainWindow", u"Scatter", None))
 
         self.btn_analysize_2.setText(QCoreApplication.translate("MainWindow", u"Go!", None))
+        self.btn_analysize_3.setText(QCoreApplication.translate("MainWindow", u"Hold", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"No view is selected yet.", None))
+        self.labelBoxBlenderInstalation_3.setText(QCoreApplication.translate("MainWindow", u"Please select the folder to save data files.", None))
+        self.labelVersion_6.setText(QCoreApplication.translate("MainWindow", u"Data File Path:", None))
+        self.line_file_path_2.setText("")
+        self.line_file_path_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
+        self.btn_open_file_2.setText(QCoreApplication.translate("MainWindow", u"Select path", None))
+        self.btn_open_file_3.setText(QCoreApplication.translate("MainWindow", u"Save", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"No file saved yet.", None))
         self.btn_message.setText(QCoreApplication.translate("MainWindow", u"Message", None))
         self.btn_print.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))
