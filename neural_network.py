@@ -1,3 +1,4 @@
+import numpy
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -29,20 +30,23 @@ myNet = nn.Sequential(
     nn.Linear(50, 1),
 )
 
+DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+myNet = myNet.to(DEVICE)
+
 
 def test(predict, label):
+    predict = numpy.array(predict)
+    label = numpy.array(label)
     t = predict == label
     accu = np.mean(t)
     return accu
 
 
-table = pd.read_csv('online_shoppers_intention.csv')
+table = pd.read_csv('./data/online_shoppers_intention.csv')
 table = shuffle(table, random_state=3)
 y = table.iloc[:, -1].apply(lambda x: 1 if x is True else 0)
 table = table.drop(columns=['Revenue'])
 X = pd.get_dummies(table)
-# scatter_matrix(X, s=32, alpha=1, c=y, figsize=(25, 25))  # 散点矩阵图
-# plt.suptitle("music data divided into 2 centroids", fontsize=50)
 mm = MinMaxScaler(feature_range=(0, 1))
 X = mm.fit_transform(X)
 train_data, test_data, train_label, test_label = train_test_split(X, y, test_size=0.3, random_state=3, stratify=y)
@@ -55,14 +59,14 @@ print('over-sampling done\n')
 
 # myNet = Net()
 criterion = nn.MSELoss()  # 损失函数
-optimizer = torch.optim.SGD(myNet.parameters(), lr=0.15)  # 优化器
-epochs = 10000  # 训练次数
+optimizer = torch.optim.SGD(myNet.parameters(), lr=0.01)  # 优化器
+epochs = 20000  # 训练次数
 
 
 def check(epoch):
     with torch.no_grad():
-        test_in = torch.from_numpy(test_data).float()
-        test_out = myNet(test_in).squeeze().numpy()
+        test_in = torch.from_numpy(test_data).float().to(DEVICE)
+        test_out = myNet(test_in).squeeze().cpu()
         for i in range(len(test_out)):
             if test_out[i] < 0.5:
                 test_out[i] = 0
@@ -70,12 +74,12 @@ def check(epoch):
                 test_out[i] = 1
         accu = test(test_out, test_label)
         f1 = f1_score(test_label, test_out)
-        print("Epoch:{}\tLoss:{:.10f}\tAccuracy:{:.10f}\tF1-score:{:.10f}".format(epoch, loss.item(), accu, f1))
+        print("Epoch:{}\tLoss:{:.10f}\tAccuracy:{:.10f}\tf1-score:{:.10f}".format(epoch, loss.item(), accu, f1))
 
 
 for i in range(epochs):
-    x_ = torch.from_numpy(train_data).float()
-    y_ = torch.from_numpy(train_label).float()
+    x_ = torch.from_numpy(train_data).float().to(DEVICE)
+    y_ = torch.from_numpy(train_label).float().to(DEVICE)
     out = myNet(x_).squeeze()
     loss = criterion(out, y_)
     optimizer.zero_grad()

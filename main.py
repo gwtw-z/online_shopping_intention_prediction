@@ -17,10 +17,6 @@ class MainWindow(QMainWindow):
         self.maximize_icon.addFile(r':/icons/images/icons/icon_maximize.png', QSize(), QIcon.Normal, QIcon.Off)
         self.restore_icon = QIcon()
         self.restore_icon.addFile(r':/icons/images/icons/icon_restore.png', QSize(), QIcon.Normal, QIcon.Off)
-        # self.ui.btn_home.setToolTip('home')
-        # self.ui.btn_analyze.setToolTip('analyze')
-        # self.ui.btn_chart.setToolTip('chart')
-        # self.ui.btn_save.setToolTip('save')
 
         self.file_path = None
         self.my_clf = None
@@ -37,7 +33,6 @@ class MainWindow(QMainWindow):
         self.ui.closeAppBtn.clicked.connect(QCoreApplication.instance().quit)
         self.ui.minimizeAppBtn.clicked.connect(self.showMinimized)
         self.ui.maximizeRestoreAppBtn.clicked.connect(self.maximize_page)
-        # test
 
     def mousePressEvent(self, QMouseEvent):
         # 改为拖动按钮
@@ -93,7 +88,8 @@ class MainWindow(QMainWindow):
         data = zip(self.result[0], self.result[1])
         for i, (prob, out) in enumerate(data, start=1):
             item_id = QTableWidgetItem(str(i))
-            item_prob = QTableWidgetItem(str(round(prob[1], 10)))
+            # item_prob = QTableWidgetItem(str(round(Decimal(prob[1]), 3)))
+            item_prob = QTableWidgetItem(format(prob[1], '.1%'))
             item_out = QTableWidgetItem(str(out))
             self.ui.tableWidget.setItem(i, 0, item_id)
             self.ui.tableWidget.setItem(i, 1, item_prob)

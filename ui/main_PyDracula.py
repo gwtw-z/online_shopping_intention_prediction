@@ -15,11 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QFrame,
-    QGridLayout, QHBoxLayout, QHeaderView, QLabel,
-    QLineEdit, QMainWindow, QPushButton, QSizePolicy,
-    QStackedWidget, QTableWidget, QTableWidgetItem, QTextEdit,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QComboBox,
+    QFrame, QGridLayout, QHBoxLayout, QHeaderView,
+    QLabel, QLineEdit, QMainWindow, QPushButton,
+    QSizePolicy, QSpacerItem, QStackedWidget, QTableWidget,
+    QTableWidgetItem, QTextEdit, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
@@ -559,10 +559,10 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "")
-        self.appMargins = QVBoxLayout(self.styleSheet)
-        self.appMargins.setSpacing(0)
-        self.appMargins.setObjectName(u"appMargins")
-        self.appMargins.setContentsMargins(10, 10, 10, 10)
+        self.horizontalLayout_8 = QHBoxLayout(self.styleSheet)
+        self.horizontalLayout_8.setSpacing(0)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalLayout_8.setContentsMargins(10, 10, 10, 10)
         self.bgApp = QFrame(self.styleSheet)
         self.bgApp.setObjectName(u"bgApp")
         self.bgApp.setStyleSheet(u"")
@@ -1223,13 +1223,115 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.widgets)
         self.chart_page = QWidget()
         self.chart_page.setObjectName(u"chart_page")
-        self.verticalLayout_20 = QVBoxLayout(self.chart_page)
+        self.verticalLayout_22 = QVBoxLayout(self.chart_page)
+        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
+        self.row_2 = QFrame(self.chart_page)
+        self.row_2.setObjectName(u"row_2")
+        self.row_2.setFrameShape(QFrame.StyledPanel)
+        self.row_2.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_19 = QVBoxLayout(self.row_2)
+        self.verticalLayout_19.setSpacing(0)
+        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
+        self.verticalLayout_19.setContentsMargins(0, 0, 0, 0)
+        self.frame_div_content_2 = QFrame(self.row_2)
+        self.frame_div_content_2.setObjectName(u"frame_div_content_2")
+        self.frame_div_content_2.setMinimumSize(QSize(0, 110))
+        self.frame_div_content_2.setMaximumSize(QSize(16777215, 110))
+        self.frame_div_content_2.setFrameShape(QFrame.NoFrame)
+        self.frame_div_content_2.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_20 = QVBoxLayout(self.frame_div_content_2)
+        self.verticalLayout_20.setSpacing(0)
         self.verticalLayout_20.setObjectName(u"verticalLayout_20")
-        self.label = QLabel(self.chart_page)
+        self.verticalLayout_20.setContentsMargins(0, 0, 0, 0)
+        self.frame_title_wid_2 = QFrame(self.frame_div_content_2)
+        self.frame_title_wid_2.setObjectName(u"frame_title_wid_2")
+        self.frame_title_wid_2.setMaximumSize(QSize(16777215, 35))
+        self.frame_title_wid_2.setFrameShape(QFrame.StyledPanel)
+        self.frame_title_wid_2.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_21 = QVBoxLayout(self.frame_title_wid_2)
+        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.labelBoxBlenderInstalation_2 = QLabel(self.frame_title_wid_2)
+        self.labelBoxBlenderInstalation_2.setObjectName(u"labelBoxBlenderInstalation_2")
+        self.labelBoxBlenderInstalation_2.setFont(font)
+        self.labelBoxBlenderInstalation_2.setStyleSheet(u"")
+
+        self.verticalLayout_21.addWidget(self.labelBoxBlenderInstalation_2)
+
+
+        self.verticalLayout_20.addWidget(self.frame_title_wid_2)
+
+        self.frame_content_wid_2 = QFrame(self.frame_div_content_2)
+        self.frame_content_wid_2.setObjectName(u"frame_content_wid_2")
+        self.frame_content_wid_2.setFrameShape(QFrame.NoFrame)
+        self.frame_content_wid_2.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_7 = QHBoxLayout(self.frame_content_wid_2)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.labelVersion_4 = QLabel(self.frame_content_wid_2)
+        self.labelVersion_4.setObjectName(u"labelVersion_4")
+        self.labelVersion_4.setStyleSheet(u"color: rgb(113, 126, 149);")
+        self.labelVersion_4.setLineWidth(1)
+        self.labelVersion_4.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_7.addWidget(self.labelVersion_4)
+
+        self.comboBox = QComboBox(self.frame_content_wid_2)
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.setObjectName(u"comboBox")
+
+        self.horizontalLayout_7.addWidget(self.comboBox)
+
+        self.comboBox_3 = QComboBox(self.frame_content_wid_2)
+        self.comboBox_3.addItem("")
+        self.comboBox_3.addItem("")
+        self.comboBox_3.setObjectName(u"comboBox_3")
+
+        self.horizontalLayout_7.addWidget(self.comboBox_3)
+
+        self.labelVersion_5 = QLabel(self.frame_content_wid_2)
+        self.labelVersion_5.setObjectName(u"labelVersion_5")
+        self.labelVersion_5.setStyleSheet(u"color: rgb(113, 126, 149);")
+        self.labelVersion_5.setLineWidth(1)
+        self.labelVersion_5.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_7.addWidget(self.labelVersion_5)
+
+        self.comboBox_2 = QComboBox(self.frame_content_wid_2)
+        self.comboBox_2.addItem("")
+        self.comboBox_2.addItem("")
+        self.comboBox_2.addItem("")
+        self.comboBox_2.setObjectName(u"comboBox_2")
+
+        self.horizontalLayout_7.addWidget(self.comboBox_2)
+
+        self.btn_analysize_2 = QPushButton(self.frame_content_wid_2)
+        self.btn_analysize_2.setObjectName(u"btn_analysize_2")
+        self.btn_analysize_2.setMinimumSize(QSize(150, 30))
+        self.btn_analysize_2.setFont(font)
+        self.btn_analysize_2.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_analysize_2.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+        self.btn_analysize_2.setIcon(icon5)
+
+        self.horizontalLayout_7.addWidget(self.btn_analysize_2)
+
+        self.horizontalSpacer = QSpacerItem(240, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_7.addItem(self.horizontalSpacer)
+
+
+        self.verticalLayout_20.addWidget(self.frame_content_wid_2)
+
+
+        self.verticalLayout_19.addWidget(self.frame_div_content_2)
+
+        self.label = QLabel(self.row_2)
         self.label.setObjectName(u"label")
         self.label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_20.addWidget(self.label)
+        self.verticalLayout_19.addWidget(self.label)
+
+
+        self.verticalLayout_22.addWidget(self.row_2)
 
         self.stackedWidget.addWidget(self.chart_page)
 
@@ -1367,13 +1469,13 @@ class Ui_MainWindow(object):
         self.appLayout.addWidget(self.contentBox)
 
 
-        self.appMargins.addWidget(self.bgApp)
+        self.horizontalLayout_8.addWidget(self.bgApp)
 
         MainWindow.setCentralWidget(self.styleSheet)
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1463,7 +1565,27 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"Intention", None));
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
-        self.label.setText(QCoreApplication.translate("MainWindow", u"To be filled.", None))
+        self.labelBoxBlenderInstalation_2.setText(QCoreApplication.translate("MainWindow", u"Please select the way to create view chart.", None))
+        self.labelVersion_4.setText(QCoreApplication.translate("MainWindow", u"View two attributes:  ", None))
+        self.comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"month", None))
+        self.comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"visitor type", None))
+
+#if QT_CONFIG(tooltip)
+        self.comboBox.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.comboBox_3.setItemText(0, QCoreApplication.translate("MainWindow", u"month", None))
+        self.comboBox_3.setItemText(1, QCoreApplication.translate("MainWindow", u"visitor type", None))
+
+#if QT_CONFIG(tooltip)
+        self.comboBox_3.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+        self.labelVersion_5.setText(QCoreApplication.translate("MainWindow", u" in the form of: ", None))
+        self.comboBox_2.setItemText(0, QCoreApplication.translate("MainWindow", u"bar", None))
+        self.comboBox_2.setItemText(1, QCoreApplication.translate("MainWindow", u"pie", None))
+        self.comboBox_2.setItemText(2, QCoreApplication.translate("MainWindow", u"Scatter", None))
+
+        self.btn_analysize_2.setText(QCoreApplication.translate("MainWindow", u"Go!", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"No view is selected yet.", None))
         self.btn_message.setText(QCoreApplication.translate("MainWindow", u"Message", None))
         self.btn_print.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))
