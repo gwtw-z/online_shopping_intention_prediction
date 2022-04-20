@@ -6,6 +6,8 @@ import pandas as pd
 import numpy as np
 
 
+# git config --global http.sslVerify "false"
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -30,7 +32,7 @@ class MainWindow(QMainWindow):
 
     def bind(self):
         self.ui.btn_open_file.clicked.connect(self.choose_file)
-        self.ui.btn_analysize.clicked.connect(self.analyze)
+        self.ui.btn_analyze.clicked.connect(self.show_analysis)
         self.ui.btn_home.clicked.connect(self.home_page)
         self.ui.btn_widgets.clicked.connect(self.widget_page)
         self.ui.btn_chart.clicked.connect(self.plot_page)
@@ -84,15 +86,6 @@ class MainWindow(QMainWindow):
         )[0]
         self.ui.line_file_path.setText(self.file_path)
 
-    def select_table_order(self):
-        btn_name = self.sender().objectName()
-        if btn_name == 'radiobutton_default':
-            self.table_order = 'Visitor ID'
-        if btn_name == 'radiobutton_probability':
-            self.table_order = 'Probability'
-        self.analyze()
-
-    def analyze(self):
         self.my_clf = classifier.RandomForest(file_path=self.file_path)
         self.my_clf.load_model()
         self.my_clf.load_reader()
@@ -103,6 +96,26 @@ class MainWindow(QMainWindow):
             'Intention': self.my_clf.clf.predict(self.my_clf.test_data)
         })
         self.result['Intention'] = self.result['Intention'].apply(lambda x: 'Deal!' if x else 'No, thanks.')
+
+    def select_table_order(self):
+        btn_name = self.sender().objectName()
+        if btn_name == 'radiobutton_default':
+            self.table_order = 'Visitor ID'
+        if btn_name == 'radiobutton_probability':
+            self.table_order = 'Probability'
+        self.show_analysis()
+
+    def show_analysis(self):
+        # self.my_clf = classifier.RandomForest(file_path=self.file_path)
+        # self.my_clf.load_model()
+        # self.my_clf.load_reader()
+        # self.ui.tableWidget.setRowCount(len(self.my_clf.test_data))
+        # self.result = pd.DataFrame({
+        #     'Visitor ID': list(range(1, len(self.my_clf.test_data) + 1)),
+        #     'Probability': np.delete(self.my_clf.clf.predict_proba(self.my_clf.test_data), 0, axis=1).ravel(),
+        #     'Intention': self.my_clf.clf.predict(self.my_clf.test_data)
+        # })
+        # self.result['Intention'] = self.result['Intention'].apply(lambda x: 'Deal!' if x else 'No, thanks.')
         # print(self.result)
         # self.result[1] = list(map(lambda x: 'Deal!' if x else 'No, thanks.', self.result[1]))
         if self.table_order == 'Probability':

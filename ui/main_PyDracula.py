@@ -1097,17 +1097,17 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_6.addWidget(self.btn_open_file)
 
-        self.btn_analysize = QPushButton(self.frame_content_wid_1)
-        self.btn_analysize.setObjectName(u"btn_analysize")
-        self.btn_analysize.setMinimumSize(QSize(150, 30))
-        self.btn_analysize.setFont(font)
-        self.btn_analysize.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_analysize.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+        self.btn_analyze = QPushButton(self.frame_content_wid_1)
+        self.btn_analyze.setObjectName(u"btn_analyze")
+        self.btn_analyze.setMinimumSize(QSize(150, 30))
+        self.btn_analyze.setFont(font)
+        self.btn_analyze.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_analyze.setStyleSheet(u"background-color: rgb(52, 59, 72);")
         icon5 = QIcon()
         icon5.addFile(u":/icons/images/icons/cil-caret-right.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_analysize.setIcon(icon5)
+        self.btn_analyze.setIcon(icon5)
 
-        self.horizontalLayout_6.addWidget(self.btn_analysize)
+        self.horizontalLayout_6.addWidget(self.btn_analyze)
 
 
         self.verticalLayout_17.addWidget(self.frame_content_wid_1)
@@ -1603,7 +1603,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1671,7 +1671,7 @@ class Ui_MainWindow(object):
         self.line_file_path.setText("")
         self.line_file_path.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
         self.btn_open_file.setText(QCoreApplication.translate("MainWindow", u"Open file", None))
-        self.btn_analysize.setText(QCoreApplication.translate("MainWindow", u"Analyze", None))
+        self.btn_analyze.setText(QCoreApplication.translate("MainWindow", u"Analyze", None))
         self.radiobutton_default.setText(QCoreApplication.translate("MainWindow", u"Default Order", None))
         self.radiobutton_probability.setText(QCoreApplication.translate("MainWindow", u"Sorted by Probability ", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
