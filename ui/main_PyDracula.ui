@@ -541,7 +541,7 @@ Button */
 
 </string>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_8">
+   <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -1817,22 +1817,7 @@ background-repeat: no-repeat;</string>
                       <property name="styleSheet">
                        <string notr="true">b</string>
                       </property>
-                      <layout class="QVBoxLayout" name="verticalLayout">
-                       <property name="spacing">
-                        <number>10</number>
-                       </property>
-                       <property name="leftMargin">
-                        <number>10</number>
-                       </property>
-                       <property name="topMargin">
-                        <number>10</number>
-                       </property>
-                       <property name="rightMargin">
-                        <number>10</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>10</number>
-                       </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_27">
                        <item>
                         <widget class="QFrame" name="row_1">
                          <property name="frameShape">
@@ -2602,8 +2587,8 @@ background-repeat: no-repeat;</string>
                                    <string>Go!</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset>
-                                    <normaloff>images/icons/cil-chart.png</normaloff>images/icons/cil-chart.png</iconset>
+                                   <iconset resource="../../../../../../repos/py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                    <normaloff>:/icons/images/icons/cil-chart.png</normaloff>:/icons/images/icons/cil-chart.png</iconset>
                                   </property>
                                  </widget>
                                 </item>
@@ -2633,8 +2618,8 @@ background-repeat: no-repeat;</string>
                                    <string>Hold</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset>
-                                    <normaloff>images/icons/cil-camera.png</normaloff>images/icons/cil-camera.png</iconset>
+                                   <iconset resource="../../../../../../repos/py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                    <normaloff>:/icons/images/icons/cil-camera.png</normaloff>:/icons/images/icons/cil-camera.png</iconset>
                                   </property>
                                  </widget>
                                 </item>
@@ -2858,8 +2843,8 @@ background-repeat: no-repeat;</string>
                                    <string>Save</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset>
-                                    <normaloff>images/icons/cil-save.png</normaloff>images/icons/cil-save.png</iconset>
+                                   <iconset resource="../../../../../../repos/py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                    <normaloff>:/icons/images/icons/cil-save.png</normaloff>:/icons/images/icons/cil-save.png</iconset>
                                   </property>
                                  </widget>
                                 </item>
@@ -3175,7 +3160,7 @@ background-repeat: no-repeat;</string>
                    </font>
                   </property>
                   <property name="text">
-                   <string>System constructed by: Homo; UI designed by: Wanderson M. Pimenta.</string>
+                   <string>System constructed by: Homo; UI style contributed by: Wanderson M. Pimenta.</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

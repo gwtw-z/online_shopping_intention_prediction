@@ -559,10 +559,10 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "")
-        self.horizontalLayout_8 = QHBoxLayout(self.styleSheet)
-        self.horizontalLayout_8.setSpacing(0)
-        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.horizontalLayout_8.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout = QVBoxLayout(self.styleSheet)
+        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(10, 10, 10, 10)
         self.bgApp = QFrame(self.styleSheet)
         self.bgApp.setObjectName(u"bgApp")
         self.bgApp.setStyleSheet(u"")
@@ -1026,10 +1026,8 @@ class Ui_MainWindow(object):
         self.widgets = QWidget()
         self.widgets.setObjectName(u"widgets")
         self.widgets.setStyleSheet(u"b")
-        self.verticalLayout = QVBoxLayout(self.widgets)
-        self.verticalLayout.setSpacing(10)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_27 = QVBoxLayout(self.widgets)
+        self.verticalLayout_27.setObjectName(u"verticalLayout_27")
         self.row_1 = QFrame(self.widgets)
         self.row_1.setObjectName(u"row_1")
         self.row_1.setFrameShape(QFrame.StyledPanel)
@@ -1117,7 +1115,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_16.addWidget(self.frame_div_content_1)
 
 
-        self.verticalLayout.addWidget(self.row_1)
+        self.verticalLayout_27.addWidget(self.row_1)
 
         self.row_3 = QFrame(self.widgets)
         self.row_3.setObjectName(u"row_3")
@@ -1218,7 +1216,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_12.addWidget(self.tableWidget)
 
 
-        self.verticalLayout.addWidget(self.row_3)
+        self.verticalLayout_27.addWidget(self.row_3)
 
         self.stackedWidget.addWidget(self.widgets)
         self.chart_page = QWidget()
@@ -1311,7 +1309,7 @@ class Ui_MainWindow(object):
         self.btn_analysize_2.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_analysize_2.setStyleSheet(u"background-color: rgb(52, 59, 72);")
         icon6 = QIcon()
-        icon6.addFile(u"images/icons/cil-chart.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon6.addFile(u":/icons/images/icons/cil-chart.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_analysize_2.setIcon(icon6)
 
         self.horizontalLayout_7.addWidget(self.btn_analysize_2)
@@ -1323,7 +1321,7 @@ class Ui_MainWindow(object):
         self.btn_analysize_3.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_analysize_3.setStyleSheet(u"background-color: rgb(52, 59, 72);")
         icon7 = QIcon()
-        icon7.addFile(u"images/icons/cil-camera.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon7.addFile(u":/icons/images/icons/cil-camera.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_analysize_3.setIcon(icon7)
 
         self.horizontalLayout_7.addWidget(self.btn_analysize_3)
@@ -1421,7 +1419,7 @@ class Ui_MainWindow(object):
         self.btn_open_file_3.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_open_file_3.setStyleSheet(u"background-color: rgb(52, 59, 72);")
         icon8 = QIcon()
-        icon8.addFile(u"images/icons/cil-save.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon8.addFile(u":/icons/images/icons/cil-save.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_open_file_3.setIcon(icon8)
 
         self.horizontalLayout_9.addWidget(self.btn_open_file_3)
@@ -1581,7 +1579,7 @@ class Ui_MainWindow(object):
         self.appLayout.addWidget(self.contentBox)
 
 
-        self.horizontalLayout_8.addWidget(self.bgApp)
+        self.verticalLayout.addWidget(self.bgApp)
 
         MainWindow.setCentralWidget(self.styleSheet)
 
@@ -1709,7 +1707,7 @@ class Ui_MainWindow(object):
         self.btn_message.setText(QCoreApplication.translate("MainWindow", u"Message", None))
         self.btn_print.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))
-        self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"System constructed by: Homo; UI designed by: Wanderson M. Pimenta.", None))
+        self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"System constructed by: Homo; UI style contributed by: Wanderson M. Pimenta.", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0.0", None))
     # retranslateUi
 
