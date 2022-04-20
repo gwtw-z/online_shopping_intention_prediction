@@ -86,6 +86,8 @@ class MainWindow(QMainWindow):
         )[0]
         self.ui.line_file_path.setText(self.file_path)
 
+        # data is processed when file path is chosen instead of when 'analyze' button is pressed
+        # so that the user doesn't actually sense the time spent here
         self.my_clf = classifier.RandomForest(file_path=self.file_path)
         self.my_clf.load_model()
         self.my_clf.load_reader()
@@ -106,6 +108,8 @@ class MainWindow(QMainWindow):
         self.show_analysis()
 
     def show_analysis(self):
+        if self.file_path is None:
+            return
         # self.my_clf = classifier.RandomForest(file_path=self.file_path)
         # self.my_clf.load_model()
         # self.my_clf.load_reader()
