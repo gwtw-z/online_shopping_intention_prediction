@@ -2,6 +2,7 @@ from PySide6.QtWidgets import QFileDialog
 from ui.main_PyDracula import *
 from ui.ui_main_pages import *
 import classifier
+import pandas as pd
 
 
 class MainWindow(QMainWindow):
@@ -21,6 +22,7 @@ class MainWindow(QMainWindow):
         self.file_path = None
         self.my_clf = None
         self.result = None
+        self.table_order = 'Visitor ID'
 
         self.bind()
 
@@ -31,6 +33,8 @@ class MainWindow(QMainWindow):
         self.ui.btn_widgets.clicked.connect(self.widget_page)
         self.ui.btn_chart.clicked.connect(self.plot_page)
         self.ui.btn_save.clicked.connect(self.save_page)
+        self.ui.radiobutton_default.clicked.connect(self.select_table_order)
+        self.ui.radiobutton_probability.clicked.connect(self.select_table_order)
         self.ui.closeAppBtn.clicked.connect(QCoreApplication.instance().quit)
         self.ui.minimizeAppBtn.clicked.connect(self.showMinimized)
         self.ui.maximizeRestoreAppBtn.clicked.connect(self.maximize_page)
@@ -78,6 +82,15 @@ class MainWindow(QMainWindow):
         )[0]
         self.ui.line_file_path.setText(self.file_path)
 
+    def select_table_order(self):
+        btn_name = self.sender().objectName()
+        if btn_name == 'radiobutton_default':
+            self.table_order = 'Visitor ID'
+        if btn_name == 'radiobutton_probability':
+            self.table_order = 'Probability'
+        print(self.table_order)
+        # self.analyze()
+
     def analyze(self):
         self.my_clf = classifier.RandomForest(file_path=self.file_path)
         self.my_clf.load_model()
@@ -89,6 +102,8 @@ class MainWindow(QMainWindow):
         # print(self.result)
         self.ui.tableWidget.setRowCount(len(self.result[0]))
         self.result[1] = list(map(lambda x: 'Deal!' if x else 'No, thanks.', self.result[1]))
+        if self.table_order == 'Sorted by Probability':
+            pass
         data = zip(self.result[0], self.result[1])
         for i, (prob, out) in enumerate(data, start=1):
             item_id = QTableWidgetItem(str(i))

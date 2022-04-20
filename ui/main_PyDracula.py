@@ -18,8 +18,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QComboBox,
     QFrame, QGridLayout, QHBoxLayout, QHeaderView,
     QLabel, QLineEdit, QMainWindow, QPushButton,
-    QSizePolicy, QSpacerItem, QStackedWidget, QTableWidget,
-    QTableWidgetItem, QTextEdit, QVBoxLayout, QWidget)
+    QRadioButton, QSizePolicy, QSpacerItem, QStackedWidget,
+    QTableWidget, QTableWidgetItem, QTextEdit, QVBoxLayout,
+    QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
@@ -1122,10 +1123,27 @@ class Ui_MainWindow(object):
         self.row_3.setMinimumSize(QSize(0, 150))
         self.row_3.setFrameShape(QFrame.StyledPanel)
         self.row_3.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_12 = QHBoxLayout(self.row_3)
-        self.horizontalLayout_12.setSpacing(0)
-        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
-        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_28 = QVBoxLayout(self.row_3)
+        self.verticalLayout_28.setObjectName(u"verticalLayout_28")
+        self.horizontalLayout_8 = QHBoxLayout()
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.radiobutton_default = QRadioButton(self.row_3)
+        self.radiobutton_default.setObjectName(u"radiobutton_default")
+
+        self.horizontalLayout_8.addWidget(self.radiobutton_default)
+
+        self.radiobutton_probability = QRadioButton(self.row_3)
+        self.radiobutton_probability.setObjectName(u"radiobutton_probability")
+
+        self.horizontalLayout_8.addWidget(self.radiobutton_probability)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_8.addItem(self.horizontalSpacer)
+
+
+        self.verticalLayout_28.addLayout(self.horizontalLayout_8)
+
         self.tableWidget = QTableWidget(self.row_3)
         if (self.tableWidget.columnCount() < 3):
             self.tableWidget.setColumnCount(3)
@@ -1206,14 +1224,14 @@ class Ui_MainWindow(object):
         self.tableWidget.setSortingEnabled(True)
         self.tableWidget.horizontalHeader().setVisible(False)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
-        self.tableWidget.horizontalHeader().setDefaultSectionSize(300)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(295)
         self.tableWidget.horizontalHeader().setStretchLastSection(True)
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
         self.tableWidget.verticalHeader().setHighlightSections(False)
         self.tableWidget.verticalHeader().setStretchLastSection(True)
 
-        self.horizontalLayout_12.addWidget(self.tableWidget)
+        self.verticalLayout_28.addWidget(self.tableWidget)
 
 
         self.verticalLayout_27.addWidget(self.row_3)
@@ -1654,6 +1672,8 @@ class Ui_MainWindow(object):
         self.line_file_path.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
         self.btn_open_file.setText(QCoreApplication.translate("MainWindow", u"Open file", None))
         self.btn_analysize.setText(QCoreApplication.translate("MainWindow", u"Analyze", None))
+        self.radiobutton_default.setText(QCoreApplication.translate("MainWindow", u"Default Order", None))
+        self.radiobutton_probability.setText(QCoreApplication.translate("MainWindow", u"Sorted by Probability ", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"0", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
