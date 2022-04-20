@@ -3,6 +3,7 @@ from ui.main_PyDracula import *
 from ui.ui_main_pages import *
 import classifier
 import pandas as pd
+import numpy as np
 
 
 class MainWindow(QMainWindow):
@@ -18,9 +19,10 @@ class MainWindow(QMainWindow):
         self.maximize_icon.addFile(r':/icons/images/icons/icon_maximize.png', QSize(), QIcon.Normal, QIcon.Off)
         self.restore_icon = QIcon()
         self.restore_icon.addFile(r':/icons/images/icons/icon_restore.png', QSize(), QIcon.Normal, QIcon.Off)
+        self.ui.radiobutton_default.setChecked(True)
 
-        self.file_path = None
         self.my_clf = None
+        self.file_path = None
         self.result = None
         self.table_order = 'Visitor ID'
 
@@ -88,31 +90,41 @@ class MainWindow(QMainWindow):
             self.table_order = 'Visitor ID'
         if btn_name == 'radiobutton_probability':
             self.table_order = 'Probability'
-        print(self.table_order)
-        # self.analyze()
+        self.analyze()
 
     def analyze(self):
         self.my_clf = classifier.RandomForest(file_path=self.file_path)
         self.my_clf.load_model()
         self.my_clf.load_reader()
-        self.result = [
-            self.my_clf.clf.predict_proba(self.my_clf.test_data),
-            self.my_clf.clf.predict(self.my_clf.test_data)
-        ]
+        self.ui.tableWidget.setRowCount(len(self.my_clf.test_data))
+        self.result = pd.DataFrame({
+            'Visitor ID': list(range(1, len(self.my_clf.test_data) + 1)),
+            'Probability': np.delete(self.my_clf.clf.predict_proba(self.my_clf.test_data), 0, axis=1).ravel(),
+            'Intention': self.my_clf.clf.predict(self.my_clf.test_data)
+        })
+        self.result['Intention'] = self.result['Intention'].apply(lambda x: 'Deal!' if x else 'No, thanks.')
         # print(self.result)
-        self.ui.tableWidget.setRowCount(len(self.result[0]))
-        self.result[1] = list(map(lambda x: 'Deal!' if x else 'No, thanks.', self.result[1]))
-        if self.table_order == 'Sorted by Probability':
-            pass
-        data = zip(self.result[0], self.result[1])
-        for i, (prob, out) in enumerate(data, start=1):
-            item_id = QTableWidgetItem(str(i))
-            # item_prob = QTableWidgetItem(str(round(Decimal(prob[1]), 3)))
-            item_prob = QTableWidgetItem(format(prob[1], '.1%'))
-            item_out = QTableWidgetItem(str(out))
-            self.ui.tableWidget.setItem(i, 0, item_id)
-            self.ui.tableWidget.setItem(i, 1, item_prob)
-            self.ui.tableWidget.setItem(i, 2, item_out)
+        # self.result[1] = list(map(lambda x: 'Deal!' if x else 'No, thanks.', self.result[1]))
+        if self.table_order == 'Probability':
+            self.result = self.result.sort_values(by=self.table_order, ascending=False, ignore_index=True)
+        if self.table_order == 'Visitor ID':
+            self.result = self.result.sort_values(by=self.table_order, ascending=True, ignore_index=True)
+        # data = zip(self.result[0], self.result[1])
+        # for i, (prob, out) in enumerate(data, start=1):
+        #     item_id = QTableWidgetItem(str(i))
+        #     # item_prob = QTableWidgetItem(str(round(Decimal(prob[1]), 3)))
+        #     item_prob = QTableWidgetItem(format(prob[1], '.1%'))
+        #     item_out = QTableWidgetItem(str(out))
+        #     self.ui.tableWidget.setItem(i, 0, item_id)
+        #     self.ui.tableWidget.setItem(i, 1, item_prob)
+        #     self.ui.tableWidget.setItem(i, 2, item_out)
+        for i in range(len(self.result)):
+            item_id = QTableWidgetItem(str(self.result.loc[i, 'Visitor ID']))
+            item_prob = QTableWidgetItem(format(self.result.loc[i, 'Probability'], '.1%'))
+            item_out = QTableWidgetItem(str(self.result.loc[i, 'Intention']))
+            self.ui.tableWidget.setItem(i + 1, 0, item_id)
+            self.ui.tableWidget.setItem(i + 1, 1, item_prob)
+            self.ui.tableWidget.setItem(i + 1, 2, item_out)
 
 
 app = QApplication()
