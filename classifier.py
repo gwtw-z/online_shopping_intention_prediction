@@ -3,9 +3,11 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn import tree
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from xgboost.sklearn import XGBClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.linear_model import LogisticRegression as LR
-from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.model_selection import GridSearchCV
 import pickle
 from sklearn import datasets
 import matplotlib.pyplot as plt
@@ -34,11 +36,26 @@ mRMR_order = ['PageValues', 'Month', 'ExitRates', 'Weekend', 'Informational_Dura
               'Administrative_Duration', 'VisitorType', 'ProductRelated_Duration', 'SpecialDay', 'Informational',
               'TrafficType', 'Administrative', 'BounceRates', 'Browser', 'ProductRelated']
 
-origin_file_ = r'C:\Users\zty19\Desktop\毕设\major\repo\data\online_shoppers_intention.csv'
-file_ = r'C:\Users\zty19\Desktop\毕设\major\repo\data\sample_100.csv'
+origin_file_ = r'D:\repos\毕设\major\repo\online_shopping_intention_prediction\data\online_shoppers_intention.csv'
+file_ = r'D:\repos\毕设\major\repo\online_shopping_intention_prediction\data\sample_10.csv'
+
+
+def normalize(table):
+    # 抽样后分类属性可能缺失，与标准表格拼接补全
+    column = ['Administrative', 'Administrative_Duration', 'Informational', 'Informational_Duration',
+              'ProductRelated', 'ProductRelated_Duration',
+              'BounceRates', 'ExitRates', 'PageValues', 'SpecialDay',
+              'OperatingSystems', 'Browser', 'Region', 'TrafficType', 'Weekend',
+              'Month_Aug', 'Month_Dec', 'Month_Feb', 'Month_Jul', 'Month_June',
+              'Month_Mar', 'Month_May', 'Month_Nov', 'Month_Oct', 'Month_Sep',
+              'VisitorType_New_Visitor', 'VisitorType_Other',
+              'VisitorType_Returning_Visitor']
+    df = pd.DataFrame(columns=column, index=[-1])
+    return pd.concat([df, table]).drop(index=[-1], axis=1).fillna(0)
 
 
 class Classifier:
+    # 默认读取全部特征，不过采样，不生成样本
     def __init__(self, file_path, clf_name='', feature_num=len(mRMR_order), over_sample=False, generate_sample=False,
                  sample_volume=100):
         self.clf = None
@@ -53,6 +70,7 @@ class Classifier:
         self.test_label = None
         self.sample = None
         self.result = None
+        self.grid_result = None
         self.clf_name = clf_name
         self.train_time = None
 
@@ -82,6 +100,7 @@ class Classifier:
         table = pd.read_csv(self.file_path)
         table = table[mRMR_order[:self.feature_num]]
         x = pd.get_dummies(table)
+        x = normalize(x)
         mm = MinMaxScaler(feature_range=(0, 1))
         x = mm.fit_transform(x)
         self.test_data = x
@@ -100,34 +119,41 @@ class Classifier:
 
         return sample
 
-    def train(self):
+    def tuning(self, param):
+        grid_search = GridSearchCV(self.clf, param, scoring='accuracy', n_jobs=-1, cv=10)
+        self.grid_result = grid_search.fit(self.train_data, self.train_label)
+
+    def train(self, training_time=True):
         start = time.time()
         self.clf.fit(self.train_data, self.train_label.ravel())
         end = time.time()
         self.train_time = end - start
-        print(self.clf_name + ':\ntraining time:', self.train_time)
+        if training_time is True:
+            print(self.clf_name + ':\ntraining time:', self.train_time)
 
     def score(self):
         self.result = cross_validate(self.clf, self.test_data, self.test_label, cv=10,
                                      scoring=['accuracy', 'f1', 'roc_auc'])
 
     def show(self):
-        print('accuracy:{:.10f}\tf1-score:{:.10f}\tauc:{:.10f}\n'.format(self.result['test_accuracy'].mean(),
-                                                                         self.result['test_f1'].mean(),
-                                                                         self.result['test_roc_auc'].mean()))
+        print('accuracy:{:.10f}\tauc:{:.10f}\n'.format(self.result['test_accuracy'].mean(),
+                                                       self.result['test_f1'].mean(),
+                                                       self.result['test_roc_auc'].mean()))
 
-    def save_model(self):
-        with open(r'./model/clf.pickle', 'wb') as f:
+    def save_model(self, model_name):
+        with open(r'./model/' + model_name + '.pickle', 'wb') as f:
             pickle.dump(self.clf, f)
 
-    def load_model(self):
-        with open(r'./model/clf.pickle', 'rb') as f:
+    def load_model(self, model_name):
+        with open(r'./model/' + model_name + '.pickle', 'rb') as f:
             self.clf = pickle.load(f)
 
-    def start(self):
+    def generate_model(self, model_name):
+        self.train_reader()
         self.train()
         self.score()
         self.show()
+        self.save_model(model_name)
 
 
 class NaiveBayes(Classifier):
@@ -149,7 +175,7 @@ class DecisionTree(Classifier):
 
 
 class RandomForest(Classifier):
-    def __init__(self, file_path, n=100, feature_num=12):
+    def __init__(self, file_path, n=30, feature_num=12):
         super(RandomForest, self).__init__(file_path, clf_name='random forest', feature_num=feature_num)
         self.clf = RandomForestClassifier(n_estimators=n, random_state=3)
 
@@ -175,24 +201,20 @@ class LogisticRegression(Classifier):
 
 
 class GDBT(Classifier):
-    def __init__(self, file_path, n=100, lr=0.5, feature_num=3):
-        super(GDBT, self).__init__(file_path, clf_name='GDBT', feature_num=feature_num)
+    def __init__(self, file_path, lr=0.2, n=20, feature_num=3, over_sample=False):
+        super(GDBT, self).__init__(file_path, clf_name='GDBT', feature_num=feature_num, over_sample=over_sample)
         self.clf = GradientBoostingClassifier(n_estimators=n, learning_rate=lr)
 
 
-# clf = RandomForest(origin_file_)
-# clf.reader()
+class XGBoost(Classifier):
+    def __init__(self, file_path, n=10, lr=0.1, feature_num=3):
+        super(XGBoost, self).__init__(file_path, clf_name='xgboost', feature_num=feature_num)
+        self.clf = XGBClassifier(object='binary:logistic', n_estimators=n, learning_rate=lr, use_label_encoder=False)
+
+
+# clf = GDBT(origin_file_, feature_num=17, over_sample=True)
+# clf.train_reader()
 # clf.train()
 # clf.score()
 # clf.show()
-#
-# clf.file_path=(file_)
-# clf.reader()
-# clf.score()
-# clf.show()
-# clf = RandomForest(origin_file_)
-# clf.start()
-# clf.save_model()
-
-# clf = Classifier(origin_file_, generate_sample=True, sample_volume=1000)
-# clf.train_reader()
+# clf.save_model('GDBT')

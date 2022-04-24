@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1064, 751)
+        MainWindow.resize(1064, 757)
         MainWindow.setMinimumSize(QSize(940, 560))
         icon = QIcon()
         icon.addFile(u"images/images/PyDracula.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -563,7 +563,7 @@ class Ui_MainWindow(object):
         self.verticalLayout = QVBoxLayout(self.styleSheet)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.bgApp = QFrame(self.styleSheet)
         self.bgApp.setObjectName(u"bgApp")
         self.bgApp.setStyleSheet(u"")
@@ -1153,8 +1153,8 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         __qtablewidgetitem2 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
-        if (self.tableWidget.rowCount() < 2):
-            self.tableWidget.setRowCount(2)
+        if (self.tableWidget.rowCount() < 15):
+            self.tableWidget.setRowCount(15)
         font4 = QFont()
         font4.setFamilies([u"Segoe UI"])
         __qtablewidgetitem3 = QTableWidgetItem()
@@ -1163,11 +1163,37 @@ class Ui_MainWindow(object):
         __qtablewidgetitem4 = QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem4)
         __qtablewidgetitem5 = QTableWidgetItem()
-        self.tableWidget.setItem(0, 0, __qtablewidgetitem5)
+        self.tableWidget.setVerticalHeaderItem(2, __qtablewidgetitem5)
         __qtablewidgetitem6 = QTableWidgetItem()
-        self.tableWidget.setItem(0, 1, __qtablewidgetitem6)
+        self.tableWidget.setVerticalHeaderItem(3, __qtablewidgetitem6)
         __qtablewidgetitem7 = QTableWidgetItem()
-        self.tableWidget.setItem(0, 2, __qtablewidgetitem7)
+        self.tableWidget.setVerticalHeaderItem(4, __qtablewidgetitem7)
+        __qtablewidgetitem8 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(5, __qtablewidgetitem8)
+        __qtablewidgetitem9 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(6, __qtablewidgetitem9)
+        __qtablewidgetitem10 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(7, __qtablewidgetitem10)
+        __qtablewidgetitem11 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(8, __qtablewidgetitem11)
+        __qtablewidgetitem12 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(9, __qtablewidgetitem12)
+        __qtablewidgetitem13 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(10, __qtablewidgetitem13)
+        __qtablewidgetitem14 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(11, __qtablewidgetitem14)
+        __qtablewidgetitem15 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(12, __qtablewidgetitem15)
+        __qtablewidgetitem16 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(13, __qtablewidgetitem16)
+        __qtablewidgetitem17 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(14, __qtablewidgetitem17)
+        __qtablewidgetitem18 = QTableWidgetItem()
+        self.tableWidget.setItem(0, 0, __qtablewidgetitem18)
+        __qtablewidgetitem19 = QTableWidgetItem()
+        self.tableWidget.setItem(0, 1, __qtablewidgetitem19)
+        __qtablewidgetitem20 = QTableWidgetItem()
+        self.tableWidget.setItem(0, 2, __qtablewidgetitem20)
         self.tableWidget.setObjectName(u"tableWidget")
         sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         sizePolicy3.setHorizontalStretch(0)
@@ -1673,7 +1699,7 @@ class Ui_MainWindow(object):
         self.btn_open_file.setText(QCoreApplication.translate("MainWindow", u"Open file", None))
         self.btn_analyze.setText(QCoreApplication.translate("MainWindow", u"Analyze", None))
         self.radiobutton_default.setText(QCoreApplication.translate("MainWindow", u"Default Order", None))
-        self.radiobutton_probability.setText(QCoreApplication.translate("MainWindow", u"Sorted by Probability ", None))
+        self.radiobutton_probability.setText(QCoreApplication.translate("MainWindow", u"Sort by Probability ", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"0", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
@@ -1681,21 +1707,47 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"2", None));
         ___qtablewidgetitem3 = self.tableWidget.verticalHeaderItem(0)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
         ___qtablewidgetitem4 = self.tableWidget.verticalHeaderItem(1)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem5 = self.tableWidget.verticalHeaderItem(2)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem6 = self.tableWidget.verticalHeaderItem(3)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem7 = self.tableWidget.verticalHeaderItem(4)
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem8 = self.tableWidget.verticalHeaderItem(5)
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem9 = self.tableWidget.verticalHeaderItem(6)
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem10 = self.tableWidget.verticalHeaderItem(7)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem11 = self.tableWidget.verticalHeaderItem(8)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem12 = self.tableWidget.verticalHeaderItem(9)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem13 = self.tableWidget.verticalHeaderItem(10)
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem14 = self.tableWidget.verticalHeaderItem(11)
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem15 = self.tableWidget.verticalHeaderItem(12)
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem16 = self.tableWidget.verticalHeaderItem(13)
+        ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem17 = self.tableWidget.verticalHeaderItem(14)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
 
         __sortingEnabled = self.tableWidget.isSortingEnabled()
         self.tableWidget.setSortingEnabled(False)
-        ___qtablewidgetitem5 = self.tableWidget.item(0, 0)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Visitor ID", None));
-        ___qtablewidgetitem6 = self.tableWidget.item(0, 1)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"Probability", None));
-        ___qtablewidgetitem7 = self.tableWidget.item(0, 2)
-        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"Intention", None));
+        ___qtablewidgetitem18 = self.tableWidget.item(0, 0)
+        ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"Visitor ID", None));
+        ___qtablewidgetitem19 = self.tableWidget.item(0, 1)
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"Probability", None));
+        ___qtablewidgetitem20 = self.tableWidget.item(0, 2)
+        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Intention", None));
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
-        self.labelBoxBlenderInstalation_2.setText(QCoreApplication.translate("MainWindow", u"Please select the way to create view chart.", None))
+        self.labelBoxBlenderInstalation_2.setText(QCoreApplication.translate("MainWindow", u"Please select the way to create a pivot chart.", None))
         self.labelVersion_4.setText(QCoreApplication.translate("MainWindow", u"View two attributes:  ", None))
         self.comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"month", None))
         self.comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"visitor type", None))
@@ -1716,14 +1768,14 @@ class Ui_MainWindow(object):
 
         self.btn_analysize_2.setText(QCoreApplication.translate("MainWindow", u"Go!", None))
         self.btn_analysize_3.setText(QCoreApplication.translate("MainWindow", u"Hold", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"No view is selected yet.", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"No pivot chart is created yet.", None))
         self.labelBoxBlenderInstalation_3.setText(QCoreApplication.translate("MainWindow", u"Please select the folder to save data files.", None))
         self.labelVersion_6.setText(QCoreApplication.translate("MainWindow", u"Data File Path:", None))
         self.line_file_path_2.setText("")
         self.line_file_path_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
         self.btn_open_file_2.setText(QCoreApplication.translate("MainWindow", u"Select path", None))
         self.btn_open_file_3.setText(QCoreApplication.translate("MainWindow", u"Save", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"No file saved yet.", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"No file is saved yet.", None))
         self.btn_message.setText(QCoreApplication.translate("MainWindow", u"Message", None))
         self.btn_print.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))

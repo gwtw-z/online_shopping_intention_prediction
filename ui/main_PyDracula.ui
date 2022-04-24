@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>1064</width>
-    <height>751</height>
+    <height>757</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -546,16 +546,16 @@ Button */
      <number>0</number>
     </property>
     <property name="leftMargin">
-     <number>10</number>
+     <number>0</number>
     </property>
     <property name="topMargin">
-     <number>10</number>
+     <number>0</number>
     </property>
     <property name="rightMargin">
-     <number>10</number>
+     <number>0</number>
     </property>
     <property name="bottomMargin">
-     <number>10</number>
+     <number>0</number>
     </property>
     <item>
      <widget class="QFrame" name="bgApp">
@@ -1214,7 +1214,7 @@ Button */
                   <string/>
                  </property>
                  <property name="icon">
-                  <iconset resource="../../../../../../repos/py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                  <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
                    <normaloff>:/icons/images/icons/icon_close.png</normaloff>:/icons/images/icons/icon_close.png</iconset>
                  </property>
                  <property name="iconSize">
@@ -1627,7 +1627,7 @@ p, li { white-space: pre-wrap; }
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="../../../../../../repos/py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
                     <normaloff>:/icons/images/icons/icon_minimize.png</normaloff>:/icons/images/icons/icon_minimize.png</iconset>
                   </property>
                   <property name="iconSize">
@@ -1671,7 +1671,7 @@ p, li { white-space: pre-wrap; }
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="../../../../../../repos/py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
                     <normaloff>:/icons/images/icons/icon_maximize.png</normaloff>:/icons/images/icons/icon_maximize.png</iconset>
                   </property>
                   <property name="iconSize">
@@ -1706,7 +1706,7 @@ p, li { white-space: pre-wrap; }
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="../../../../../../repos/py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
                     <normaloff>:/icons/images/icons/icon_close.png</normaloff>:/icons/images/icons/icon_close.png</iconset>
                   </property>
                   <property name="iconSize">
@@ -1984,7 +1984,7 @@ background-repeat: no-repeat;</string>
                                    <string>Open file</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../../repos/py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-folder-open.png</normaloff>:/icons/images/icons/cil-folder-open.png</iconset>
                                   </property>
                                  </widget>
@@ -2015,7 +2015,7 @@ background-repeat: no-repeat;</string>
                                    <string>Analyze</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../../repos/py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-caret-right.png</normaloff>:/icons/images/icons/cil-caret-right.png</iconset>
                                   </property>
                                  </widget>
@@ -2056,7 +2056,7 @@ background-repeat: no-repeat;</string>
                             <item>
                              <widget class="QRadioButton" name="radiobutton_probability">
                               <property name="text">
-                               <string>Sorted by Probability </string>
+                               <string>Sort by Probability </string>
                               </property>
                              </widget>
                             </item>
@@ -2335,7 +2335,7 @@ background-repeat: no-repeat;</string>
                             </attribute>
                             <row>
                              <property name="text">
-                              <string>New Row</string>
+                              <string>新建行</string>
                              </property>
                              <property name="font">
                               <font>
@@ -2345,7 +2345,72 @@ background-repeat: no-repeat;</string>
                             </row>
                             <row>
                              <property name="text">
-                              <string>New Row</string>
+                              <string>新建行</string>
+                             </property>
+                            </row>
+                            <row>
+                             <property name="text">
+                              <string>新建行</string>
+                             </property>
+                            </row>
+                            <row>
+                             <property name="text">
+                              <string>新建行</string>
+                             </property>
+                            </row>
+                            <row>
+                             <property name="text">
+                              <string>新建行</string>
+                             </property>
+                            </row>
+                            <row>
+                             <property name="text">
+                              <string>新建行</string>
+                             </property>
+                            </row>
+                            <row>
+                             <property name="text">
+                              <string>新建行</string>
+                             </property>
+                            </row>
+                            <row>
+                             <property name="text">
+                              <string>新建行</string>
+                             </property>
+                            </row>
+                            <row>
+                             <property name="text">
+                              <string>新建行</string>
+                             </property>
+                            </row>
+                            <row>
+                             <property name="text">
+                              <string>新建行</string>
+                             </property>
+                            </row>
+                            <row>
+                             <property name="text">
+                              <string>新建行</string>
+                             </property>
+                            </row>
+                            <row>
+                             <property name="text">
+                              <string>新建行</string>
+                             </property>
+                            </row>
+                            <row>
+                             <property name="text">
+                              <string>新建行</string>
+                             </property>
+                            </row>
+                            <row>
+                             <property name="text">
+                              <string>新建行</string>
+                             </property>
+                            </row>
+                            <row>
+                             <property name="text">
+                              <string>新建行</string>
                              </property>
                             </row>
                             <column>
@@ -2476,7 +2541,7 @@ background-repeat: no-repeat;</string>
                                    <string notr="true"/>
                                   </property>
                                   <property name="text">
-                                   <string>Please select the way to create view chart.</string>
+                                   <string>Please select the way to create a pivot chart.</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -2603,7 +2668,7 @@ background-repeat: no-repeat;</string>
                                    <string>Go!</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../../repos/py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-chart.png</normaloff>:/icons/images/icons/cil-chart.png</iconset>
                                   </property>
                                  </widget>
@@ -2634,7 +2699,7 @@ background-repeat: no-repeat;</string>
                                    <string>Hold</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../../repos/py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-camera.png</normaloff>:/icons/images/icons/cil-camera.png</iconset>
                                   </property>
                                  </widget>
@@ -2648,7 +2713,7 @@ background-repeat: no-repeat;</string>
                           <item>
                            <widget class="QLabel" name="label">
                             <property name="text">
-                             <string>No view is selected yet.</string>
+                             <string>No pivot chart is created yet.</string>
                             </property>
                             <property name="alignment">
                              <set>Qt::AlignCenter</set>
@@ -2828,7 +2893,7 @@ background-repeat: no-repeat;</string>
                                    <string>Select path</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../../repos/py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-folder-open.png</normaloff>:/icons/images/icons/cil-folder-open.png</iconset>
                                   </property>
                                  </widget>
@@ -2859,7 +2924,7 @@ background-repeat: no-repeat;</string>
                                    <string>Save</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../../repos/py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-save.png</normaloff>:/icons/images/icons/cil-save.png</iconset>
                                   </property>
                                  </widget>
@@ -2876,7 +2941,7 @@ background-repeat: no-repeat;</string>
                        <item>
                         <widget class="QLabel" name="label_2">
                          <property name="text">
-                          <string>No file saved yet.</string>
+                          <string>No file is saved yet.</string>
                          </property>
                          <property name="alignment">
                           <set>Qt::AlignCenter</set>
@@ -3231,7 +3296,7 @@ background-repeat: no-repeat;</string>
   </widget>
  </widget>
  <resources>
-  <include location="../../../../../../repos/py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc"/>
+  <include location="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -7,7 +7,6 @@ import numpy as np
 
 
 # git config --global http.sslVerify "false"
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -16,6 +15,9 @@ class MainWindow(QMainWindow):
         self.window_maximized_flag = False
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
+        self.ui.stackedWidget.setCurrentWidget(self.ui.home)
+
+        self.offset = None
 
         self.maximize_icon = QIcon()
         self.maximize_icon.addFile(r':/icons/images/icons/icon_maximize.png', QSize(), QIcon.Normal, QIcon.Off)
@@ -24,6 +26,7 @@ class MainWindow(QMainWindow):
         self.ui.radiobutton_default.setChecked(True)
 
         self.my_clf = None
+        self.my_length = None
         self.file_path = None
         self.result = None
         self.table_order = 'Visitor ID'
@@ -35,23 +38,30 @@ class MainWindow(QMainWindow):
         self.ui.btn_analyze.clicked.connect(self.show_analysis)
         self.ui.btn_home.clicked.connect(self.home_page)
         self.ui.btn_widgets.clicked.connect(self.widget_page)
-        self.ui.btn_chart.clicked.connect(self.plot_page)
+        self.ui.btn_chart.clicked.connect(self.chart_page)
         self.ui.btn_save.clicked.connect(self.save_page)
         self.ui.radiobutton_default.clicked.connect(self.select_table_order)
         self.ui.radiobutton_probability.clicked.connect(self.select_table_order)
         self.ui.closeAppBtn.clicked.connect(QCoreApplication.instance().quit)
         self.ui.minimizeAppBtn.clicked.connect(self.showMinimized)
         self.ui.maximizeRestoreAppBtn.clicked.connect(self.maximize_page)
+        self.ui.titleRightInfo.mouseMoveEvent = self.mouseMoveEvent
 
-    def mousePressEvent(self, QMouseEvent):
-        # 改为拖动按钮
-        if QMouseEvent.button() == Qt.LeftButton:
-            self.flag = True
-            # 获取鼠标相对窗口的位置
-            self.m_Position = QMouseEvent.globalPos() - self.pos()
-            QMouseEvent.accept()
-        # 更改鼠标图标
-        # self.setCursor(QCursor(Qt.OpenHandCursor))
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            self.offset = QPoint(event.position().x(), event.position().y())
+        else:
+            super().mousePressEvent(event)
+
+    def mouseMoveEvent(self, event):
+        if self.offset is not None and event.buttons() == Qt.LeftButton:
+            self.move(self.pos() + QPoint(event.scenePosition().x(), event.scenePosition().y()) - self.offset)
+        else:
+            super().mouseMoveEvent(event)
+
+    def mouseReleaseEvent(self, event):
+        self.offset = None
+        super().mouseReleaseEvent(event)
 
     def maximize_page(self):
         if self.window_maximized_flag is False:
@@ -71,7 +81,7 @@ class MainWindow(QMainWindow):
     def widget_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.widgets)
 
-    def plot_page(self):
+    def chart_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.chart_page)
 
     def save_page(self):
@@ -88,12 +98,13 @@ class MainWindow(QMainWindow):
 
         # data is processed when file path is chosen instead of when 'analyze' button is pressed
         # so that the user doesn't actually sense the time spent here
-        self.my_clf = classifier.RandomForest(file_path=self.file_path)
-        self.my_clf.load_model()
+        self.my_clf = classifier.GDBT(file_path=self.file_path, feature_num=17)
+        self.my_clf.load_model('GDBT')
         self.my_clf.load_reader()
-        self.ui.tableWidget.setRowCount(len(self.my_clf.test_data))
+        self.my_length = len(self.my_clf.test_data)
         self.result = pd.DataFrame({
             'Visitor ID': list(range(1, len(self.my_clf.test_data) + 1)),
+            # the way Visitor ID is assigned may be improved later
             'Probability': np.delete(self.my_clf.clf.predict_proba(self.my_clf.test_data), 0, axis=1).ravel(),
             'Intention': self.my_clf.clf.predict(self.my_clf.test_data)
         })
@@ -105,37 +116,26 @@ class MainWindow(QMainWindow):
             self.table_order = 'Visitor ID'
         if btn_name == 'radiobutton_probability':
             self.table_order = 'Probability'
+
+        if self.file_path is None:
+            return
+        if self.table_order == 'Probability':
+            self.result = self.result.sort_values(by=self.table_order, ascending=False, ignore_index=True)
+        if self.table_order == 'Visitor ID':
+            self.result = self.result.sort_values(by=self.table_order, ascending=True, ignore_index=True)
         self.show_analysis()
 
     def show_analysis(self):
         if self.file_path is None:
             return
-        # self.my_clf = classifier.RandomForest(file_path=self.file_path)
-        # self.my_clf.load_model()
-        # self.my_clf.load_reader()
-        # self.ui.tableWidget.setRowCount(len(self.my_clf.test_data))
-        # self.result = pd.DataFrame({
-        #     'Visitor ID': list(range(1, len(self.my_clf.test_data) + 1)),
-        #     'Probability': np.delete(self.my_clf.clf.predict_proba(self.my_clf.test_data), 0, axis=1).ravel(),
-        #     'Intention': self.my_clf.clf.predict(self.my_clf.test_data)
-        # })
-        # self.result['Intention'] = self.result['Intention'].apply(lambda x: 'Deal!' if x else 'No, thanks.')
-        # print(self.result)
-        # self.result[1] = list(map(lambda x: 'Deal!' if x else 'No, thanks.', self.result[1]))
-        if self.table_order == 'Probability':
-            self.result = self.result.sort_values(by=self.table_order, ascending=False, ignore_index=True)
-        if self.table_order == 'Visitor ID':
-            self.result = self.result.sort_values(by=self.table_order, ascending=True, ignore_index=True)
-        # data = zip(self.result[0], self.result[1])
-        # for i, (prob, out) in enumerate(data, start=1):
-        #     item_id = QTableWidgetItem(str(i))
-        #     # item_prob = QTableWidgetItem(str(round(Decimal(prob[1]), 3)))
-        #     item_prob = QTableWidgetItem(format(prob[1], '.1%'))
-        #     item_out = QTableWidgetItem(str(out))
-        #     self.ui.tableWidget.setItem(i, 0, item_id)
-        #     self.ui.tableWidget.setItem(i, 1, item_prob)
-        #     self.ui.tableWidget.setItem(i, 2, item_out)
-        for i in range(len(self.result)):
+        self.ui.tableWidget.clear()
+        self.ui.tableWidget.setRowCount(15)
+        self.ui.tableWidget.setItem(0, 0, QTableWidgetItem('Visitor ID'))
+        self.ui.tableWidget.setItem(0, 1, QTableWidgetItem('Probability'))
+        self.ui.tableWidget.setItem(0, 2, QTableWidgetItem('Intention'))
+        if self.my_length > 15:
+            self.ui.tableWidget.setRowCount(self.my_length)
+        for i in range(self.my_length):
             item_id = QTableWidgetItem(str(self.result.loc[i, 'Visitor ID']))
             item_prob = QTableWidgetItem(format(self.result.loc[i, 'Probability'], '.1%'))
             item_out = QTableWidgetItem(str(self.result.loc[i, 'Intention']))

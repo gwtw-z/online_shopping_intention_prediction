@@ -19,15 +19,19 @@ from pandas.plotting import scatter_matrix
 import matplotlib.pyplot as plt
 
 myNet = nn.Sequential(
-    nn.Linear(28, 50),
+    nn.Linear(28, 100),
     nn.ReLU(),
-    nn.Linear(50, 50),
+    nn.Linear(100, 80),
     nn.ReLU(),
-    nn.Linear(50, 50),
+    nn.Linear(80, 50),
     nn.ReLU(),
-    nn.Linear(50, 50),
+    nn.Linear(50, 30),
     nn.ReLU(),
-    nn.Linear(50, 1),
+    nn.Linear(30, 20),
+    nn.ReLU(),
+    nn.Linear(20, 10),
+    nn.ReLU(),
+    nn.Linear(10, 1),
 )
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -59,8 +63,8 @@ print('over-sampling done\n')
 
 # myNet = Net()
 criterion = nn.MSELoss()  # 损失函数
-optimizer = torch.optim.SGD(myNet.parameters(), lr=0.01)  # 优化器
-epochs = 20000  # 训练次数
+optimizer = torch.optim.Adam(myNet.parameters(), lr=0.1)  # 优化器
+epochs = 30000  # 训练次数
 
 
 def check(epoch):
