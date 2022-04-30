@@ -4,12 +4,15 @@ from ui.ui_main_pages import *
 import classifier
 import pandas as pd
 import numpy as np
+import datetime
+import os
+import seaborn as sns
 
 
 # git config --global http.sslVerify "false"
 class MainWindow(QMainWindow):
     def __init__(self):
-        super(MainWindow, self).__init__()
+        super(MainWindow, self).__init__(parent=None)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.window_maximized_flag = False
@@ -25,10 +28,14 @@ class MainWindow(QMainWindow):
         self.restore_icon.addFile(r':/icons/images/icons/icon_restore.png', QSize(), QIcon.Normal, QIcon.Off)
         self.ui.radiobutton_default.setChecked(True)
 
+        self.ui.line_file_path_2.setText('(Default)./save')
+
         self.my_clf = None
         self.my_length = None
         self.file_path = None
+        self.save_path = './save'
         self.result = None
+        self.chart = None
         self.table_order = 'Visitor ID'
 
         self.bind()
@@ -39,13 +46,15 @@ class MainWindow(QMainWindow):
         self.ui.btn_home.clicked.connect(self.home_page)
         self.ui.btn_widgets.clicked.connect(self.widget_page)
         self.ui.btn_chart.clicked.connect(self.chart_page)
-        self.ui.btn_save.clicked.connect(self.save_page)
+        self.ui.btn_save_page.clicked.connect(self.save_page)
         self.ui.radiobutton_default.clicked.connect(self.select_table_order)
         self.ui.radiobutton_probability.clicked.connect(self.select_table_order)
         self.ui.closeAppBtn.clicked.connect(QCoreApplication.instance().quit)
         self.ui.minimizeAppBtn.clicked.connect(self.showMinimized)
         self.ui.maximizeRestoreAppBtn.clicked.connect(self.maximize_page)
         self.ui.titleRightInfo.mouseMoveEvent = self.mouseMoveEvent
+        self.ui.btn_save_path.clicked.connect(self.choose_save_path)
+        self.ui.btn_save_file.clicked.connect(self.save_output)
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -109,6 +118,11 @@ class MainWindow(QMainWindow):
             'Intention': self.my_clf.clf.predict(self.my_clf.test_data)
         })
         self.result['Intention'] = self.result['Intention'].apply(lambda x: 'Deal!' if x else 'No, thanks.')
+        # self.result['Probability'].value_counts().plot.bar(figsize=(16, 8))
+        ax = sns.histplot(self.result['Probability'])
+        self.chart = ax.get_figure()
+        self.chart.savefig('./temp/plt.png')
+        self.ui.label.setPixmap(QPixmap('./temp/plt.png'))
 
     def select_table_order(self):
         btn_name = self.sender().objectName()
@@ -142,6 +156,21 @@ class MainWindow(QMainWindow):
             self.ui.tableWidget.setItem(i + 1, 0, item_id)
             self.ui.tableWidget.setItem(i + 1, 1, item_prob)
             self.ui.tableWidget.setItem(i + 1, 2, item_out)
+
+    def choose_save_path(self):
+        self.save_path = QFileDialog.getExistingDirectory(self, '选择保存路径', "./")
+        self.ui.line_file_path_2.setText(self.save_path)
+
+    def save_output(self):
+        if self.result is None:
+            self.ui.label_save_answer.setText('No analysis is performed yet!')
+        else:
+            self.ui.label_save_answer.setText('Analysis result is saved!')
+            path = self.save_path + '/' + datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
+            if not os.path.exists(path):
+                os.mkdir(path)
+            self.result.to_excel(path + r'/data.xlsx', index=None)
+            self.chart.savefig(path + r'/plot.png')
 
 
 app = QApplication()

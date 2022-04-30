@@ -699,17 +699,17 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_8.addWidget(self.btn_chart)
 
-        self.btn_save = QPushButton(self.topMenu)
-        self.btn_save.setObjectName(u"btn_save")
-        sizePolicy.setHeightForWidth(self.btn_save.sizePolicy().hasHeightForWidth())
-        self.btn_save.setSizePolicy(sizePolicy)
-        self.btn_save.setMinimumSize(QSize(0, 45))
-        self.btn_save.setFont(font)
-        self.btn_save.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_save.setLayoutDirection(Qt.LeftToRight)
-        self.btn_save.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-save.png)")
+        self.btn_save_page = QPushButton(self.topMenu)
+        self.btn_save_page.setObjectName(u"btn_save_page")
+        sizePolicy.setHeightForWidth(self.btn_save_page.sizePolicy().hasHeightForWidth())
+        self.btn_save_page.setSizePolicy(sizePolicy)
+        self.btn_save_page.setMinimumSize(QSize(0, 45))
+        self.btn_save_page.setFont(font)
+        self.btn_save_page.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_save_page.setLayoutDirection(Qt.LeftToRight)
+        self.btn_save_page.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-save.png)")
 
-        self.verticalLayout_8.addWidget(self.btn_save)
+        self.verticalLayout_8.addWidget(self.btn_save_page)
 
 
         self.verticalMenuLayout.addWidget(self.topMenu, 0, Qt.AlignTop)
@@ -1431,13 +1431,13 @@ class Ui_MainWindow(object):
         self.frame_content_wid_3.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_9 = QHBoxLayout(self.frame_content_wid_3)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
-        self.labelVersion_6 = QLabel(self.frame_content_wid_3)
-        self.labelVersion_6.setObjectName(u"labelVersion_6")
-        self.labelVersion_6.setStyleSheet(u"color: rgb(113, 126, 149);")
-        self.labelVersion_6.setLineWidth(1)
-        self.labelVersion_6.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.label_save_path = QLabel(self.frame_content_wid_3)
+        self.label_save_path.setObjectName(u"label_save_path")
+        self.label_save_path.setStyleSheet(u"color: rgb(113, 126, 149);")
+        self.label_save_path.setLineWidth(1)
+        self.label_save_path.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
-        self.horizontalLayout_9.addWidget(self.labelVersion_6)
+        self.horizontalLayout_9.addWidget(self.label_save_path)
 
         self.line_file_path_2 = QLineEdit(self.frame_content_wid_3)
         self.line_file_path_2.setObjectName(u"line_file_path_2")
@@ -1446,27 +1446,27 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_9.addWidget(self.line_file_path_2)
 
-        self.btn_open_file_2 = QPushButton(self.frame_content_wid_3)
-        self.btn_open_file_2.setObjectName(u"btn_open_file_2")
-        self.btn_open_file_2.setMinimumSize(QSize(150, 30))
-        self.btn_open_file_2.setFont(font)
-        self.btn_open_file_2.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_open_file_2.setStyleSheet(u"background-color: rgb(52, 59, 72);")
-        self.btn_open_file_2.setIcon(icon4)
+        self.btn_save_path = QPushButton(self.frame_content_wid_3)
+        self.btn_save_path.setObjectName(u"btn_save_path")
+        self.btn_save_path.setMinimumSize(QSize(150, 30))
+        self.btn_save_path.setFont(font)
+        self.btn_save_path.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_save_path.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+        self.btn_save_path.setIcon(icon4)
 
-        self.horizontalLayout_9.addWidget(self.btn_open_file_2)
+        self.horizontalLayout_9.addWidget(self.btn_save_path)
 
-        self.btn_open_file_3 = QPushButton(self.frame_content_wid_3)
-        self.btn_open_file_3.setObjectName(u"btn_open_file_3")
-        self.btn_open_file_3.setMinimumSize(QSize(150, 30))
-        self.btn_open_file_3.setFont(font)
-        self.btn_open_file_3.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_open_file_3.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+        self.btn_save_file = QPushButton(self.frame_content_wid_3)
+        self.btn_save_file.setObjectName(u"btn_save_file")
+        self.btn_save_file.setMinimumSize(QSize(150, 30))
+        self.btn_save_file.setFont(font)
+        self.btn_save_file.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_save_file.setStyleSheet(u"background-color: rgb(52, 59, 72);")
         icon8 = QIcon()
         icon8.addFile(u":/icons/images/icons/cil-save.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_open_file_3.setIcon(icon8)
+        self.btn_save_file.setIcon(icon8)
 
-        self.horizontalLayout_9.addWidget(self.btn_open_file_3)
+        self.horizontalLayout_9.addWidget(self.btn_save_file)
 
 
         self.verticalLayout_24.addWidget(self.frame_content_wid_3)
@@ -1477,11 +1477,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_26.addWidget(self.row_4)
 
-        self.label_2 = QLabel(self.save_page)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setAlignment(Qt.AlignCenter)
+        self.label_save_answer = QLabel(self.save_page)
+        self.label_save_answer.setObjectName(u"label_save_answer")
+        self.label_save_answer.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_26.addWidget(self.label_2)
+        self.verticalLayout_26.addWidget(self.label_save_answer)
 
         self.verticalSpacer = QSpacerItem(20, 471, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -1629,7 +1629,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1653,9 +1653,9 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.btn_chart.setText(QCoreApplication.translate("MainWindow", u"New", None))
 #if QT_CONFIG(tooltip)
-        self.btn_save.setToolTip(QCoreApplication.translate("MainWindow", u"save", None))
+        self.btn_save_page.setToolTip(QCoreApplication.translate("MainWindow", u"save", None))
 #endif // QT_CONFIG(tooltip)
-        self.btn_save.setText(QCoreApplication.translate("MainWindow", u"Save", None))
+        self.btn_save_page.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.toggleLeftBox.setText(QCoreApplication.translate("MainWindow", u"Left Box", None))
         self.extraLabel.setText(QCoreApplication.translate("MainWindow", u"Left Box", None))
 #if QT_CONFIG(tooltip)
@@ -1770,12 +1770,12 @@ class Ui_MainWindow(object):
         self.btn_analysize_3.setText(QCoreApplication.translate("MainWindow", u"Hold", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"No pivot chart is created yet.", None))
         self.labelBoxBlenderInstalation_3.setText(QCoreApplication.translate("MainWindow", u"Please select the folder to save data files.", None))
-        self.labelVersion_6.setText(QCoreApplication.translate("MainWindow", u"Data File Path:", None))
+        self.label_save_path.setText(QCoreApplication.translate("MainWindow", u"Data File Path:", None))
         self.line_file_path_2.setText("")
         self.line_file_path_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
-        self.btn_open_file_2.setText(QCoreApplication.translate("MainWindow", u"Select path", None))
-        self.btn_open_file_3.setText(QCoreApplication.translate("MainWindow", u"Save", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"No file is saved yet.", None))
+        self.btn_save_path.setText(QCoreApplication.translate("MainWindow", u"Select path", None))
+        self.btn_save_file.setText(QCoreApplication.translate("MainWindow", u"Save", None))
+        self.label_save_answer.setText(QCoreApplication.translate("MainWindow", u"No file is saved yet.", None))
         self.btn_message.setText(QCoreApplication.translate("MainWindow", u"Message", None))
         self.btn_print.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))
