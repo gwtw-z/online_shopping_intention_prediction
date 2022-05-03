@@ -716,6 +716,7 @@ class Ui_MainWindow(object):
 
         self.bottomMenu = QFrame(self.leftMenuFrame)
         self.bottomMenu.setObjectName(u"bottomMenu")
+        self.bottomMenu.setToolTipDuration(-4)
         self.bottomMenu.setFrameShape(QFrame.NoFrame)
         self.bottomMenu.setFrameShadow(QFrame.Raised)
         self.verticalLayout_9 = QVBoxLayout(self.bottomMenu)
@@ -881,6 +882,9 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_12.addWidget(self.extraBottom)
 
+        self.extraTopMenu.raise_()
+        self.extraBottom.raise_()
+        self.extraCenter.raise_()
 
         self.extraColumLayout.addWidget(self.extraContent)
 
@@ -1637,27 +1641,27 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Prediction System", None))
-        self.titleLeftApp.setText(QCoreApplication.translate("MainWindow", u"PyDracula", None))
-        self.titleLeftDescription.setText(QCoreApplication.translate("MainWindow", u"Modern GUI / Flat Style", None))
+        self.titleLeftApp.setText(QCoreApplication.translate("MainWindow", u"PyPredict", None))
+        self.titleLeftDescription.setText(QCoreApplication.translate("MainWindow", u"Ease your e-commerce", None))
         self.toggleButton.setText(QCoreApplication.translate("MainWindow", u"Hide", None))
 #if QT_CONFIG(tooltip)
-        self.btn_home.setToolTip(QCoreApplication.translate("MainWindow", u"home", None))
+        self.btn_home.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.btn_home.setText(QCoreApplication.translate("MainWindow", u"Home", None))
 #if QT_CONFIG(tooltip)
-        self.btn_widgets.setToolTip(QCoreApplication.translate("MainWindow", u"analysize", None))
+        self.btn_widgets.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.btn_widgets.setText(QCoreApplication.translate("MainWindow", u"Analyze", None))
 #if QT_CONFIG(tooltip)
-        self.btn_chart.setToolTip(QCoreApplication.translate("MainWindow", u"chart", None))
+        self.btn_chart.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.btn_chart.setText(QCoreApplication.translate("MainWindow", u"Chart", None))
 #if QT_CONFIG(tooltip)
-        self.btn_save_page.setToolTip(QCoreApplication.translate("MainWindow", u"save", None))
+        self.btn_save_page.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.btn_save_page.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.toggleLeftBox.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
-        self.extraLabel.setText(QCoreApplication.translate("MainWindow", u"Left Box", None))
+        self.extraLabel.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
 #if QT_CONFIG(tooltip)
         self.extraCloseColumnBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Close left box", None))
 #endif // QT_CONFIG(tooltip)

@@ -686,7 +686,7 @@ Button */
               </font>
              </property>
              <property name="text">
-              <string>PyDracula</string>
+              <string>PyPredict</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -716,7 +716,7 @@ Button */
               </font>
              </property>
              <property name="text">
-              <string>Modern GUI / Flat Style</string>
+              <string>Ease your e-commerce</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -867,7 +867,7 @@ Button */
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="toolTip">
-                   <string>home</string>
+                   <string/>
                   </property>
                   <property name="layoutDirection">
                    <enum>Qt::LeftToRight</enum>
@@ -906,7 +906,7 @@ Button */
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="toolTip">
-                   <string>analysize</string>
+                   <string/>
                   </property>
                   <property name="layoutDirection">
                    <enum>Qt::LeftToRight</enum>
@@ -945,7 +945,7 @@ Button */
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="toolTip">
-                   <string>chart</string>
+                   <string/>
                   </property>
                   <property name="layoutDirection">
                    <enum>Qt::LeftToRight</enum>
@@ -984,7 +984,7 @@ Button */
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="toolTip">
-                   <string>save</string>
+                   <string/>
                   </property>
                   <property name="layoutDirection">
                    <enum>Qt::LeftToRight</enum>
@@ -1002,6 +1002,9 @@ Button */
              </item>
              <item alignment="Qt::AlignBottom">
               <widget class="QFrame" name="bottomMenu">
+               <property name="toolTipDuration">
+                <number>-4</number>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -1186,7 +1189,7 @@ Button */
                   </size>
                  </property>
                  <property name="text">
-                  <string>Left Box</string>
+                  <string>Settings</string>
                  </property>
                 </widget>
                </item>
@@ -1445,6 +1448,9 @@ p, li { white-space: pre-wrap; }
               </widget>
              </item>
             </layout>
+            <zorder>extraTopMenu</zorder>
+            <zorder>extraBottom</zorder>
+            <zorder>extraCenter</zorder>
            </widget>
           </item>
          </layout>

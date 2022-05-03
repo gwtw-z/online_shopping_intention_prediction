@@ -48,8 +48,8 @@ class MainWindow(QMainWindow):
         self.restore_icon = QIcon()
         self.restore_icon.addFile(r':/icons/images/icons/icon_restore.png', QSize(), QIcon.Normal, QIcon.Off)
         self.ui.radiobutton_default.setChecked(True)
-
         self.ui.line_file_path_2.setText('(Default)./save')
+        self.ui.leftMenuBg.setMinimumWidth(Settings.MENU_WIDTH)
 
         self.my_clf = None
         self.my_length = None
@@ -78,6 +78,7 @@ class MainWindow(QMainWindow):
         self.ui.btn_save_file.clicked.connect(self.save_output)
         self.ui.toggleButton.clicked.connect(self.toggleMenu)
         self.ui.toggleLeftBox.clicked.connect(self.toggleLeftBox)
+        self.ui.extraCloseColumnBtn.clicked.connect(self.toggleLeftBox)
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -257,32 +258,31 @@ class MainWindow(QMainWindow):
         self.animation.setEasingCurve(QEasingCurve.InOutQuart)
         self.animation.start()
 
-    def toggleLeftBox(self, enable):
-        if enable:
-            # GET WIDTH
-            width = self.ui.extraLeftBox.width()
-            widthRightBox = self.ui.extraRightBox.width()
-            maxExtend = Settings.LEFT_BOX_WIDTH
-            color = Settings.BTN_LEFT_BOX_COLOR
-            standard = 0
+    def toggleLeftBox(self):
+        # GET WIDTH
+        width = self.ui.extraLeftBox.width()
+        widthRightBox = self.ui.extraRightBox.width()
+        maxExtend = Settings.LEFT_BOX_WIDTH
+        color = Settings.BTN_LEFT_BOX_COLOR
+        standard = 0
 
-            # GET BTN STYLE
-            style = self.ui.toggleLeftBox.styleSheet()
+        # GET BTN STYLE
+        style = self.ui.toggleLeftBox.styleSheet()
 
-            # SET MAX WIDTH
-            if width == 0:
-                widthExtended = maxExtend
-                # SELECT BTN
-                self.ui.toggleLeftBox.setStyleSheet(style + color)
-                if widthRightBox != 0:
-                    style = self.ui.settingsTopBtn.styleSheet()
-                    self.ui.settingsTopBtn.setStyleSheet(style.replace(Settings.BTN_RIGHT_BOX_COLOR, ''))
-            else:
-                widthExtended = standard
-                # RESET BTN
-                self.ui.toggleLeftBox.setStyleSheet(style.replace(color, ''))
+        # SET MAX WIDTH
+        if width == 0:
+            widthExtended = maxExtend
+            # SELECT BTN
+            self.ui.toggleLeftBox.setStyleSheet(style + color)
+            # if widthRightBox != 0:
+            #     style = self.ui.settingsTopBtn.styleSheet()
+            #     self.ui.settingsTopBtn.setStyleSheet(style.replace(Settings.BTN_RIGHT_BOX_COLOR, ''))
+        else:
+            widthExtended = standard
+            # RESET BTN
+            self.ui.toggleLeftBox.setStyleSheet(style.replace(color, ''))
 
-        self.start_box_animation(self, width, widthRightBox, "left")
+        self.start_box_animation(width, widthRightBox, "left")
 
 
 app = QApplication()
