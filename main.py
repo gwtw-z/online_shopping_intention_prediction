@@ -205,9 +205,6 @@ class MainWindow(QMainWindow):
             return
         self.ui.tableWidget.clearContents()
         self.ui.tableWidget.setRowCount(15)
-        # self.ui.tableWidget.setItem(0, 0, QTableWidgetItem('Visitor ID'))
-        # self.ui.tableWidget.setItem(0, 1, QTableWidgetItem('Probability'))
-        # self.ui.tableWidget.setItem(0, 2, QTableWidgetItem('Intention'))
         if self.my_length > 15:
             self.ui.tableWidget.setRowCount(self.my_length)
         for i in range(self.my_length):
@@ -314,7 +311,7 @@ class MainWindow(QMainWindow):
         self.right_box.setEasingCurve(QEasingCurve.InOutQuart)
 
         # GROUP ANIMATION
-        self.group = QParallelAnimationGroup()
+        self.group = QParallelAnimationGroup(parent=None)
         self.group.addAnimation(self.left_box)
         self.group.addAnimation(self.right_box)
         self.group.start()
