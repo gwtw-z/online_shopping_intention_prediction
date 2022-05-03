@@ -38,6 +38,7 @@ mRMR_order = ['PageValues', 'Month', 'ExitRates', 'Weekend', 'Informational_Dura
 
 origin_file_ = r'D:\repos\毕设\major\repo\online_shopping_intention_prediction\data\online_shoppers_intention.csv'
 file_ = r'D:\repos\毕设\major\repo\online_shopping_intention_prediction\data\sample_10.csv'
+new_data = r'D:\repos\毕设\major\repo\online_shopping_intention_prediction\data\breast_cancer.csv'
 
 
 def normalize(table):
@@ -77,11 +78,10 @@ class Classifier:
     def train_reader(self):
         table = pd.read_csv(self.file_path)
         y = table.iloc[:, -1]
-        table = table.drop(columns=['Revenue'])
+        table = table.iloc[:, :-1]
         if self.generate_sample is True:
             self.sample = table.sample(n=self.sample_volume)
             self.sample.to_csv(r'./data/sample_' + str(self.sample_volume) + '.csv', index=False)
-        table = table[mRMR_order[:self.feature_num]]
         x = pd.get_dummies(table)
         mm = MinMaxScaler(feature_range=(0, 1))
         x = mm.fit_transform(x)
@@ -96,11 +96,11 @@ class Classifier:
         self.train_label = np.array(self.train_label).ravel()
         self.test_label = np.array(self.test_label).ravel()
 
-    def load_reader(self):
+    def load_reader(self, is_user_diy_model=False):
         table = pd.read_csv(self.file_path)
-        table = table[mRMR_order[:self.feature_num]]
         x = pd.get_dummies(table)
-        x = normalize(x)
+        if is_user_diy_model is False:
+            x = normalize(x)
         mm = MinMaxScaler(feature_range=(0, 1))
         x = mm.fit_transform(x)
         self.test_data = x
@@ -140,8 +140,8 @@ class Classifier:
                                                        self.result['test_f1'].mean(),
                                                        self.result['test_roc_auc'].mean()))
 
-    def save_model(self, model_name):
-        with open(r'./model/' + model_name + '.pickle', 'wb') as f:
+    def save_model(self, model):
+        with open(model, 'wb') as f:
             pickle.dump(self.clf, f)
 
     def load_model(self, model):
@@ -157,37 +157,37 @@ class Classifier:
 
 
 class NaiveBayes(Classifier):
-    def __init__(self, file_path, feature_num=3):
-        super(NaiveBayes, self).__init__(file_path, clf_name='naive bayes', feature_num=feature_num)
+    def __init__(self, file_path, feature_num=17):
+        super(NaiveBayes, self).__init__(file_path, clf_name='Naive Bayes', feature_num=feature_num)
         self.clf = GaussianNB()
 
 
 class KNN(Classifier):
-    def __init__(self, file_path, n=5, feature_num=3):
-        super(KNN, self).__init__(file_path, clf_name='knn', feature_num=feature_num)
+    def __init__(self, file_path, n=23, feature_num=17):
+        super(KNN, self).__init__(file_path, clf_name='KNN', feature_num=feature_num)
         self.clf = KNeighborsClassifier(n_neighbors=n)
 
 
 class DecisionTree(Classifier):
-    def __init__(self, file_path, feature_num=3):
-        super(DecisionTree, self).__init__(file_path, clf_name='decision tree', feature_num=feature_num)
+    def __init__(self, file_path, feature_num=17):
+        super(DecisionTree, self).__init__(file_path, clf_name='Decision Tree', feature_num=feature_num)
         self.clf = tree.DecisionTreeClassifier(criterion='gini')
 
 
 class RandomForest(Classifier):
-    def __init__(self, file_path, n=30, feature_num=12):
-        super(RandomForest, self).__init__(file_path, clf_name='random forest', feature_num=feature_num)
+    def __init__(self, file_path, n=30, feature_num=17):
+        super(RandomForest, self).__init__(file_path, clf_name='Random Forest', feature_num=feature_num)
         self.clf = RandomForestClassifier(n_estimators=n, random_state=3)
 
 
 class SVM(Classifier):
-    def __init__(self, file_path, c=2, feature_num=3):
-        super(SVM, self).__init__(file_path, clf_name='svm', feature_num=feature_num)
+    def __init__(self, file_path, c=8.5, feature_num=17):
+        super(SVM, self).__init__(file_path, clf_name='SVM', feature_num=feature_num)
         self.clf = svm.SVC(C=c, kernel='rbf')
 
 
 class MLP(Classifier):
-    def __init__(self, file_path, feature_num=3):
+    def __init__(self, file_path, feature_num=17):
         super(MLP, self).__init__(file_path, clf_name='MLP', feature_num=feature_num)
         self.clf = MLPClassifier(solver='adam', alpha=0.5, hidden_layer_sizes=(50, 50, 50, 50, 50),
                                  learning_rate='adaptive', learning_rate_init=0.15, shuffle=True,
@@ -195,19 +195,18 @@ class MLP(Classifier):
 
 
 class LogisticRegression(Classifier):
-    def __init__(self, file_path, feature_num=3):
+    def __init__(self, file_path, feature_num=17):
         super(LogisticRegression, self).__init__(file_path, clf_name='LogisticRegression', feature_num=feature_num)
         self.clf = LR()
 
 
 class GDBT(Classifier):
-    def __init__(self, file_path, lr=0.2, n=20, feature_num=3, over_sample=False):
+    def __init__(self, file_path, lr=0.2, n=20, feature_num=17, over_sample=False):
         super(GDBT, self).__init__(file_path, clf_name='GDBT', feature_num=feature_num, over_sample=over_sample)
         self.clf = GradientBoostingClassifier(n_estimators=n, learning_rate=lr)
 
 
 class XGBoost(Classifier):
-    def __init__(self, file_path, n=10, lr=0.1, feature_num=3):
+    def __init__(self, file_path, n=10, lr=0.1, feature_num=17):
         super(XGBoost, self).__init__(file_path, clf_name='xgboost', feature_num=feature_num)
         self.clf = XGBClassifier(object='binary:logistic', n_estimators=n, learning_rate=lr, use_label_encoder=False)
-

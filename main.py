@@ -45,6 +45,10 @@ class MainWindow(QMainWindow):
         self.result = None
         self.chart = None
         self.table_order = 'Visitor ID'
+        self.new_data = None
+        self.user_diy_clf = None
+        self.new_model_path = './model'
+        self.is_diy_model = False
 
         self.bind()
 
@@ -69,6 +73,10 @@ class MainWindow(QMainWindow):
         self.ui.btn_adjustments.clicked.connect(self.adjust_page)
         self.ui.btn_DIY.clicked.connect(self.diy_page)
         self.ui.btn_select_model.clicked.connect(self.select_model)
+        self.ui.btn_select_new_data.clicked.connect(self.select_new_data)
+        self.ui.btn_train_new_model.clicked.connect(self.train_new_model)
+        self.ui.btn_select_path_new_model.clicked.connect(self.select_path_save_new_model)
+        self.ui.btn_save_new_model.clicked.connect(self.save_new_model)
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -116,10 +124,13 @@ class MainWindow(QMainWindow):
     def diy_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.diy_page)
 
+    def pick_model_name(self):
+        return self.model_path.split('/')[-1].split('.')[0]
+
     def select_model(self):
         model_path = QFileDialog.getOpenFileName(
             self,
-            '选择数据文件',
+            '选择分析模型',
             r'.',
             '(*.pickle)'
         )[0]
@@ -128,7 +139,7 @@ class MainWindow(QMainWindow):
         else:
             self.model_path = model_path
         self.ui.line_model_path.setText(self.model_path)
-        self.current_model = self.model_path.split('/')[-1].split('.')[0]
+        self.current_model = self.pick_model_name()
         self.ui.label_model.setText('The current model selected is : ' + self.current_model)
 
     def select_file(self):
@@ -143,12 +154,19 @@ class MainWindow(QMainWindow):
         else:
             self.file_path = file_path
         self.ui.line_file_path.setText(self.file_path)
+        self.calculate()
 
+    def calculate(self):
         # data is processed when file path is chosen instead of when 'analyze' button is pressed
         # so that the user doesn't actually sense the time spent here
+        if self.file_path is None or self.model_path is None:
+            return
         self.my_clf = classifier.Classifier(file_path=self.file_path, feature_num=17)
+        self.is_diy_model = False
+        if self.pick_model_name()[:3] == 'DIY':
+            self.is_diy_model = True
         self.my_clf.load_model(self.model_path)
-        self.my_clf.load_reader()
+        self.my_clf.load_reader(is_user_diy_model=self.is_diy_model)
         self.my_length = len(self.my_clf.test_data)
         self.result = pd.DataFrame({
             'Visitor ID': list(range(1, len(self.my_clf.test_data) + 1)),
@@ -156,7 +174,10 @@ class MainWindow(QMainWindow):
             'Probability': np.delete(self.my_clf.clf.predict_proba(self.my_clf.test_data), 0, axis=1).ravel(),
             'Intention': self.my_clf.clf.predict(self.my_clf.test_data)
         })
-        self.result['Intention'] = self.result['Intention'].apply(lambda x: 'Deal!' if x else 'No, thanks.')
+        if self.is_diy_model is False:
+            self.result['Intention'] = self.result['Intention'].apply(lambda x: 'Deal!' if x else 'No, thanks.')
+        else:
+            self.result['Intention'] = self.result['Intention'].apply(lambda x: 'True' if x else 'False')
         ax = sns.histplot(self.result['Probability'])
         self.chart = ax.get_figure()
         if not os.path.exists('./temp'):
@@ -220,11 +241,48 @@ class MainWindow(QMainWindow):
             self.result.to_excel(path + r'/data.xlsx', index=None)
             self.chart.savefig(path + r'/chart.png')
 
-    def adjust(self):
-        pass
+    def select_new_data(self):
+        new_data = QFileDialog.getOpenFileName(
+            self,
+            '选择数据文件',
+            r'.',
+            '(*.csv)'
+        )[0]
+        if new_data == '':
+            return
+        else:
+            self.new_data = new_data
+            self.ui.line_file_path_new_data.setText(new_data)
 
-    def DIY(self):
-        pass
+    def train_new_model(self):
+        model_name = self.ui.model_choice.currentText()
+        if model_name == 'KNN':
+            self.user_diy_clf = classifier.KNN(self.new_data)
+        if model_name == 'Decision Tree':
+            self.user_diy_clf = classifier.DecisionTree(self.new_data)
+        if model_name == 'Random Forest':
+            self.user_diy_clf = classifier.RandomForest(self.new_data)
+        if model_name == 'GDBT':
+            self.user_diy_clf = classifier.GDBT(self.new_data)
+        self.user_diy_clf.train_reader()
+        self.user_diy_clf.train(training_time=False)
+        score = classifier.cross_validate(self.user_diy_clf.clf, self.user_diy_clf.test_data,
+                                          self.user_diy_clf.test_label, cv=10, scoring=['accuracy'])
+        self.ui.label_train_result.setText(
+            'Training result:  ' + model_name + ' scores ' + str(format(score['test_accuracy'].mean(), '.2%'))
+            + ' in ' + str(self.user_diy_clf.train_time))
+
+    def select_path_save_new_model(self):
+        save_path = QFileDialog.getExistingDirectory(self, '选择保存路径', "./")
+        if save_path == '':
+            self.ui.line_file_path_2.setText('(Default)./model')
+        else:
+            self.new_model_path = save_path
+            self.ui.line_file_path_new_model.setText(save_path)
+
+    def save_new_model(self):
+        self.user_diy_clf.save_model(self.new_model_path + '/DIY_' + self.user_diy_clf.clf_name + '.pickle')
+        self.ui.label_diy_model_info.setText('DIY model is save!')
 
     def start_box_animation(self, left_box_width, right_box_width, direction):
         right_width = 0
