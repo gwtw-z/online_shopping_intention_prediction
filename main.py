@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import QFileDialog
 from ui.main_PyDracula import *
 from ui.ui_main_pages import *
+from settings import Settings
 import classifier
 import pandas as pd
 import numpy as np
@@ -9,30 +10,13 @@ import os
 import seaborn as sns
 
 
-class Settings:
-    # APP SETTINGS
-    # ///////////////////////////////////////////////////////////////
-    ENABLE_CUSTOM_TITLE_BAR = True
-    MENU_WIDTH = 240
-    LEFT_BOX_WIDTH = 240
-    RIGHT_BOX_WIDTH = 240
-    TIME_ANIMATION = 500
-
-    # BTNS LEFT AND RIGHT BOX COLORS
-    BTN_LEFT_BOX_COLOR = "background-color: rgb(44, 49, 58);"
-    BTN_RIGHT_BOX_COLOR = "background-color: #ff79c6;"
-
-    # MENU SELECTED STYLESHEET
-    MENU_SELECTED_STYLESHEET = """
-    border-left: 22px solid qlineargradient(spread:pad, x1:0.034, y1:0, x2:0.216, y2:0, stop:0.499 rgba(255, 121, 198, 255), stop:0.5 rgba(85, 170, 255, 0));
-    background-color: rgb(40, 44, 52);
-    """
-
-
 # git config --global http.sslVerify "false"
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__(parent=None)
+        self.group = None
+        self.right_box = None
+        self.left_box = None
         self.animation = None
         self.offset = None
 
@@ -41,7 +25,7 @@ class MainWindow(QMainWindow):
         self.window_maximized_flag = False
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.ui.stackedWidget.setCurrentWidget(self.ui.home)
+        self.ui.stackedWidget.setCurrentWidget(self.ui.home_page)
 
         self.maximize_icon = QIcon()
         self.maximize_icon.addFile(r':/icons/images/icons/icon_maximize.png', QSize(), QIcon.Normal, QIcon.Off)
@@ -50,7 +34,10 @@ class MainWindow(QMainWindow):
         self.ui.radiobutton_default.setChecked(True)
         self.ui.line_file_path_2.setText('(Default)./save')
         self.ui.leftMenuBg.setMinimumWidth(Settings.MENU_WIDTH)
+        self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
+        self.model_path = './model/GDBT.pickle'  # default model
+        self.current_model = '(Default)GDBT'
         self.my_clf = None
         self.my_length = None
         self.file_path = None
@@ -62,10 +49,10 @@ class MainWindow(QMainWindow):
         self.bind()
 
     def bind(self):
-        self.ui.btn_open_file.clicked.connect(self.choose_file)
+        self.ui.btn_open_file.clicked.connect(self.select_file)
         self.ui.btn_analyze.clicked.connect(self.show_analysis)
         self.ui.btn_home.clicked.connect(self.home_page)
-        self.ui.btn_widgets.clicked.connect(self.widget_page)
+        self.ui.btn_widgets.clicked.connect(self.analysis_page)
         self.ui.btn_chart.clicked.connect(self.chart_page)
         self.ui.btn_save_page.clicked.connect(self.save_page)
         self.ui.radiobutton_default.clicked.connect(self.select_table_order)
@@ -79,8 +66,9 @@ class MainWindow(QMainWindow):
         self.ui.toggleButton.clicked.connect(self.toggleMenu)
         self.ui.toggleLeftBox.clicked.connect(self.toggleLeftBox)
         self.ui.extraCloseColumnBtn.clicked.connect(self.toggleLeftBox)
-        self.ui.btn_adjustments.clicked.connect(self.adjust)
-        self.ui.btn_DIY.clicked.connect(self.DIY)
+        self.ui.btn_adjustments.clicked.connect(self.adjust_page)
+        self.ui.btn_DIY.clicked.connect(self.diy_page)
+        self.ui.btn_select_model.clicked.connect(self.select_model)
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -111,10 +99,10 @@ class MainWindow(QMainWindow):
             self.window_maximized_flag = False
 
     def home_page(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.home)
+        self.ui.stackedWidget.setCurrentWidget(self.ui.home_page)
 
-    def widget_page(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.widgets)
+    def analysis_page(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.analysis_page)
 
     def chart_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.chart_page)
@@ -122,21 +110,44 @@ class MainWindow(QMainWindow):
     def save_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.save_page)
 
-    def choose_file(self):
-        self.file_path = QFileDialog.getOpenFileName(
+    def adjust_page(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.adjust_page)
+
+    def diy_page(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.diy_page)
+
+    def select_model(self):
+        model_path = QFileDialog.getOpenFileName(
+            self,
+            '选择数据文件',
+            r'.',
+            '(*.pickle)'
+        )[0]
+        if model_path == '':
+            return
+        else:
+            self.model_path = model_path
+        self.ui.line_model_path.setText(self.model_path)
+        self.current_model = self.model_path.split('/')[-1].split('.')[0]
+        self.ui.label_model.setText('The current model selected is : ' + self.current_model)
+
+    def select_file(self):
+        file_path = QFileDialog.getOpenFileName(
             self,
             '选择数据文件',
             r'.',
             '(*.csv)'
         )[0]
+        if file_path == '':
+            return
+        else:
+            self.file_path = file_path
         self.ui.line_file_path.setText(self.file_path)
 
         # data is processed when file path is chosen instead of when 'analyze' button is pressed
         # so that the user doesn't actually sense the time spent here
-        if self.file_path == '':
-            return
-        self.my_clf = classifier.GDBT(file_path=self.file_path, feature_num=17)
-        self.my_clf.load_model('GDBT')
+        self.my_clf = classifier.Classifier(file_path=self.file_path, feature_num=17)
+        self.my_clf.load_model(self.model_path)
         self.my_clf.load_reader()
         self.my_length = len(self.my_clf.test_data)
         self.result = pd.DataFrame({
@@ -146,7 +157,6 @@ class MainWindow(QMainWindow):
             'Intention': self.my_clf.clf.predict(self.my_clf.test_data)
         })
         self.result['Intention'] = self.result['Intention'].apply(lambda x: 'Deal!' if x else 'No, thanks.')
-        # self.result['Probability'].value_counts().plot.bar(figsize=(16, 8))
         ax = sns.histplot(self.result['Probability'])
         self.chart = ax.get_figure()
         if not os.path.exists('./temp'):
@@ -172,27 +182,32 @@ class MainWindow(QMainWindow):
     def show_analysis(self):
         if self.file_path is None:
             return
-        self.ui.tableWidget.clear()
+        self.ui.tableWidget.clearContents()
         self.ui.tableWidget.setRowCount(15)
-        self.ui.tableWidget.setItem(0, 0, QTableWidgetItem('Visitor ID'))
-        self.ui.tableWidget.setItem(0, 1, QTableWidgetItem('Probability'))
-        self.ui.tableWidget.setItem(0, 2, QTableWidgetItem('Intention'))
+        # self.ui.tableWidget.setItem(0, 0, QTableWidgetItem('Visitor ID'))
+        # self.ui.tableWidget.setItem(0, 1, QTableWidgetItem('Probability'))
+        # self.ui.tableWidget.setItem(0, 2, QTableWidgetItem('Intention'))
         if self.my_length > 15:
             self.ui.tableWidget.setRowCount(self.my_length)
         for i in range(self.my_length):
             item_id = QTableWidgetItem(str(self.result.loc[i, 'Visitor ID']))
             item_prob = QTableWidgetItem(format(self.result.loc[i, 'Probability'], '.1%'))
             item_out = QTableWidgetItem(str(self.result.loc[i, 'Intention']))
-            self.ui.tableWidget.setItem(i + 1, 0, item_id)
-            self.ui.tableWidget.setItem(i + 1, 1, item_prob)
-            self.ui.tableWidget.setItem(i + 1, 2, item_out)
+            item_id.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+            item_prob.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+            item_out.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+
+            self.ui.tableWidget.setItem(i, 0, item_id)
+            self.ui.tableWidget.setItem(i, 1, item_prob)
+            self.ui.tableWidget.setItem(i, 2, item_out)
 
     def choose_save_path(self):
-        self.save_path = QFileDialog.getExistingDirectory(self, '选择保存路径', "./")
-        if self.save_path == '':
+        save_path = QFileDialog.getExistingDirectory(self, '选择保存路径', "./")
+        if save_path == '':
             self.ui.line_file_path_2.setText('(Default)./save')
         else:
-            self.ui.line_file_path_2.setText(self.save_path)
+            self.save_path = save_path
+            self.ui.line_file_path_2.setText(save_path)
 
     def save_output(self):
         if self.result is None:
@@ -246,7 +261,7 @@ class MainWindow(QMainWindow):
         self.group.addAnimation(self.right_box)
         self.group.start()
 
-    def toggleMenu(self, enable):
+    def toggleMenu(self):
         # GET WIDTH
         width = self.ui.leftMenuBg.width()
         maxExtend = Settings.MENU_WIDTH

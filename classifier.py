@@ -144,8 +144,8 @@ class Classifier:
         with open(r'./model/' + model_name + '.pickle', 'wb') as f:
             pickle.dump(self.clf, f)
 
-    def load_model(self, model_name):
-        with open(r'./model/' + model_name + '.pickle', 'rb') as f:
+    def load_model(self, model):
+        with open(model, 'rb') as f:
             self.clf = pickle.load(f)
 
     def generate_model(self, model_name):
@@ -210,3 +210,4 @@ class XGBoost(Classifier):
     def __init__(self, file_path, n=10, lr=0.1, feature_num=3):
         super(XGBoost, self).__init__(file_path, clf_name='xgboost', feature_num=feature_num)
         self.clf = XGBClassifier(object='binary:logistic', n_estimators=n, learning_rate=lr, use_label_encoder=False)
+

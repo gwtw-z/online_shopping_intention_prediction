@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1064, 757)
+        MainWindow.resize(1097, 757)
         MainWindow.setMinimumSize(QSize(940, 560))
         icon = QIcon()
         icon.addFile(u"images/images/PyDracula.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -1003,25 +1003,23 @@ class Ui_MainWindow(object):
         self.pagesContainer.setStyleSheet(u"")
         self.pagesContainer.setFrameShape(QFrame.NoFrame)
         self.pagesContainer.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_15 = QVBoxLayout(self.pagesContainer)
-        self.verticalLayout_15.setSpacing(0)
-        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
-        self.verticalLayout_15.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_36 = QVBoxLayout(self.pagesContainer)
+        self.verticalLayout_36.setObjectName(u"verticalLayout_36")
         self.stackedWidget = QStackedWidget(self.pagesContainer)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.stackedWidget.setStyleSheet(u"background: transparent;")
-        self.home = QWidget()
-        self.home.setObjectName(u"home")
-        self.home.setStyleSheet(u"background-image: url(:/images/images/images/PyDracula_vertical.png);\n"
+        self.home_page = QWidget()
+        self.home_page.setObjectName(u"home_page")
+        self.home_page.setStyleSheet(u"background-image: url(:/images/images/images/PyDracula_vertical.png);\n"
 "background-position: center;\n"
 "background-repeat: no-repeat;")
-        self.stackedWidget.addWidget(self.home)
-        self.widgets = QWidget()
-        self.widgets.setObjectName(u"widgets")
-        self.widgets.setStyleSheet(u"b")
-        self.verticalLayout_27 = QVBoxLayout(self.widgets)
+        self.stackedWidget.addWidget(self.home_page)
+        self.analysis_page = QWidget()
+        self.analysis_page.setObjectName(u"analysis_page")
+        self.analysis_page.setStyleSheet(u"b")
+        self.verticalLayout_27 = QVBoxLayout(self.analysis_page)
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
-        self.row_1 = QFrame(self.widgets)
+        self.row_1 = QFrame(self.analysis_page)
         self.row_1.setObjectName(u"row_1")
         self.row_1.setFrameShape(QFrame.StyledPanel)
         self.row_1.setFrameShadow(QFrame.Raised)
@@ -1110,7 +1108,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_27.addWidget(self.row_1)
 
-        self.row_3 = QFrame(self.widgets)
+        self.row_3 = QFrame(self.analysis_page)
         self.row_3.setObjectName(u"row_3")
         self.row_3.setMinimumSize(QSize(0, 150))
         self.row_3.setFrameShape(QFrame.StyledPanel)
@@ -1240,13 +1238,14 @@ class Ui_MainWindow(object):
         self.tableWidget.setShowGrid(True)
         self.tableWidget.setGridStyle(Qt.SolidLine)
         self.tableWidget.setSortingEnabled(True)
-        self.tableWidget.horizontalHeader().setVisible(False)
+        self.tableWidget.horizontalHeader().setVisible(True)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
-        self.tableWidget.horizontalHeader().setDefaultSectionSize(295)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(290)
         self.tableWidget.horizontalHeader().setStretchLastSection(True)
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
         self.tableWidget.verticalHeader().setHighlightSections(False)
+        self.tableWidget.verticalHeader().setProperty("showSortIndicator", False)
         self.tableWidget.verticalHeader().setStretchLastSection(True)
 
         self.verticalLayout_28.addWidget(self.tableWidget)
@@ -1254,7 +1253,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_27.addWidget(self.row_3)
 
-        self.stackedWidget.addWidget(self.widgets)
+        self.stackedWidget.addWidget(self.analysis_page)
         self.chart_page = QWidget()
         self.chart_page.setObjectName(u"chart_page")
         self.verticalLayout_22 = QVBoxLayout(self.chart_page)
@@ -1378,6 +1377,221 @@ class Ui_MainWindow(object):
         self.verticalLayout_22.addWidget(self.row_2)
 
         self.stackedWidget.addWidget(self.chart_page)
+        self.adjust_page = QWidget()
+        self.adjust_page.setObjectName(u"adjust_page")
+        self.verticalLayout_35 = QVBoxLayout(self.adjust_page)
+        self.verticalLayout_35.setObjectName(u"verticalLayout_35")
+        self.row_6 = QFrame(self.adjust_page)
+        self.row_6.setObjectName(u"row_6")
+        self.row_6.setFrameShape(QFrame.StyledPanel)
+        self.row_6.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_32 = QVBoxLayout(self.row_6)
+        self.verticalLayout_32.setSpacing(0)
+        self.verticalLayout_32.setObjectName(u"verticalLayout_32")
+        self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
+        self.frame_div_content_5 = QFrame(self.row_6)
+        self.frame_div_content_5.setObjectName(u"frame_div_content_5")
+        self.frame_div_content_5.setMinimumSize(QSize(0, 110))
+        self.frame_div_content_5.setMaximumSize(QSize(16777215, 110))
+        self.frame_div_content_5.setFrameShape(QFrame.NoFrame)
+        self.frame_div_content_5.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_33 = QVBoxLayout(self.frame_div_content_5)
+        self.verticalLayout_33.setSpacing(0)
+        self.verticalLayout_33.setObjectName(u"verticalLayout_33")
+        self.verticalLayout_33.setContentsMargins(0, 0, 0, 0)
+        self.frame_title_wid_5 = QFrame(self.frame_div_content_5)
+        self.frame_title_wid_5.setObjectName(u"frame_title_wid_5")
+        self.frame_title_wid_5.setMaximumSize(QSize(16777215, 35))
+        self.frame_title_wid_5.setFrameShape(QFrame.StyledPanel)
+        self.frame_title_wid_5.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_34 = QVBoxLayout(self.frame_title_wid_5)
+        self.verticalLayout_34.setObjectName(u"verticalLayout_34")
+        self.labelBoxBlenderInstalation_6 = QLabel(self.frame_title_wid_5)
+        self.labelBoxBlenderInstalation_6.setObjectName(u"labelBoxBlenderInstalation_6")
+        self.labelBoxBlenderInstalation_6.setFont(font)
+        self.labelBoxBlenderInstalation_6.setStyleSheet(u"")
+
+        self.verticalLayout_34.addWidget(self.labelBoxBlenderInstalation_6)
+
+
+        self.verticalLayout_33.addWidget(self.frame_title_wid_5)
+
+        self.frame_content_wid_5 = QFrame(self.frame_div_content_5)
+        self.frame_content_wid_5.setObjectName(u"frame_content_wid_5")
+        self.frame_content_wid_5.setFrameShape(QFrame.NoFrame)
+        self.frame_content_wid_5.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_11 = QHBoxLayout(self.frame_content_wid_5)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.label_save_path_4 = QLabel(self.frame_content_wid_5)
+        self.label_save_path_4.setObjectName(u"label_save_path_4")
+        self.label_save_path_4.setStyleSheet(u"color: rgb(113, 126, 149);")
+        self.label_save_path_4.setLineWidth(1)
+        self.label_save_path_4.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.horizontalLayout_11.addWidget(self.label_save_path_4)
+
+        self.line_model_path = QLineEdit(self.frame_content_wid_5)
+        self.line_model_path.setObjectName(u"line_model_path")
+        self.line_model_path.setMinimumSize(QSize(0, 30))
+        self.line_model_path.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+
+        self.horizontalLayout_11.addWidget(self.line_model_path)
+
+        self.btn_select_model = QPushButton(self.frame_content_wid_5)
+        self.btn_select_model.setObjectName(u"btn_select_model")
+        self.btn_select_model.setMinimumSize(QSize(150, 30))
+        self.btn_select_model.setFont(font)
+        self.btn_select_model.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_select_model.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+        self.btn_select_model.setIcon(icon4)
+
+        self.horizontalLayout_11.addWidget(self.btn_select_model)
+
+
+        self.verticalLayout_33.addWidget(self.frame_content_wid_5)
+
+
+        self.verticalLayout_32.addWidget(self.frame_div_content_5)
+
+
+        self.verticalLayout_35.addWidget(self.row_6)
+
+        self.label_model = QLabel(self.adjust_page)
+        self.label_model.setObjectName(u"label_model")
+        self.label_model.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_35.addWidget(self.label_model)
+
+        self.verticalSpacer_3 = QSpacerItem(20, 526, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_35.addItem(self.verticalSpacer_3)
+
+        self.stackedWidget.addWidget(self.adjust_page)
+        self.diy_page = QWidget()
+        self.diy_page.setObjectName(u"diy_page")
+        self.verticalLayout_15 = QVBoxLayout(self.diy_page)
+        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
+        self.row_5 = QFrame(self.diy_page)
+        self.row_5.setObjectName(u"row_5")
+        self.row_5.setFrameShape(QFrame.StyledPanel)
+        self.row_5.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_29 = QVBoxLayout(self.row_5)
+        self.verticalLayout_29.setSpacing(0)
+        self.verticalLayout_29.setObjectName(u"verticalLayout_29")
+        self.verticalLayout_29.setContentsMargins(0, 0, 0, 0)
+        self.frame_div_content_4 = QFrame(self.row_5)
+        self.frame_div_content_4.setObjectName(u"frame_div_content_4")
+        self.frame_div_content_4.setMinimumSize(QSize(0, 110))
+        self.frame_div_content_4.setMaximumSize(QSize(16777215, 110))
+        self.frame_div_content_4.setFrameShape(QFrame.NoFrame)
+        self.frame_div_content_4.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_30 = QVBoxLayout(self.frame_div_content_4)
+        self.verticalLayout_30.setSpacing(0)
+        self.verticalLayout_30.setObjectName(u"verticalLayout_30")
+        self.verticalLayout_30.setContentsMargins(0, 0, 0, 0)
+        self.frame_title_wid_4 = QFrame(self.frame_div_content_4)
+        self.frame_title_wid_4.setObjectName(u"frame_title_wid_4")
+        self.frame_title_wid_4.setMaximumSize(QSize(16777215, 35))
+        self.frame_title_wid_4.setFrameShape(QFrame.StyledPanel)
+        self.frame_title_wid_4.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_31 = QVBoxLayout(self.frame_title_wid_4)
+        self.verticalLayout_31.setObjectName(u"verticalLayout_31")
+        self.labelBoxBlenderInstalation_5 = QLabel(self.frame_title_wid_4)
+        self.labelBoxBlenderInstalation_5.setObjectName(u"labelBoxBlenderInstalation_5")
+        self.labelBoxBlenderInstalation_5.setFont(font)
+        self.labelBoxBlenderInstalation_5.setStyleSheet(u"")
+
+        self.verticalLayout_31.addWidget(self.labelBoxBlenderInstalation_5)
+
+
+        self.verticalLayout_30.addWidget(self.frame_title_wid_4)
+
+        self.frame_content_wid_4 = QFrame(self.frame_div_content_4)
+        self.frame_content_wid_4.setObjectName(u"frame_content_wid_4")
+        self.frame_content_wid_4.setFrameShape(QFrame.NoFrame)
+        self.frame_content_wid_4.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_10 = QHBoxLayout(self.frame_content_wid_4)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.label_save_path_3 = QLabel(self.frame_content_wid_4)
+        self.label_save_path_3.setObjectName(u"label_save_path_3")
+        self.label_save_path_3.setStyleSheet(u"color: rgb(113, 126, 149);")
+        self.label_save_path_3.setLineWidth(1)
+        self.label_save_path_3.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.horizontalLayout_10.addWidget(self.label_save_path_3)
+
+        self.line_file_path_new = QLineEdit(self.frame_content_wid_4)
+        self.line_file_path_new.setObjectName(u"line_file_path_new")
+        self.line_file_path_new.setMinimumSize(QSize(0, 30))
+        self.line_file_path_new.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+
+        self.horizontalLayout_10.addWidget(self.line_file_path_new)
+
+        self.btn_select_path_new = QPushButton(self.frame_content_wid_4)
+        self.btn_select_path_new.setObjectName(u"btn_select_path_new")
+        self.btn_select_path_new.setMinimumSize(QSize(150, 30))
+        self.btn_select_path_new.setFont(font)
+        self.btn_select_path_new.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_select_path_new.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+        self.btn_select_path_new.setIcon(icon4)
+
+        self.horizontalLayout_10.addWidget(self.btn_select_path_new)
+
+
+        self.verticalLayout_30.addWidget(self.frame_content_wid_4)
+
+
+        self.verticalLayout_29.addWidget(self.frame_div_content_4)
+
+
+        self.verticalLayout_15.addWidget(self.row_5)
+
+        self.horizontalLayout_12 = QHBoxLayout()
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.label_save_path_5 = QLabel(self.diy_page)
+        self.label_save_path_5.setObjectName(u"label_save_path_5")
+        self.label_save_path_5.setStyleSheet(u"color: rgb(113, 126, 149);")
+        self.label_save_path_5.setLineWidth(1)
+        self.label_save_path_5.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.horizontalLayout_12.addWidget(self.label_save_path_5)
+
+        self.model_choice = QComboBox(self.diy_page)
+        self.model_choice.addItem("")
+        self.model_choice.addItem("")
+        self.model_choice.addItem("")
+        self.model_choice.addItem("")
+        self.model_choice.addItem("")
+        self.model_choice.setObjectName(u"model_choice")
+        self.model_choice.setCurrentText(u"KNN")
+
+        self.horizontalLayout_12.addWidget(self.model_choice)
+
+        self.btn_train_model = QPushButton(self.diy_page)
+        self.btn_train_model.setObjectName(u"btn_train_model")
+        self.btn_train_model.setMinimumSize(QSize(150, 30))
+        self.btn_train_model.setFont(font)
+        self.btn_train_model.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_train_model.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+        self.btn_train_model.setIcon(icon5)
+
+        self.horizontalLayout_12.addWidget(self.btn_train_model)
+
+
+        self.verticalLayout_15.addLayout(self.horizontalLayout_12)
+
+        self.label_train_result = QLabel(self.diy_page)
+        self.label_train_result.setObjectName(u"label_train_result")
+        self.label_train_result.setFont(font)
+        self.label_train_result.setStyleSheet(u"")
+
+        self.verticalLayout_15.addWidget(self.label_train_result)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 526, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_15.addItem(self.verticalSpacer_2)
+
+        self.stackedWidget.addWidget(self.diy_page)
         self.save_page = QWidget()
         self.save_page.setObjectName(u"save_page")
         self.verticalLayout_26 = QVBoxLayout(self.save_page)
@@ -1481,7 +1695,7 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.addWidget(self.save_page)
 
-        self.verticalLayout_15.addWidget(self.stackedWidget)
+        self.verticalLayout_36.addWidget(self.stackedWidget)
 
 
         self.horizontalLayout_4.addWidget(self.pagesContainer)
@@ -1621,7 +1835,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(4)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1698,7 +1912,7 @@ class Ui_MainWindow(object):
                         "or:#ff79c6;\">Redesign GUI</span></p>\n"
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt; color:#ffffff;\">Pyside6-uic main_PyDracula.ui -o main_PyDracula.py</span></p>\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt; color:#ffffff;\"><br /></p></body></html>", None))
-        self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"Online Shopping Intention Predicting System", None))
+        self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Online Shopping Intention Predicting System</span></p></body></html>", None))
 #if QT_CONFIG(tooltip)
         self.minimizeAppBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Minimize", None))
 #endif // QT_CONFIG(tooltip)
@@ -1712,7 +1926,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.closeAppBtn.setText("")
         self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"Please select the data file(*.csv) to analyze.", None))
-        self.labelVersion_3.setText(QCoreApplication.translate("MainWindow", u"Data File Path:", None))
+        self.labelVersion_3.setText(QCoreApplication.translate("MainWindow", u"Data file path:", None))
         self.line_file_path.setText("")
         self.line_file_path.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
         self.btn_open_file.setText(QCoreApplication.translate("MainWindow", u"Open file", None))
@@ -1720,11 +1934,11 @@ class Ui_MainWindow(object):
         self.radiobutton_default.setText(QCoreApplication.translate("MainWindow", u"Default Order", None))
         self.radiobutton_probability.setText(QCoreApplication.translate("MainWindow", u"Sort by Probability ", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"0", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Visitor ID", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"1", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Probability", None));
         ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"2", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Intention", None));
         ___qtablewidgetitem3 = self.tableWidget.verticalHeaderItem(0)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
         ___qtablewidgetitem4 = self.tableWidget.verticalHeaderItem(1)
@@ -1758,12 +1972,6 @@ class Ui_MainWindow(object):
 
         __sortingEnabled = self.tableWidget.isSortingEnabled()
         self.tableWidget.setSortingEnabled(False)
-        ___qtablewidgetitem18 = self.tableWidget.item(0, 0)
-        ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"Visitor ID", None));
-        ___qtablewidgetitem19 = self.tableWidget.item(0, 1)
-        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"Probability", None));
-        ___qtablewidgetitem20 = self.tableWidget.item(0, 2)
-        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Intention", None));
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
         self.labelBoxBlenderInstalation_2.setText(QCoreApplication.translate("MainWindow", u"Please select the way to create a pivot chart.", None))
@@ -1788,8 +1996,28 @@ class Ui_MainWindow(object):
         self.btn_analysize_2.setText(QCoreApplication.translate("MainWindow", u"Go!", None))
         self.btn_analysize_3.setText(QCoreApplication.translate("MainWindow", u"Hold", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"No pivot chart is created yet.", None))
+        self.labelBoxBlenderInstalation_6.setText(QCoreApplication.translate("MainWindow", u"The default model performed best in our training, while the others(*.pickle) are optional here.", None))
+        self.label_save_path_4.setText(QCoreApplication.translate("MainWindow", u"Select model path:", None))
+        self.line_model_path.setText(QCoreApplication.translate("MainWindow", u"(Default)./model/GDBT.pickle", None))
+        self.line_model_path.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
+        self.btn_select_model.setText(QCoreApplication.translate("MainWindow", u"Select", None))
+        self.label_model.setText(QCoreApplication.translate("MainWindow", u"The current model selected is : (Default)GDBT", None))
+        self.labelBoxBlenderInstalation_5.setText(QCoreApplication.translate("MainWindow", u"Meet with another problem? Don't worry, because DIY is supported.", None))
+        self.label_save_path_3.setText(QCoreApplication.translate("MainWindow", u"Select file path of the new problem:", None))
+        self.line_file_path_new.setText("")
+        self.line_file_path_new.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
+        self.btn_select_path_new.setText(QCoreApplication.translate("MainWindow", u"Select path", None))
+        self.label_save_path_5.setText(QCoreApplication.translate("MainWindow", u"Select the machine learning model you'd like to use in this problem :", None))
+        self.model_choice.setItemText(0, QCoreApplication.translate("MainWindow", u"KNN", None))
+        self.model_choice.setItemText(1, QCoreApplication.translate("MainWindow", u"Decision Tree", None))
+        self.model_choice.setItemText(2, QCoreApplication.translate("MainWindow", u"Random Forest", None))
+        self.model_choice.setItemText(3, QCoreApplication.translate("MainWindow", u"SVM", None))
+        self.model_choice.setItemText(4, QCoreApplication.translate("MainWindow", u"GDBT", None))
+
+        self.btn_train_model.setText(QCoreApplication.translate("MainWindow", u"Train with Default parameters", None))
+        self.label_train_result.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Training result:</span></p></body></html>", None))
         self.labelBoxBlenderInstalation_3.setText(QCoreApplication.translate("MainWindow", u"Please select the folder to save data files.", None))
-        self.label_save_path.setText(QCoreApplication.translate("MainWindow", u"Save File Path:", None))
+        self.label_save_path.setText(QCoreApplication.translate("MainWindow", u"Save file path:", None))
         self.line_file_path_2.setText(QCoreApplication.translate("MainWindow", u"(Default)./save", None))
         self.line_file_path_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
         self.btn_save_path.setText(QCoreApplication.translate("MainWindow", u"Select path", None))
