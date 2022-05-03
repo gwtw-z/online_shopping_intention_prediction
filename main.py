@@ -79,6 +79,8 @@ class MainWindow(QMainWindow):
         self.ui.toggleButton.clicked.connect(self.toggleMenu)
         self.ui.toggleLeftBox.clicked.connect(self.toggleLeftBox)
         self.ui.extraCloseColumnBtn.clicked.connect(self.toggleLeftBox)
+        self.ui.btn_adjustments.clicked.connect(self.adjust)
+        self.ui.btn_DIY.clicked.connect(self.DIY)
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -202,6 +204,12 @@ class MainWindow(QMainWindow):
                 os.mkdir(path)
             self.result.to_excel(path + r'/data.xlsx', index=None)
             self.chart.savefig(path + r'/chart.png')
+
+    def adjust(self):
+        pass
+
+    def DIY(self):
+        pass
 
     def start_box_animation(self, left_box_width, right_box_width, direction):
         right_width = 0
