@@ -9,18 +9,39 @@ import os
 import seaborn as sns
 
 
+class Settings:
+    # APP SETTINGS
+    # ///////////////////////////////////////////////////////////////
+    ENABLE_CUSTOM_TITLE_BAR = True
+    MENU_WIDTH = 240
+    LEFT_BOX_WIDTH = 240
+    RIGHT_BOX_WIDTH = 240
+    TIME_ANIMATION = 500
+
+    # BTNS LEFT AND RIGHT BOX COLORS
+    BTN_LEFT_BOX_COLOR = "background-color: rgb(44, 49, 58);"
+    BTN_RIGHT_BOX_COLOR = "background-color: #ff79c6;"
+
+    # MENU SELECTED STYLESHEET
+    MENU_SELECTED_STYLESHEET = """
+    border-left: 22px solid qlineargradient(spread:pad, x1:0.034, y1:0, x2:0.216, y2:0, stop:0.499 rgba(255, 121, 198, 255), stop:0.5 rgba(85, 170, 255, 0));
+    background-color: rgb(40, 44, 52);
+    """
+
+
 # git config --global http.sslVerify "false"
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__(parent=None)
+        self.animation = None
+        self.offset = None
+
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.window_maximized_flag = False
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
-
-        self.offset = None
 
         self.maximize_icon = QIcon()
         self.maximize_icon.addFile(r':/icons/images/icons/icon_maximize.png', QSize(), QIcon.Normal, QIcon.Off)
@@ -55,6 +76,8 @@ class MainWindow(QMainWindow):
         self.ui.titleRightInfo.mouseMoveEvent = self.mouseMoveEvent
         self.ui.btn_save_path.clicked.connect(self.choose_save_path)
         self.ui.btn_save_file.clicked.connect(self.save_output)
+        self.ui.toggleButton.clicked.connect(self.toggleMenu)
+        self.ui.toggleLeftBox.clicked.connect(self.toggleLeftBox)
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -107,6 +130,8 @@ class MainWindow(QMainWindow):
 
         # data is processed when file path is chosen instead of when 'analyze' button is pressed
         # so that the user doesn't actually sense the time spent here
+        if self.file_path == '':
+            return
         self.my_clf = classifier.GDBT(file_path=self.file_path, feature_num=17)
         self.my_clf.load_model('GDBT')
         self.my_clf.load_reader()
@@ -121,6 +146,8 @@ class MainWindow(QMainWindow):
         # self.result['Probability'].value_counts().plot.bar(figsize=(16, 8))
         ax = sns.histplot(self.result['Probability'])
         self.chart = ax.get_figure()
+        if not os.path.exists('./temp'):
+            os.mkdir('./temp')
         self.chart.savefig('./temp/plt.png')
         self.ui.label.setPixmap(QPixmap('./temp/plt.png'))
 
@@ -159,18 +186,103 @@ class MainWindow(QMainWindow):
 
     def choose_save_path(self):
         self.save_path = QFileDialog.getExistingDirectory(self, '选择保存路径', "./")
-        self.ui.line_file_path_2.setText(self.save_path)
+        if self.save_path == '':
+            self.ui.line_file_path_2.setText('(Default)./save')
+        else:
+            self.ui.line_file_path_2.setText(self.save_path)
 
     def save_output(self):
         if self.result is None:
-            self.ui.label_save_answer.setText('No analysis is performed yet!')
+            self.ui.label_save_answer.setText('No analysis is done yet!')
         else:
             self.ui.label_save_answer.setText('Analysis result is saved!')
             path = self.save_path + '/' + datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
             if not os.path.exists(path):
                 os.mkdir(path)
             self.result.to_excel(path + r'/data.xlsx', index=None)
-            self.chart.savefig(path + r'/plot.png')
+            self.chart.savefig(path + r'/chart.png')
+
+    def start_box_animation(self, left_box_width, right_box_width, direction):
+        right_width = 0
+        left_width = 0
+
+        # Check values
+        if left_box_width == 0 and direction == "left":
+            left_width = 240
+        else:
+            left_width = 0
+        # Check values
+        if right_box_width == 0 and direction == "right":
+            right_width = 240
+        else:
+            right_width = 0
+
+            # ANIMATION LEFT BOX
+        self.left_box = QPropertyAnimation(self.ui.extraLeftBox, b"minimumWidth")
+        self.left_box.setDuration(Settings.TIME_ANIMATION)
+        self.left_box.setStartValue(left_box_width)
+        self.left_box.setEndValue(left_width)
+        self.left_box.setEasingCurve(QEasingCurve.InOutQuart)
+
+        # ANIMATION RIGHT BOX
+        self.right_box = QPropertyAnimation(self.ui.extraRightBox, b"minimumWidth")
+        self.right_box.setDuration(Settings.TIME_ANIMATION)
+        self.right_box.setStartValue(right_box_width)
+        self.right_box.setEndValue(right_width)
+        self.right_box.setEasingCurve(QEasingCurve.InOutQuart)
+
+        # GROUP ANIMATION
+        self.group = QParallelAnimationGroup()
+        self.group.addAnimation(self.left_box)
+        self.group.addAnimation(self.right_box)
+        self.group.start()
+
+    def toggleMenu(self, enable):
+        # GET WIDTH
+        width = self.ui.leftMenuBg.width()
+        maxExtend = Settings.MENU_WIDTH
+        standard = 60
+
+        # SET MAX WIDTH
+        if width == 60:
+            widthExtended = maxExtend
+        else:
+            widthExtended = standard
+
+        # ANIMATION
+        self.animation = QPropertyAnimation(self.ui.leftMenuBg, b"minimumWidth")
+        self.animation.setDuration(Settings.TIME_ANIMATION)
+        self.animation.setStartValue(width)
+        self.animation.setEndValue(widthExtended)
+        self.animation.setEasingCurve(QEasingCurve.InOutQuart)
+        self.animation.start()
+
+    def toggleLeftBox(self, enable):
+        if enable:
+            # GET WIDTH
+            width = self.ui.extraLeftBox.width()
+            widthRightBox = self.ui.extraRightBox.width()
+            maxExtend = Settings.LEFT_BOX_WIDTH
+            color = Settings.BTN_LEFT_BOX_COLOR
+            standard = 0
+
+            # GET BTN STYLE
+            style = self.ui.toggleLeftBox.styleSheet()
+
+            # SET MAX WIDTH
+            if width == 0:
+                widthExtended = maxExtend
+                # SELECT BTN
+                self.ui.toggleLeftBox.setStyleSheet(style + color)
+                if widthRightBox != 0:
+                    style = self.ui.settingsTopBtn.styleSheet()
+                    self.ui.settingsTopBtn.setStyleSheet(style.replace(Settings.BTN_RIGHT_BOX_COLOR, ''))
+            else:
+                widthExtended = standard
+                # RESET BTN
+                self.ui.toggleLeftBox.setStyleSheet(style.replace(color, ''))
+
+        self.start_box_animation(self, width, widthRightBox, "left")
 
 
 app = QApplication()

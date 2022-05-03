@@ -210,11 +210,3 @@ class XGBoost(Classifier):
     def __init__(self, file_path, n=10, lr=0.1, feature_num=3):
         super(XGBoost, self).__init__(file_path, clf_name='xgboost', feature_num=feature_num)
         self.clf = XGBClassifier(object='binary:logistic', n_estimators=n, learning_rate=lr, use_label_encoder=False)
-
-
-# clf = GDBT(origin_file_, feature_num=17, over_sample=True)
-# clf.train_reader()
-# clf.train()
-# clf.score()
-# clf.show()
-# clf.save_model('GDBT')
