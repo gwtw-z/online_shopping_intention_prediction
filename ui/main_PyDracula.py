@@ -1012,6 +1012,14 @@ class Ui_MainWindow(object):
         self.home_page = QWidget()
         self.home_page.setObjectName(u"home_page")
         self.home_page.setStyleSheet(u"")
+        self.verticalLayout_37 = QVBoxLayout(self.home_page)
+        self.verticalLayout_37.setObjectName(u"verticalLayout_37")
+        self.label_home_picture = QLabel(self.home_page)
+        self.label_home_picture.setObjectName(u"label_home_picture")
+        self.label_home_picture.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_37.addWidget(self.label_home_picture)
+
         self.stackedWidget.addWidget(self.home_page)
         self.analyze_page = QWidget()
         self.analyze_page.setObjectName(u"analyze_page")
@@ -1993,6 +2001,7 @@ class Ui_MainWindow(object):
         self.closeAppBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Close", None))
 #endif // QT_CONFIG(tooltip)
         self.closeAppBtn.setText("")
+        self.label_home_picture.setText("")
         self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"Please select the data file(*.csv) to analyze.", None))
         self.labelVersion_3.setText(QCoreApplication.translate("MainWindow", u"Data file path:", None))
         self.line_file_path.setText("")

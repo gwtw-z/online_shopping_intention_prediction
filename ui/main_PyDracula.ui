@@ -1794,6 +1794,18 @@ p, li { white-space: pre-wrap; }
                       <property name="styleSheet">
                        <string notr="true"/>
                       </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_37">
+                       <item>
+                        <widget class="QLabel" name="label_home_picture">
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
                      </widget>
                      <widget class="QWidget" name="analyze_page">
                       <property name="styleSheet">

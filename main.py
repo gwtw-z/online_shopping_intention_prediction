@@ -30,6 +30,7 @@ class MainWindow(QMainWindow):
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.ui.stackedWidget.setCurrentWidget(self.ui.home_page)
         self.ui.btn_home_page.setStyleSheet(self.selectMenu(self.ui.btn_home_page.styleSheet()))
+        self.ui.label_home_picture.setPixmap(QPixmap(r'./images/images/PyPredict.png'))
         self.current_btn = self.ui.btn_home_page
         # PyDracula_vertical
         # PyPredict
