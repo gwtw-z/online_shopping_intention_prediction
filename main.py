@@ -1,4 +1,5 @@
 from PySide6.QtWidgets import QFileDialog
+from PySide6 import QtCore
 from ui.main_PyDracula import *
 from ui.ui_main_pages import *
 from settings import Settings
@@ -10,7 +11,7 @@ import os
 import seaborn as sns
 
 # git config --global http.sslVerify "false"
-os.environ["QT_FONT_DPI"] = "96"
+# os.environ["QT_FONT_DPI"] = "96"
 
 
 class MainWindow(QMainWindow):
@@ -30,6 +31,8 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.ui.home_page)
         self.ui.btn_home_page.setStyleSheet(self.selectMenu(self.ui.btn_home_page.styleSheet()))
         self.current_btn = self.ui.btn_home_page
+        # PyDracula_vertical
+        # PyPredict
 
         self.maximize_icon = QIcon()
         self.maximize_icon.addFile(r':/icons/images/icons/icon_maximize.png', QSize(), QIcon.Normal, QIcon.Off)

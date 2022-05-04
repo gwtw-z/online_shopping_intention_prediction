@@ -1011,9 +1011,7 @@ class Ui_MainWindow(object):
         self.stackedWidget.setStyleSheet(u"background: transparent;")
         self.home_page = QWidget()
         self.home_page.setObjectName(u"home_page")
-        self.home_page.setStyleSheet(u"background-image: url(:/images/images/images/PyDracula_vertical.png);\n"
-"background-position: center;\n"
-"background-repeat: no-repeat;")
+        self.home_page.setStyleSheet(u"")
         self.stackedWidget.addWidget(self.home_page)
         self.analyze_page = QWidget()
         self.analyze_page.setObjectName(u"analyze_page")
@@ -1906,7 +1904,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

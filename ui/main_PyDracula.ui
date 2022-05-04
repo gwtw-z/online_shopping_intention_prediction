@@ -1218,7 +1218,7 @@ Button */
                   <string/>
                  </property>
                  <property name="icon">
-                  <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                  <iconset resource="../resources.qrc">
                    <normaloff>:/icons/images/icons/icon_close.png</normaloff>:/icons/images/icons/icon_close.png</iconset>
                  </property>
                  <property name="iconSize">
@@ -1626,7 +1626,7 @@ p, li { white-space: pre-wrap; }
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                   <iconset resource="../resources.qrc">
                     <normaloff>:/icons/images/icons/icon_minimize.png</normaloff>:/icons/images/icons/icon_minimize.png</iconset>
                   </property>
                   <property name="iconSize">
@@ -1670,7 +1670,7 @@ p, li { white-space: pre-wrap; }
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                   <iconset resource="../resources.qrc">
                     <normaloff>:/icons/images/icons/icon_maximize.png</normaloff>:/icons/images/icons/icon_maximize.png</iconset>
                   </property>
                   <property name="iconSize">
@@ -1705,7 +1705,7 @@ p, li { white-space: pre-wrap; }
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                   <iconset resource="../resources.qrc">
                     <normaloff>:/icons/images/icons/icon_close.png</normaloff>:/icons/images/icons/icon_close.png</iconset>
                   </property>
                   <property name="iconSize">
@@ -1788,13 +1788,11 @@ p, li { white-space: pre-wrap; }
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>1</number>
+                      <number>0</number>
                      </property>
                      <widget class="QWidget" name="home_page">
                       <property name="styleSheet">
-                       <string notr="true">background-image: url(:/images/images/images/PyDracula_vertical.png);
-background-position: center;
-background-repeat: no-repeat;</string>
+                       <string notr="true"/>
                       </property>
                      </widget>
                      <widget class="QWidget" name="analyze_page">
@@ -1968,7 +1966,7 @@ background-repeat: no-repeat;</string>
                                    <string>Open file</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-folder-open.png</normaloff>:/icons/images/icons/cil-folder-open.png</iconset>
                                   </property>
                                  </widget>
@@ -1999,7 +1997,7 @@ background-repeat: no-repeat;</string>
                                    <string>Analyze</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-caret-right.png</normaloff>:/icons/images/icons/cil-caret-right.png</iconset>
                                   </property>
                                  </widget>
@@ -2655,7 +2653,7 @@ background-repeat: no-repeat;</string>
                                    <string>Go!</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-chart.png</normaloff>:/icons/images/icons/cil-chart.png</iconset>
                                   </property>
                                  </widget>
@@ -2686,7 +2684,7 @@ background-repeat: no-repeat;</string>
                                    <string>Hold</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-camera.png</normaloff>:/icons/images/icons/cil-camera.png</iconset>
                                   </property>
                                  </widget>
@@ -2880,7 +2878,7 @@ background-repeat: no-repeat;</string>
                                    <string>Select</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-folder-open.png</normaloff>:/icons/images/icons/cil-folder-open.png</iconset>
                                   </property>
                                  </widget>
@@ -3028,7 +3026,7 @@ background-repeat: no-repeat;</string>
                                    <string>Select path</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-folder-open.png</normaloff>:/icons/images/icons/cil-folder-open.png</iconset>
                                   </property>
                                  </widget>
@@ -3114,7 +3112,7 @@ background-repeat: no-repeat;</string>
                                    <string>Train</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-caret-right.png</normaloff>:/icons/images/icons/cil-caret-right.png</iconset>
                                   </property>
                                  </widget>
@@ -3234,7 +3232,7 @@ background-repeat: no-repeat;</string>
                                    <string>Select path</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-folder-open.png</normaloff>:/icons/images/icons/cil-folder-open.png</iconset>
                                   </property>
                                  </widget>
@@ -3265,7 +3263,7 @@ background-repeat: no-repeat;</string>
                                    <string>Save</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-save.png</normaloff>:/icons/images/icons/cil-save.png</iconset>
                                   </property>
                                  </widget>
@@ -3481,7 +3479,7 @@ background-repeat: no-repeat;</string>
                                    <string>Select path</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-folder-open.png</normaloff>:/icons/images/icons/cil-folder-open.png</iconset>
                                   </property>
                                  </widget>
@@ -3512,7 +3510,7 @@ background-repeat: no-repeat;</string>
                                    <string>Save</string>
                                   </property>
                                   <property name="icon">
-                                   <iconset resource="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc">
+                                   <iconset resource="../resources.qrc">
                                     <normaloff>:/icons/images/icons/cil-save.png</normaloff>:/icons/images/icons/cil-save.png</iconset>
                                   </property>
                                  </widget>
@@ -3884,7 +3882,7 @@ background-repeat: no-repeat;</string>
   </widget>
  </widget>
  <resources>
-  <include location="../../../../../py/Modern_GUI_PyDracula_PySide6_or_PyQt6-master/resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

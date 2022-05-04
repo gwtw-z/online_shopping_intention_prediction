@@ -4,7 +4,7 @@ from sklearn import tree
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import GradientBoostingClassifier
-from xgboost.sklearn import XGBClassifier
+# from xgboost.sklearn import XGBClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.linear_model import LogisticRegression as LR
 from sklearn.model_selection import GridSearchCV
@@ -205,8 +205,7 @@ class GDBT(Classifier):
         super(GDBT, self).__init__(file_path, clf_name='GDBT', feature_num=feature_num, over_sample=over_sample)
         self.clf = GradientBoostingClassifier(n_estimators=n, learning_rate=lr)
 
-
-class XGBoost(Classifier):
-    def __init__(self, file_path, n=10, lr=0.1, feature_num=17):
-        super(XGBoost, self).__init__(file_path, clf_name='xgboost', feature_num=feature_num)
-        self.clf = XGBClassifier(object='binary:logistic', n_estimators=n, learning_rate=lr, use_label_encoder=False)
+# class XGBoost(Classifier):
+#     def __init__(self, file_path, n=10, lr=0.1, feature_num=17):
+#         super(XGBoost, self).__init__(file_path, clf_name='xgboost', feature_num=feature_num)
+#         self.clf = XGBClassifier(object='binary:logistic', n_estimators=n, learning_rate=lr, use_label_encoder=False)
