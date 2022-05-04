@@ -819,29 +819,29 @@ class Ui_MainWindow(object):
         self.verticalLayout_11.setSpacing(0)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
-        self.btn_adjustments = QPushButton(self.extraTopMenu)
-        self.btn_adjustments.setObjectName(u"btn_adjustments")
-        sizePolicy.setHeightForWidth(self.btn_adjustments.sizePolicy().hasHeightForWidth())
-        self.btn_adjustments.setSizePolicy(sizePolicy)
-        self.btn_adjustments.setMinimumSize(QSize(0, 45))
-        self.btn_adjustments.setFont(font)
-        self.btn_adjustments.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_adjustments.setLayoutDirection(Qt.LeftToRight)
-        self.btn_adjustments.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-equalizer.png);")
+        self.btn_adjust_page = QPushButton(self.extraTopMenu)
+        self.btn_adjust_page.setObjectName(u"btn_adjust_page")
+        sizePolicy.setHeightForWidth(self.btn_adjust_page.sizePolicy().hasHeightForWidth())
+        self.btn_adjust_page.setSizePolicy(sizePolicy)
+        self.btn_adjust_page.setMinimumSize(QSize(0, 45))
+        self.btn_adjust_page.setFont(font)
+        self.btn_adjust_page.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_adjust_page.setLayoutDirection(Qt.LeftToRight)
+        self.btn_adjust_page.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-equalizer.png);")
 
-        self.verticalLayout_11.addWidget(self.btn_adjustments)
+        self.verticalLayout_11.addWidget(self.btn_adjust_page)
 
-        self.btn_DIY = QPushButton(self.extraTopMenu)
-        self.btn_DIY.setObjectName(u"btn_DIY")
-        sizePolicy.setHeightForWidth(self.btn_DIY.sizePolicy().hasHeightForWidth())
-        self.btn_DIY.setSizePolicy(sizePolicy)
-        self.btn_DIY.setMinimumSize(QSize(0, 45))
-        self.btn_DIY.setFont(font)
-        self.btn_DIY.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_DIY.setLayoutDirection(Qt.LeftToRight)
-        self.btn_DIY.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-layers.png);")
+        self.btn_diy_page = QPushButton(self.extraTopMenu)
+        self.btn_diy_page.setObjectName(u"btn_diy_page")
+        sizePolicy.setHeightForWidth(self.btn_diy_page.sizePolicy().hasHeightForWidth())
+        self.btn_diy_page.setSizePolicy(sizePolicy)
+        self.btn_diy_page.setMinimumSize(QSize(0, 45))
+        self.btn_diy_page.setFont(font)
+        self.btn_diy_page.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_diy_page.setLayoutDirection(Qt.LeftToRight)
+        self.btn_diy_page.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-layers.png);")
 
-        self.verticalLayout_11.addWidget(self.btn_DIY)
+        self.verticalLayout_11.addWidget(self.btn_diy_page)
 
 
         self.verticalLayout_12.addWidget(self.extraTopMenu, 0, Qt.AlignTop)
@@ -1939,13 +1939,12 @@ class Ui_MainWindow(object):
         self.extraCloseColumnBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Close left box", None))
 #endif // QT_CONFIG(tooltip)
         self.extraCloseColumnBtn.setText("")
-        self.btn_adjustments.setText(QCoreApplication.translate("MainWindow", u"Adjustments", None))
-        self.btn_DIY.setText(QCoreApplication.translate("MainWindow", u"DIY Workshop", None))
+        self.btn_adjust_page.setText(QCoreApplication.translate("MainWindow", u"Adjustments", None))
+        self.btn_diy_page.setText(QCoreApplication.translate("MainWindow", u"DIY Workshop", None))
         self.textEdit.setMarkdown(QCoreApplication.translate("MainWindow", u"**PyPredict**\n"
 "\n"
 "PyPredict is an intelligent system committed to easing your e-commerce, created\n"
-"using Python and Pyside6 (support for PyQt), and with colors based on the\n"
-"Dracula theme by Zeno Rocha.\n"
+"using Pyside6 and color style based on the Dracula theme by Zeno Rocha.\n"
 "\n"
 "MIT License\n"
 "\n"
@@ -1969,18 +1968,18 @@ class Ui_MainWindow(object):
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Microsoft YaHei UI'; font-size:9pt;\"><br /></p>\n"
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600; color:#ff79c6;\">PyPredict</span></p>\n"
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#ffffff;\">PyPredict is an intelligent syst"
-                        "em committed to easing your e-commerce, created using Python and Pyside6 (support for PyQt), and with colors based on the Dracula theme by Zeno Rocha.</span></p>\n"
+                        "em committed to easing your e-commerce, created using Pyside6 and color style based on the Dracula theme by Zeno Rocha.</span></p>\n"
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#ffffff;\">MIT License</span></p>\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#ffffff;\"><br /></p>\n"
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#bd93f9;\">System constructed by Homo</span></p>\n"
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#bd93f9;\">UI style contributed by Wanderson M. Pimenta</span></p>\n"
-"<p align=\"center\""
-                        " style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#bd93f9;\"><br /></p>\n"
+"<p align=\"center\" style=\"-qt-paragraph-type:emp"
+                        "ty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#bd93f9;\"><br /></p>\n"
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600; color:#ff79c6;\">Run System</span></p>\n"
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt; color:#ffffff;\">python main.py</span></p>\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt; color:#ffffff;\"><br /></p>\n"
-"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600; col"
-                        "or:#ff79c6;\">Redesign GUI</span></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600; color:#ff79c6;\">Redesign GUI</spa"
+                        "n></p>\n"
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt; color:#ffffff;\">Pyside6-uic main_PyDracula.ui -o main_PyDracula.py</span></p>\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt; color:#ffffff;\"><br /></p></body></html>", None))
         self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Online Shopping Intention Predicting System</span></p></body></html>", None))

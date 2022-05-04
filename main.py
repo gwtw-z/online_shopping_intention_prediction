@@ -74,8 +74,8 @@ class MainWindow(QMainWindow):
         self.ui.toggleButton.clicked.connect(self.toggleMenu)
         self.ui.toggleLeftBox.clicked.connect(self.toggleLeftBox)
         self.ui.extraCloseColumnBtn.clicked.connect(self.toggleLeftBox)
-        self.ui.btn_adjustments.clicked.connect(self.adjust_page)
-        self.ui.btn_DIY.clicked.connect(self.diy_page)
+        self.ui.btn_adjust_page.clicked.connect(self.widget_page)
+        self.ui.btn_diy_page.clicked.connect(self.widget_page)
         self.ui.btn_select_model.clicked.connect(self.select_model)
         self.ui.btn_select_new_data.clicked.connect(self.select_new_data)
         self.ui.btn_train_new_model.clicked.connect(self.train_new_model)
@@ -156,12 +156,16 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget.setCurrentWidget(self.ui.chart_page)
         if self.current_btn.objectName() == 'btn_save_page':
             self.ui.stackedWidget.setCurrentWidget(self.ui.save_page)
+        if self.current_btn.objectName() == 'btn_adjust_page':
+            self.ui.stackedWidget.setCurrentWidget(self.ui.adjust_page)
+        if self.current_btn.objectName() == 'btn_diy_page':
+            self.ui.stackedWidget.setCurrentWidget(self.ui.diy_page)
 
-    def adjust_page(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.adjust_page)
-
-    def diy_page(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.diy_page)
+    # def adjust_page(self):
+    #     self.ui.stackedWidget.setCurrentWidget(self.ui.adjust_page)
+    #
+    # def diy_page(self):
+    #     self.ui.stackedWidget.setCurrentWidget(self.ui.diy_page)
 
     def pick_model_name(self):
         return self.model_path.split('/')[-1].split('.')[0]
