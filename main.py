@@ -9,8 +9,10 @@ import datetime
 import os
 import seaborn as sns
 
-
 # git config --global http.sslVerify "false"
+os.environ["QT_FONT_DPI"] = "96"
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__(parent=None)
@@ -26,6 +28,8 @@ class MainWindow(QMainWindow):
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.ui.stackedWidget.setCurrentWidget(self.ui.home_page)
+        self.ui.btn_home_page.setStyleSheet(self.selectMenu(self.ui.btn_home_page.styleSheet()))
+        self.current_btn = self.ui.btn_home_page
 
         self.maximize_icon = QIcon()
         self.maximize_icon.addFile(r':/icons/images/icons/icon_maximize.png', QSize(), QIcon.Normal, QIcon.Off)
@@ -55,10 +59,10 @@ class MainWindow(QMainWindow):
     def bind(self):
         self.ui.btn_open_file.clicked.connect(self.select_file)
         self.ui.btn_analyze.clicked.connect(self.show_analysis)
-        self.ui.btn_home.clicked.connect(self.home_page)
-        self.ui.btn_widgets.clicked.connect(self.analysis_page)
-        self.ui.btn_chart.clicked.connect(self.chart_page)
-        self.ui.btn_save_page.clicked.connect(self.save_page)
+        self.ui.btn_home_page.clicked.connect(self.widget_page)
+        self.ui.btn_analyze_page.clicked.connect(self.widget_page)
+        self.ui.btn_chart_page.clicked.connect(self.widget_page)
+        self.ui.btn_save_page.clicked.connect(self.widget_page)
         self.ui.radiobutton_default.clicked.connect(self.select_table_order)
         self.ui.radiobutton_probability.clicked.connect(self.select_table_order)
         self.ui.closeAppBtn.clicked.connect(QCoreApplication.instance().quit)
@@ -77,6 +81,16 @@ class MainWindow(QMainWindow):
         self.ui.btn_train_new_model.clicked.connect(self.train_new_model)
         self.ui.btn_select_path_new_model.clicked.connect(self.select_path_save_new_model)
         self.ui.btn_save_new_model.clicked.connect(self.save_new_model)
+
+    # SELECT
+    def selectMenu(self, get_style):
+        select = get_style + Settings.MENU_SELECTED_STYLESHEET
+        return select
+
+    # DESELECT
+    def deselectMenu(self, get_style):
+        deselect = get_style.replace(Settings.MENU_SELECTED_STYLESHEET, "")
+        return deselect
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -106,17 +120,42 @@ class MainWindow(QMainWindow):
             self.ui.maximizeRestoreAppBtn.setToolTip('Maximize')
             self.window_maximized_flag = False
 
-    def home_page(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.home_page)
+    # def home_page(self):
+    #     self.ui.stackedWidget.setCurrentWidget(self.ui.home_page)
+    #     self.current_btn.setStyleSheet(self.deselectMenu(self.current_btn.styleSheet()))
+    #     self.current_btn = self.ui.btn_home_page
+    #     self.current_btn.setStyleSheet(self.selectMenu(self.current_btn.styleSheet()))
+    #
+    # def analyze_page(self):
+    #     self.ui.stackedWidget.setCurrentWidget(self.ui.analyze_page)
+    #     self.current_btn.setStyleSheet(self.deselectMenu(self.current_btn.styleSheet()))
+    #     self.current_btn = self.ui.btn_analyze_page
+    #     self.current_btn.setStyleSheet(self.selectMenu(self.current_btn.styleSheet()))
+    #
+    # def chart_page(self):
+    #     self.ui.stackedWidget.setCurrentWidget(self.ui.chart_page)
+    #     self.current_btn.setStyleSheet(self.deselectMenu(self.current_btn.styleSheet()))
+    #     self.current_btn = self.ui.btn_chart_page
+    #     self.current_btn.setStyleSheet(self.selectMenu(self.current_btn.styleSheet()))
+    #
+    # def save_page(self):
+    #     self.ui.stackedWidget.setCurrentWidget(self.ui.save_page)
+    #     self.current_btn.setStyleSheet(self.deselectMenu(self.current_btn.styleSheet()))
+    #     self.current_btn = self.ui.btn_save_page
+    #     self.current_btn.setStyleSheet(self.selectMenu(self.current_btn.styleSheet()))
 
-    def analysis_page(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.analysis_page)
-
-    def chart_page(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.chart_page)
-
-    def save_page(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.save_page)
+    def widget_page(self):
+        self.current_btn.setStyleSheet(self.deselectMenu(self.current_btn.styleSheet()))
+        self.current_btn = self.sender()
+        self.current_btn.setStyleSheet(self.selectMenu(self.current_btn.styleSheet()))
+        if self.current_btn.objectName() == 'btn_home_page':
+            self.ui.stackedWidget.setCurrentWidget(self.ui.home_page)
+        if self.current_btn.objectName() == 'btn_analyze_page':
+            self.ui.stackedWidget.setCurrentWidget(self.ui.analyze_page)
+        if self.current_btn.objectName() == 'btn_chart_page':
+            self.ui.stackedWidget.setCurrentWidget(self.ui.chart_page)
+        if self.current_btn.objectName() == 'btn_save_page':
+            self.ui.stackedWidget.setCurrentWidget(self.ui.save_page)
 
     def adjust_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.adjust_page)
@@ -136,8 +175,7 @@ class MainWindow(QMainWindow):
         )[0]
         if model_path == '':
             return
-        else:
-            self.model_path = model_path
+        self.model_path = model_path
         self.ui.line_model_path.setText(self.model_path)
         self.current_model = self.pick_model_name()
         self.ui.label_model.setText('The current model selected is : ' + self.current_model)
@@ -151,8 +189,7 @@ class MainWindow(QMainWindow):
         )[0]
         if file_path == '':
             return
-        else:
-            self.file_path = file_path
+        self.file_path = file_path
         self.ui.line_file_path.setText(self.file_path)
         self.calculate()
 
@@ -222,7 +259,7 @@ class MainWindow(QMainWindow):
     def choose_save_path(self):
         save_path = QFileDialog.getExistingDirectory(self, '选择保存路径', "./")
         if save_path == '':
-            self.ui.line_file_path_2.setText('(Default)./save')
+            return
         else:
             self.save_path = save_path
             self.ui.line_file_path_2.setText(save_path)
@@ -247,9 +284,8 @@ class MainWindow(QMainWindow):
         )[0]
         if new_data == '':
             return
-        else:
-            self.new_data = new_data
-            self.ui.line_file_path_new_data.setText(new_data)
+        self.new_data = new_data
+        self.ui.line_file_path_new_data.setText(new_data)
 
     def train_new_model(self):
         model_name = self.ui.model_choice.currentText()
@@ -266,16 +302,15 @@ class MainWindow(QMainWindow):
         score = classifier.cross_validate(self.user_diy_clf.clf, self.user_diy_clf.test_data,
                                           self.user_diy_clf.test_label, cv=10, scoring=['accuracy'])
         self.ui.label_train_result.setText(
-            'Training result:  ' + model_name + ' scores ' + str(format(score['test_accuracy'].mean(), '.2%'))
-            + ' in ' + str(self.user_diy_clf.train_time))
+            'Training result:  ' + model_name + ' got ' + str(format(score['test_accuracy'].mean(), '.2%'))
+            + ' accuracy in ' + str(format(self.user_diy_clf.train_time, '.5f')) + 's')
 
     def select_path_save_new_model(self):
         save_path = QFileDialog.getExistingDirectory(self, '选择保存路径', "./")
         if save_path == '':
-            self.ui.line_file_path_2.setText('(Default)./model')
-        else:
-            self.new_model_path = save_path
-            self.ui.line_file_path_new_model.setText(save_path)
+            return
+        self.new_model_path = save_path
+        self.ui.line_file_path_new_model.setText(save_path)
 
     def save_new_model(self):
         self.user_diy_clf.save_model(self.new_model_path + '/DIY_' + self.user_diy_clf.clf_name + '.pickle')

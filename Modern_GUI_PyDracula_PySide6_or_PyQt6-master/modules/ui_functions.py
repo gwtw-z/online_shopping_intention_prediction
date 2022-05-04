@@ -185,14 +185,14 @@ class UIFunctions(MainWindow):
     # SELECT/DESELECT MENU
     # ///////////////////////////////////////////////////////////////
     # SELECT
-    def selectMenu(getStyle):
-        select = getStyle + Settings.MENU_SELECTED_STYLESHEET
-        return select
-
-    # DESELECT
-    def deselectMenu(getStyle):
-        deselect = getStyle.replace(Settings.MENU_SELECTED_STYLESHEET, "")
-        return deselect
+    # def selectMenu(getStyle):
+    #     select = getStyle + Settings.MENU_SELECTED_STYLESHEET
+    #     return select
+    #
+    # # DESELECT
+    # def deselectMenu(getStyle):
+    #     deselect = getStyle.replace(Settings.MENU_SELECTED_STYLESHEET, "")
+    #     return deselect
 
     # START SELECTION
     def selectStandardMenu(self, widget):

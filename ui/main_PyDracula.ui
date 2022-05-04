@@ -842,7 +842,7 @@ Button */
                  <number>0</number>
                 </property>
                 <item>
-                 <widget class="QPushButton" name="btn_home">
+                 <widget class="QPushButton" name="btn_home_page">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -881,7 +881,7 @@ Button */
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="btn_widgets">
+                 <widget class="QPushButton" name="btn_analyze_page">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -912,7 +912,8 @@ Button */
                    <enum>Qt::LeftToRight</enum>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-image: url(:/icons/images/icons/cil-browser.png);</string>
+                   <string notr="true">background-image: url(:/icons/images/icons/cil-browser.png);
+</string>
                   </property>
                   <property name="text">
                    <string>Analyze</string>
@@ -920,7 +921,7 @@ Button */
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="btn_chart">
+                 <widget class="QPushButton" name="btn_chart_page">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -990,7 +991,7 @@ Button */
                    <enum>Qt::LeftToRight</enum>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-image: url(:/icons/images/icons/cil-save.png)</string>
+                   <string notr="true">background-image: url(:/icons/images/icons/cil-save.png);</string>
                   </property>
                   <property name="text">
                    <string>Save</string>
@@ -1797,7 +1798,7 @@ background-position: center;
 background-repeat: no-repeat;</string>
                       </property>
                      </widget>
-                     <widget class="QWidget" name="analysis_page">
+                     <widget class="QWidget" name="analyze_page">
                       <property name="styleSheet">
                        <string notr="true">b</string>
                       </property>
