@@ -57,8 +57,8 @@ def normalize(table):
 
 class Classifier:
     # 默认读取全部特征，不过采样，不生成样本
-    def __init__(self, file_path, clf_name='', feature_num=len(mRMR_order), over_sample=False, generate_sample=False,
-                 sample_volume=100):
+    def __init__(self, file_path=origin_file_, clf_name='', feature_num=len(mRMR_order), over_sample=False,
+                 generate_sample=False, sample_volume=100):
         self.clf = None
         self.feature_num = feature_num
         self.over_sample = over_sample
@@ -119,11 +119,14 @@ class Classifier:
 
         return sample
 
-    def tuning(self, param):
-        grid_search = GridSearchCV(self.clf, param, scoring='accuracy', n_jobs=-1, cv=10)
+    def tuning(self, param, scoring):
+        grid_search = GridSearchCV(self.clf, param, scoring=scoring, n_jobs=-1, cv=10, refit=False)
         self.grid_result = grid_search.fit(self.train_data, self.train_label)
+        # self.grid_result = grid_search
+        # print('best ' + scoring + ':', grid_search.best_score_)
+        # print('best parameters:', grid_search.best_params_)
 
-    def train(self, training_time=True):
+    def train(self, training_time=False):
         start = time.time()
         self.clf.fit(self.train_data, self.train_label.ravel())
         end = time.time()
@@ -166,6 +169,7 @@ class KNN(Classifier):
     def __init__(self, file_path, n=23, feature_num=17):
         super(KNN, self).__init__(file_path, clf_name='KNN', feature_num=feature_num)
         self.clf = KNeighborsClassifier(n_neighbors=n)
+        KNeighborsClassifier.predict_proba()
 
 
 class DecisionTree(Classifier):
@@ -175,23 +179,27 @@ class DecisionTree(Classifier):
 
 
 class RandomForest(Classifier):
-    def __init__(self, file_path, n=30, feature_num=17):
+    def __init__(self, file_path, max_depth=9, n_estimators=42, feature_num=17):
+        # n_estimators:42 max_depth:9 test_accuracy:0.909163 roc_auc:0.930263
+        # n_estimators:45 max_depth:8 test_accuracy:0.906731 roc_auc:0.93292
         super(RandomForest, self).__init__(file_path, clf_name='Random Forest', feature_num=feature_num)
-        self.clf = RandomForestClassifier(n_estimators=n, random_state=3)
+        self.clf = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth, random_state=3)
 
 
 class SVM(Classifier):
-    def __init__(self, file_path, c=8.5, feature_num=17):
+    def __init__(self, file_path, c=44, gamma=0.15625, feature_num=17):
+        # C:44 gamma:0.15625 test_accuracy:0.891553 roc_auc:0.884948
+        # C:5 gamma:0.078125 test_accuracy:0.881705 roc_auc:0.896859
         super(SVM, self).__init__(file_path, clf_name='SVM', feature_num=feature_num)
-        self.clf = svm.SVC(C=c, kernel='rbf')
+        self.clf = svm.SVC(C=c, gamma=gamma, kernel='rbf', probability=True)
 
 
 class MLP(Classifier):
-    def __init__(self, file_path, feature_num=17):
-        super(MLP, self).__init__(file_path, clf_name='MLP', feature_num=feature_num)
-        self.clf = MLPClassifier(solver='adam', alpha=0.5, hidden_layer_sizes=(50, 50, 50, 50, 50),
-                                 learning_rate='adaptive', learning_rate_init=0.15, shuffle=True,
-                                 max_iter=5000, random_state=1)
+    def __init__(self, file_path, feature_num=17, over_sample=False):
+        super(MLP, self).__init__(file_path, clf_name='MLP', feature_num=feature_num, over_sample=over_sample)
+        self.clf = MLPClassifier(solver='sgd', alpha=0.0000, hidden_layer_sizes=(50, 40, 30, 20, 10),
+                                 early_stopping=False, learning_rate='constant', learning_rate_init=0.15, shuffle=True,
+                                 max_iter=10000)
 
 
 class LogisticRegression(Classifier):
@@ -201,11 +209,29 @@ class LogisticRegression(Classifier):
 
 
 class GDBT(Classifier):
-    def __init__(self, file_path, lr=0.2, n=20, feature_num=17, over_sample=False):
+    def __init__(self, file_path, lr=0.2, n_estimators=19, max_depth=4, feature_num=17, over_sample=False):
+        # n_estimators:19 max_depth:4 test_accuracy:0.909237 roc_auc:0.936355
+        # n_estimators:16 max_depth:4 test_accuracy:0.908121 roc_auc:0.936568
         super(GDBT, self).__init__(file_path, clf_name='GDBT', feature_num=feature_num, over_sample=over_sample)
-        self.clf = GradientBoostingClassifier(n_estimators=n, learning_rate=lr)
+        self.clf = GradientBoostingClassifier(n_estimators=n_estimators, max_depth=max_depth, learning_rate=lr)
+
 
 # class XGBoost(Classifier):
 #     def __init__(self, file_path, n=10, lr=0.1, feature_num=17):
 #         super(XGBoost, self).__init__(file_path, clf_name='xgboost', feature_num=feature_num)
 #         self.clf = XGBClassifier(object='binary:logistic', n_estimators=n, learning_rate=lr, use_label_encoder=False)
+
+# clf = SVM(origin_file_)
+# clf.train_reader()
+# clf.train()
+# clf.score()
+# clf.show()
+# clf.clf.predict_proba(clf.train_data)
+
+# para = {
+#     'n_estimators': [20, 30],
+#     'max_depth': [10, 20]
+# }
+# clf = RandomForest(origin_file_)
+# clf.train_reader()
+# clf.tuning(para, 'roc_auc')

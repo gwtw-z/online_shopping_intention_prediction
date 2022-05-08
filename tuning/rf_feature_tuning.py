@@ -1,4 +1,4 @@
-from classifier import RandomForest
+from classifier import RandomForest, origin_file_
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import MultipleLocator
 from tqdm import tqdm
@@ -8,7 +8,8 @@ f1 = []
 auc = []
 k_range = range(1, 16, 1)
 for i in tqdm(k_range):
-    clf = RandomForest(n=30, feature_num=i)
+    clf = RandomForest(origin_file_, n=30, feature_num=i)
+    clf.train_reader()
     clf.train()
     clf.score()
     accu.append(clf.result['test_accuracy'].mean())

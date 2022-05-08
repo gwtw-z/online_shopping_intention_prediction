@@ -1557,8 +1557,9 @@ class Ui_MainWindow(object):
         self.model_choice.addItem("")
         self.model_choice.addItem("")
         self.model_choice.addItem("")
+        self.model_choice.addItem("")
         self.model_choice.setObjectName(u"model_choice")
-        self.model_choice.setCurrentText(u"KNN")
+        self.model_choice.setCurrentText(u"(choose a model)")
 
         self.horizontalLayout_10.addWidget(self.model_choice)
 
@@ -1724,12 +1725,12 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_9.addWidget(self.label_save_path)
 
-        self.line_file_path_2 = QLineEdit(self.frame_content_wid_3)
-        self.line_file_path_2.setObjectName(u"line_file_path_2")
-        self.line_file_path_2.setMinimumSize(QSize(0, 30))
-        self.line_file_path_2.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.line_save_file_path = QLineEdit(self.frame_content_wid_3)
+        self.line_save_file_path.setObjectName(u"line_save_file_path")
+        self.line_save_file_path.setMinimumSize(QSize(0, 30))
+        self.line_save_file_path.setStyleSheet(u"background-color: rgb(33, 37, 43);")
 
-        self.horizontalLayout_9.addWidget(self.line_file_path_2)
+        self.horizontalLayout_9.addWidget(self.line_save_file_path)
 
         self.btn_save_path = QPushButton(self.frame_content_wid_3)
         self.btn_save_path.setObjectName(u"btn_save_path")
@@ -1988,7 +1989,7 @@ class Ui_MainWindow(object):
                         "n></p>\n"
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt; color:#ffffff;\">Pyside6-uic main_PyDracula.ui -o main_PyDracula.py</span></p>\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt; color:#ffffff;\"><br /></p></body></html>", None))
-        self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt;\">Online Shopping Intention Predicting System</span></p></body></html>", None))
+        self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:12pt; font-weight:700;\">Online Shopping Intention Predicting System</span></p></body></html>", None))
 #if QT_CONFIG(tooltip)
         self.minimizeAppBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Minimize", None))
 #endif // QT_CONFIG(tooltip)
@@ -2085,10 +2086,11 @@ class Ui_MainWindow(object):
         self.line_file_path_new_data.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
         self.btn_select_new_data.setText(QCoreApplication.translate("MainWindow", u"Select path", None))
         self.label_save_path_5.setText(QCoreApplication.translate("MainWindow", u"Select the machine learning model you'd like to use in this problem : ", None))
-        self.model_choice.setItemText(0, QCoreApplication.translate("MainWindow", u"KNN", None))
-        self.model_choice.setItemText(1, QCoreApplication.translate("MainWindow", u"Decision Tree", None))
-        self.model_choice.setItemText(2, QCoreApplication.translate("MainWindow", u"Random Forest", None))
-        self.model_choice.setItemText(3, QCoreApplication.translate("MainWindow", u"GDBT", None))
+        self.model_choice.setItemText(0, QCoreApplication.translate("MainWindow", u"(choose a model)", None))
+        self.model_choice.setItemText(1, QCoreApplication.translate("MainWindow", u"KNN", None))
+        self.model_choice.setItemText(2, QCoreApplication.translate("MainWindow", u"Decision Tree", None))
+        self.model_choice.setItemText(3, QCoreApplication.translate("MainWindow", u"Random Forest", None))
+        self.model_choice.setItemText(4, QCoreApplication.translate("MainWindow", u"GDBT", None))
 
         self.btn_train_new_model.setText(QCoreApplication.translate("MainWindow", u"Train", None))
         self.label_train_result.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:10pt;\">  Training result:</span></p></body></html>", None))
@@ -2100,8 +2102,8 @@ class Ui_MainWindow(object):
         self.label_diy_model_info.setText(QCoreApplication.translate("MainWindow", u"No DIY model is saved yet.", None))
         self.labelBoxBlenderInstalation_3.setText(QCoreApplication.translate("MainWindow", u"Please select the folder to save data files.", None))
         self.label_save_path.setText(QCoreApplication.translate("MainWindow", u"Save file path:", None))
-        self.line_file_path_2.setText(QCoreApplication.translate("MainWindow", u"(Default)./save", None))
-        self.line_file_path_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
+        self.line_save_file_path.setText(QCoreApplication.translate("MainWindow", u"(Default)./save", None))
+        self.line_save_file_path.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
         self.btn_save_path.setText(QCoreApplication.translate("MainWindow", u"Select path", None))
         self.btn_save_file.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.label_save_answer.setText(QCoreApplication.translate("MainWindow", u"No file is saved yet.", None))

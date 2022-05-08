@@ -11,6 +11,7 @@ from sklearn.utils import shuffle
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import f1_score
+from sklearn.metrics import roc_auc_score
 from imblearn.combine import SMOTETomek
 from classifier import Classifier
 from collections import Counter
@@ -19,22 +20,19 @@ from pandas.plotting import scatter_matrix
 import matplotlib.pyplot as plt
 
 myNet = nn.Sequential(
-    nn.Linear(28, 100),
+    nn.Linear(28, 50),
     nn.ReLU(),
-    nn.Linear(100, 80),
+    nn.Linear(50, 40),
     nn.ReLU(),
-    nn.Linear(80, 50),
-    nn.ReLU(),
-    nn.Linear(50, 30),
+    nn.Linear(40, 30),
     nn.ReLU(),
     nn.Linear(30, 20),
     nn.ReLU(),
-    nn.Linear(20, 10),
-    nn.ReLU(),
-    nn.Linear(10, 1),
+    nn.Linear(20, 1),
 )
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+print(DEVICE)
 myNet = myNet.to(DEVICE)
 
 
@@ -57,17 +55,19 @@ train_data, test_data, train_label, test_label = train_test_split(X, y, test_siz
 test_label = np.array(test_label).ravel()
 train_label = np.array(train_label).ravel()
 
-smote_tomek = SMOTETomek(random_state=3)
-train_data, train_label = smote_tomek.fit_resample(train_data, train_label)
-print('over-sampling done\n')
+# smote_tomek = SMOTETomek(random_state=3)
+# train_data, train_label = smote_tomek.fit_resample(train_data, train_label)
+# print('over-sampling done\n')
 
 # myNet = Net()
 criterion = nn.MSELoss()  # 损失函数
-optimizer = torch.optim.Adam(myNet.parameters(), lr=0.1)  # 优化器
-epochs = 30000  # 训练次数
+optimizer = torch.optim.SGD(myNet.parameters(), lr=0.15)  # 优化器
+epochs = 5000  # 训练次数
+accuracy = []
+roc_auc = []
 
 
-def check(epoch):
+def check(cur_epoch):
     with torch.no_grad():
         test_in = torch.from_numpy(test_data).float().to(DEVICE)
         test_out = myNet(test_in).squeeze().cpu()
@@ -76,9 +76,17 @@ def check(epoch):
                 test_out[i] = 0
             else:
                 test_out[i] = 1
-        accu = test(test_out, test_label)
-        f1 = f1_score(test_label, test_out)
-        print("Epoch:{}\tLoss:{:.10f}\tAccuracy:{:.10f}\tf1-score:{:.10f}".format(epoch, loss.item(), accu, f1))
+        if cur_epoch % 50 == 0:
+            accu = test(test_label, test_out)
+            f1 = f1_score(test_label, test_out)
+            auc = roc_auc_score(test_label, test_out)
+            accuracy.append(accu)
+            roc_auc.append(auc)
+            if cur_epoch % 500 == 0:
+                print(
+                    "Epoch:{}\tLoss:{:.10f}\tAccuracy:{:.10f}\tf1-score:{:.10f}\tauc:{:.10f}".format(cur_epoch,
+                                                                                                     loss.item(),
+                                                                                                     accu, f1, auc))
 
 
 for i in range(epochs):
@@ -89,6 +97,14 @@ for i in range(epochs):
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
-    if i % 500 == 0:  # 每100次输出相关的信息
-        check(i)
+    # if i % 500 == 0:  # 每100次输出相关的信息
+    #     check(i)
+    check(i)
+
 check(epochs)
+data = pd.DataFrame({'accu': accuracy, 'auc': roc_auc})
+plt.plot(data[['accu', 'auc']])
+plt.xlabel('epoch(×50)')
+plt.title('accuracy and roc_auc in training epochs')
+plt.legend(['accuracy', 'roc_auc'], loc='best')
+plt.show(block=True)

@@ -1,5 +1,4 @@
 from PySide6.QtWidgets import QFileDialog
-from PySide6 import QtCore
 from ui.main_PyDracula import *
 from ui.ui_main_pages import *
 from settings import Settings
@@ -9,6 +8,7 @@ import numpy as np
 import datetime
 import os
 import seaborn as sns
+
 
 # git config --global http.sslVerify "false"
 # os.environ["QT_FONT_DPI"] = "96"
@@ -32,15 +32,13 @@ class MainWindow(QMainWindow):
         self.ui.btn_home_page.setStyleSheet(self.selectMenu(self.ui.btn_home_page.styleSheet()))
         self.ui.label_home_picture.setPixmap(QPixmap(r'./images/images/PyPredict.png'))
         self.current_btn = self.ui.btn_home_page
-        # PyDracula_vertical
-        # PyPredict
 
         self.maximize_icon = QIcon()
         self.maximize_icon.addFile(r':/icons/images/icons/icon_maximize.png', QSize(), QIcon.Normal, QIcon.Off)
         self.restore_icon = QIcon()
         self.restore_icon.addFile(r':/icons/images/icons/icon_restore.png', QSize(), QIcon.Normal, QIcon.Off)
         self.ui.radiobutton_default.setChecked(True)
-        self.ui.line_file_path_2.setText('(Default)./save')
+        self.ui.line_save_file_path.setText('(Default)./save')
         self.ui.leftMenuBg.setMinimumWidth(Settings.MENU_WIDTH)
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
@@ -147,6 +145,12 @@ class MainWindow(QMainWindow):
     #     self.current_btn.setStyleSheet(self.deselectMenu(self.current_btn.styleSheet()))
     #     self.current_btn = self.ui.btn_save_page
     #     self.current_btn.setStyleSheet(self.selectMenu(self.current_btn.styleSheet()))
+    #
+    # def adjust_page(self):
+    #     self.ui.stackedWidget.setCurrentWidget(self.ui.adjust_page)
+    #
+    # def diy_page(self):
+    #     self.ui.stackedWidget.setCurrentWidget(self.ui.diy_page)
 
     def widget_page(self):
         self.current_btn.setStyleSheet(self.deselectMenu(self.current_btn.styleSheet()))
@@ -164,12 +168,6 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget.setCurrentWidget(self.ui.adjust_page)
         if self.current_btn.objectName() == 'btn_diy_page':
             self.ui.stackedWidget.setCurrentWidget(self.ui.diy_page)
-
-    # def adjust_page(self):
-    #     self.ui.stackedWidget.setCurrentWidget(self.ui.adjust_page)
-    #
-    # def diy_page(self):
-    #     self.ui.stackedWidget.setCurrentWidget(self.ui.diy_page)
 
     def pick_model_name(self):
         return self.model_path.split('/')[-1].split('.')[0]
@@ -214,7 +212,7 @@ class MainWindow(QMainWindow):
         self.my_clf.load_reader(is_user_diy_model=self.is_diy_model)
         self.my_length = len(self.my_clf.test_data)
         self.result = pd.DataFrame({
-            'Visitor ID': list(range(1, len(self.my_clf.test_data) + 1)),
+            'Visitor ID': list(range(1, self.my_length + 1)),
             # the way Visitor ID is assigned may be improved later
             'Probability': np.delete(self.my_clf.clf.predict_proba(self.my_clf.test_data), 0, axis=1).ravel(),
             'Intention': self.my_clf.clf.predict(self.my_clf.test_data)
@@ -223,12 +221,14 @@ class MainWindow(QMainWindow):
             self.result['Intention'] = self.result['Intention'].apply(lambda x: 'Deal!' if x else 'No, thanks.')
         else:
             self.result['Intention'] = self.result['Intention'].apply(lambda x: 'True' if x else 'False')
-        ax = sns.histplot(self.result['Probability'])
+        sns.set(style='dark')
+        ax = sns.histplot(self.result['Probability'], kde=True, bins=min(20, self.my_length))
         self.chart = ax.get_figure()
         if not os.path.exists('./temp'):
             os.mkdir('./temp')
         self.chart.savefig('./temp/plt.png')
         self.ui.label.setPixmap(QPixmap('./temp/plt.png'))
+        ax.clear()
 
     def select_table_order(self):
         btn_name = self.sender().objectName()
@@ -265,12 +265,12 @@ class MainWindow(QMainWindow):
             self.ui.tableWidget.setItem(i, 2, item_out)
 
     def choose_save_path(self):
-        save_path = QFileDialog.getExistingDirectory(self, '选择保存路径', "./")
+        save_path = QFileDialog.getExistingDirectory(self, '选择保存路径', './')
         if save_path == '':
             return
         else:
             self.save_path = save_path
-            self.ui.line_file_path_2.setText(save_path)
+            self.ui.line_save_file_path.setText(save_path)
 
     def save_output(self):
         if self.result is None:
@@ -297,6 +297,8 @@ class MainWindow(QMainWindow):
 
     def train_new_model(self):
         model_name = self.ui.model_choice.currentText()
+        if model_name == '(choose a model)':
+            return
         if model_name == 'KNN':
             self.user_diy_clf = classifier.KNN(self.new_data)
         if model_name == 'Decision Tree':
@@ -314,7 +316,7 @@ class MainWindow(QMainWindow):
             + ' accuracy in ' + str(format(self.user_diy_clf.train_time, '.5f')) + 's')
 
     def select_path_save_new_model(self):
-        save_path = QFileDialog.getExistingDirectory(self, '选择保存路径', "./")
+        save_path = QFileDialog.getExistingDirectory(self, '选择保存路径', './')
         if save_path == '':
             return
         self.new_model_path = save_path
@@ -329,12 +331,12 @@ class MainWindow(QMainWindow):
         left_width = 0
 
         # Check values
-        if left_box_width == 0 and direction == "left":
+        if left_box_width == 0 and direction == 'left':
             left_width = 240
         else:
             left_width = 0
         # Check values
-        if right_box_width == 0 and direction == "right":
+        if right_box_width == 0 and direction == 'right':
             right_width = 240
         else:
             right_width = 0
@@ -403,7 +405,7 @@ class MainWindow(QMainWindow):
             # RESET BTN
             self.ui.toggleLeftBox.setStyleSheet(style.replace(color, ''))
 
-        self.start_box_animation(width, widthRightBox, "left")
+        self.start_box_animation(width, widthRightBox, 'left')
 
 
 app = QApplication()

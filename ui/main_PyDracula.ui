@@ -1562,7 +1562,7 @@ p, li { white-space: pre-wrap; }
                    </font>
                   </property>
                   <property name="text">
-                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Online Shopping Intention Predicting System&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:700;&quot;&gt;Online Shopping Intention Predicting System&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3074,8 +3074,13 @@ p, li { white-space: pre-wrap; }
                                 <item>
                                  <widget class="QComboBox" name="model_choice">
                                   <property name="currentText">
-                                   <string notr="true">KNN</string>
+                                   <string notr="true">(choose a model)</string>
                                   </property>
+                                  <item>
+                                   <property name="text">
+                                    <string>(choose a model)</string>
+                                   </property>
+                                  </item>
                                   <item>
                                    <property name="text">
                                     <string>KNN</string>
@@ -3447,7 +3452,7 @@ p, li { white-space: pre-wrap; }
                                  </widget>
                                 </item>
                                 <item>
-                                 <widget class="QLineEdit" name="line_file_path_2">
+                                 <widget class="QLineEdit" name="line_save_file_path">
                                   <property name="minimumSize">
                                    <size>
                                     <width>0</width>
