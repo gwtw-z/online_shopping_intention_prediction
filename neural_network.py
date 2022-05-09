@@ -61,8 +61,8 @@ train_label = np.array(train_label).ravel()
 
 # myNet = Net()
 criterion = nn.MSELoss()  # 损失函数
-optimizer = torch.optim.SGD(myNet.parameters(), lr=0.15)  # 优化器
-epochs = 5000  # 训练次数
+optimizer = torch.optim.SGD(myNet.parameters(), lr=0.05)  # 优化器
+epochs = 10000  # 训练次数
 accuracy = []
 roc_auc = []
 
@@ -76,7 +76,7 @@ def check(cur_epoch):
                 test_out[i] = 0
             else:
                 test_out[i] = 1
-        if cur_epoch % 50 == 0:
+        if cur_epoch % 10 == 0:
             accu = test(test_label, test_out)
             f1 = f1_score(test_label, test_out)
             auc = roc_auc_score(test_label, test_out)
@@ -103,8 +103,9 @@ for i in range(epochs):
 
 check(epochs)
 data = pd.DataFrame({'accu': accuracy, 'auc': roc_auc})
+sns.set(style='dark')
 plt.plot(data[['accu', 'auc']])
-plt.xlabel('epoch(×50)')
+plt.xlabel('epoch(×10)')
 plt.title('accuracy and roc_auc in training epochs')
 plt.legend(['accuracy', 'roc_auc'], loc='best')
 plt.show(block=True)

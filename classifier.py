@@ -120,9 +120,8 @@ class Classifier:
         return sample
 
     def tuning(self, param, scoring):
-        grid_search = GridSearchCV(self.clf, param, scoring=scoring, n_jobs=-1, cv=10, refit=False)
-        self.grid_result = grid_search.fit(self.train_data, self.train_label)
-        # self.grid_result = grid_search
+        grid_search = GridSearchCV(self.clf, param, scoring=scoring, n_jobs=-1, cv=10, refit=False, verbose=2)
+        self.grid_result = grid_search.fit(self.test_data, self.test_label)
         # print('best ' + scoring + ':', grid_search.best_score_)
         # print('best parameters:', grid_search.best_params_)
 
@@ -140,7 +139,6 @@ class Classifier:
 
     def show(self):
         print('accuracy:{:.10f}\tauc:{:.10f}\n'.format(self.result['test_accuracy'].mean(),
-                                                       self.result['test_f1'].mean(),
                                                        self.result['test_roc_auc'].mean()))
 
     def save_model(self, model):
@@ -166,10 +164,15 @@ class NaiveBayes(Classifier):
 
 
 class KNN(Classifier):
-    def __init__(self, file_path, n=23, feature_num=17):
-        super(KNN, self).__init__(file_path, clf_name='KNN', feature_num=feature_num)
+    def __init__(self, file_path, n=25, feature_num=17, over_sample=False):
+        # n_neighbors:24  mean_test_accuracy:0.8491467076832929 mean_test_roc_auc:0.7277925234465007
+        # n_neighbors:28 mean_test_accuracy:0.8477953563319417  mean_test_roc_auc:0.7317958347476091
+
+        # over_sampled:
+        # n_neighbors:9 mean_test_accuracy:0.8526616860763202 mean_test_roc_auc:0.7239525303420712
+        # n_neighbors:25 mean_test_accuracy:0.8496879806635904 mean_test_roc_auc:0.7420600929031179
+        super(KNN, self).__init__(file_path, clf_name='KNN', feature_num=feature_num, over_sample=over_sample)
         self.clf = KNeighborsClassifier(n_neighbors=n)
-        KNeighborsClassifier.predict_proba()
 
 
 class DecisionTree(Classifier):
@@ -179,18 +182,27 @@ class DecisionTree(Classifier):
 
 
 class RandomForest(Classifier):
-    def __init__(self, file_path, max_depth=9, n_estimators=42, feature_num=17):
-        # n_estimators:42 max_depth:9 test_accuracy:0.909163 roc_auc:0.930263
-        # n_estimators:45 max_depth:8 test_accuracy:0.906731 roc_auc:0.93292
-        super(RandomForest, self).__init__(file_path, clf_name='Random Forest', feature_num=feature_num)
+    def __init__(self, file_path, max_depth=8, n_estimators=68, feature_num=17, over_sample=False):
+        # n_estimators:84 max_depth:8 test_accuracy:0.896187 roc_auc:0.914586
+        # n_estimators:99 max_depth:8 test_accuracy:0.895104 roc_auc:0.915525
+
+        # over_sampled:
+        # n_estimators:51 max_depth:13 test_accuracy:0.895376 roc_auc:0.911067
+        # n_estimators:68 max_depth:8 test_accuracy:0.892941 roc_auc:0.915193
+        super(RandomForest, self).__init__(file_path, clf_name='Random Forest', feature_num=feature_num,
+                                           over_sample=over_sample)
         self.clf = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth, random_state=3)
 
 
 class SVM(Classifier):
-    def __init__(self, file_path, c=44, gamma=0.15625, feature_num=17):
-        # C:44 gamma:0.15625 test_accuracy:0.891553 roc_auc:0.884948
-        # C:5 gamma:0.078125 test_accuracy:0.881705 roc_auc:0.896859
-        super(SVM, self).__init__(file_path, clf_name='SVM', feature_num=feature_num)
+    def __init__(self, file_path, c=5, gamma=0.078125, feature_num=17, over_sample=False):
+        # C:49 gamma:0.15625 test_accuracy:0.881857 roc_auc:0.859042
+        # C:5 gamma:0.078125 test_accuracy:0.868071 roc_auc:0.876636
+
+        # over_sampled:
+        # C:49 gamma:0.15625 test_accuracy:0.881857  roc_auc:0.859042
+        # C:5 gamma:0.078125 test_accuracy:0.868071 roc_auc:0.876636
+        super(SVM, self).__init__(file_path, clf_name='SVM', feature_num=feature_num, over_sample=over_sample)
         self.clf = svm.SVC(C=c, gamma=gamma, kernel='rbf', probability=True)
 
 
@@ -208,11 +220,12 @@ class LogisticRegression(Classifier):
         self.clf = LR()
 
 
-class GDBT(Classifier):
-    def __init__(self, file_path, lr=0.2, n_estimators=19, max_depth=4, feature_num=17, over_sample=False):
-        # n_estimators:19 max_depth:4 test_accuracy:0.909237 roc_auc:0.936355
-        # n_estimators:16 max_depth:4 test_accuracy:0.908121 roc_auc:0.936568
-        super(GDBT, self).__init__(file_path, clf_name='GDBT', feature_num=feature_num, over_sample=over_sample)
+class GBDT(Classifier):
+    def __init__(self, file_path, lr=0.2, n_estimators=18, max_depth=3, feature_num=17, over_sample=False):
+        # over_sampled:
+        # n_estimators:13 max_depth:3 test_accuracy:0.894294 roc_auc:0.914158
+        # n_estimators:18 max_depth:3 test_accuracy:0.892402 roc_auc:0.917063
+        super(GBDT, self).__init__(file_path, clf_name='GDBT', feature_num=feature_num, over_sample=over_sample)
         self.clf = GradientBoostingClassifier(n_estimators=n_estimators, max_depth=max_depth, learning_rate=lr)
 
 
@@ -228,10 +241,17 @@ class GDBT(Classifier):
 # clf.show()
 # clf.clf.predict_proba(clf.train_data)
 
-# para = {
-#     'n_estimators': [20, 30],
-#     'max_depth': [10, 20]
+# param = {
+#     'n_neighbors': np.arange(2, 30)
 # }
-# clf = RandomForest(origin_file_)
+# clf = KNN(origin_file_, over_sample=True)
 # clf.train_reader()
-# clf.tuning(para, 'roc_auc')
+# clf.tuning(param, ['accuracy', 'roc_auc'])
+# result = pd.DataFrame(clf.grid_result.cv_results_)
+
+# clf = GBDT(origin_file_)
+# clf.train_reader()
+# clf.train()
+# clf.score()
+# clf.show()
+# print(clf.clf.feature_importances_)

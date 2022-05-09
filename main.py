@@ -42,8 +42,8 @@ class MainWindow(QMainWindow):
         self.ui.leftMenuBg.setMinimumWidth(Settings.MENU_WIDTH)
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
-        self.model_path = './model/GDBT.pickle'  # default model
-        self.current_model = '(Default)GDBT'
+        self.model_path = './model/GBDT.pickle'  # default model
+        self.current_model = '(Default)GBDT'
         self.my_clf = None
         self.my_length = None
         self.file_path = None
@@ -305,8 +305,8 @@ class MainWindow(QMainWindow):
             self.user_diy_clf = classifier.DecisionTree(self.new_data)
         if model_name == 'Random Forest':
             self.user_diy_clf = classifier.RandomForest(self.new_data)
-        if model_name == 'GDBT':
-            self.user_diy_clf = classifier.GDBT(self.new_data)
+        if model_name == 'GBDT':
+            self.user_diy_clf = classifier.GBDT(self.new_data)
         self.user_diy_clf.train_reader()
         self.user_diy_clf.train(training_time=False)
         score = classifier.cross_validate(self.user_diy_clf.clf, self.user_diy_clf.test_data,
