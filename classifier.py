@@ -249,5 +249,5 @@ class GBDT(Classifier):
 # clf.tuning(param, ['accuracy', 'roc_auc'])
 # result = pd.DataFrame(clf.grid_result.cv_results_)
 
-clf = GBDT(origin_file_)
-clf.generate_model('GBDT.pickle')
+# clf = GBDT(origin_file_)
+# clf.generate_model('GBDT.pickle')
