@@ -36,9 +36,9 @@ mRMR_order = ['PageValues', 'Month', 'ExitRates', 'Weekend', 'Informational_Dura
               'Administrative_Duration', 'VisitorType', 'ProductRelated_Duration', 'SpecialDay', 'Informational',
               'TrafficType', 'Administrative', 'BounceRates', 'Browser', 'ProductRelated']
 
-origin_file_ = r'D:\repos\毕设\major\repo\online_shopping_intention_prediction\data\online_shoppers_intention.csv'
-file_ = r'D:\repos\毕设\major\repo\online_shopping_intention_prediction\data\sample_10.csv'
-new_data = r'D:\repos\毕设\major\repo\online_shopping_intention_prediction\data\breast_cancer.csv'
+origin_file_ = r'.\data\online_shoppers_intention.csv'
+file_ = r'.\data\sample_10.csv'
+new_data = r'.\data\breast_cancer.csv'
 
 
 def normalize(table):
@@ -249,9 +249,5 @@ class GBDT(Classifier):
 # clf.tuning(param, ['accuracy', 'roc_auc'])
 # result = pd.DataFrame(clf.grid_result.cv_results_)
 
-# clf = GBDT(origin_file_)
-# clf.train_reader()
-# clf.train()
-# clf.score()
-# clf.show()
-# print(clf.clf.feature_importances_)
+clf = GBDT(origin_file_)
+clf.generate_model('GBDT.pickle')
