@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 import datetime
 import os
+import shutil
 import seaborn as sns
 
 
@@ -228,7 +229,7 @@ class MainWindow(QMainWindow):
             os.mkdir('./temp')
         self.chart.savefig('./temp/plt.png')
         self.ui.label.setPixmap(QPixmap('./temp/plt.png'))
-        ax.clear()
+        ax.clear()  # ax not cleared, there would be trouble analyzing more data
 
     def select_table_order(self):
         btn_name = self.sender().objectName()
@@ -285,7 +286,8 @@ class MainWindow(QMainWindow):
             if not os.path.exists(path):
                 os.mkdir(path)
             self.result.to_excel(path + r'/data.xlsx', index=None)
-            self.chart.savefig(path + r'/chart.png')
+            # self.chart.savefig(path + r'/chart.png') # this does not work
+            shutil.copy(r'./temp/plt.png', path)
 
     def select_new_data(self):
         new_data = QFileDialog.getOpenFileName(
