@@ -190,7 +190,7 @@ class MainWindow(QMainWindow):
         file_path = QFileDialog.getOpenFileName(
             self,
             '选择数据文件',
-            r'.',
+            r'./data',
             '(*.csv)'
         )[0]
         if file_path == '':
@@ -265,7 +265,11 @@ class MainWindow(QMainWindow):
             self.ui.tableWidget.setItem(i, 2, item_out)
 
     def choose_save_path(self):
-        save_path = QFileDialog.getExistingDirectory(self, '选择保存路径', './')
+        save_path = QFileDialog.getExistingDirectory(
+            self,
+            '选择保存路径',
+            './save'
+        )
         if save_path == '':
             return
         else:
@@ -287,7 +291,7 @@ class MainWindow(QMainWindow):
         new_data = QFileDialog.getOpenFileName(
             self,
             '选择数据文件',
-            r'.',
+            r'./data',
             '(*.csv)'
         )[0]
         if new_data == '':
@@ -316,7 +320,11 @@ class MainWindow(QMainWindow):
             + ' accuracy in ' + str(format(self.user_diy_clf.train_time, '.5f')) + 's')
 
     def select_path_save_new_model(self):
-        save_path = QFileDialog.getExistingDirectory(self, '选择保存路径', './')
+        save_path = QFileDialog.getExistingDirectory(
+            self,
+            '选择保存路径',
+            r'./model'
+        )
         if save_path == '':
             return
         self.new_model_path = save_path
