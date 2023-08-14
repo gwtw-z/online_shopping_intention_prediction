@@ -142,7 +142,7 @@ class Classifier:
                                                        self.result['test_roc_auc'].mean()))
 
     def save_model(self, model):
-        with open(model, 'wb') as f:
+        with open('./model/'+model, 'wb') as f:
             pickle.dump(self.clf, f)
 
     def load_model(self, model):
@@ -249,5 +249,6 @@ class GBDT(Classifier):
 # clf.tuning(param, ['accuracy', 'roc_auc'])
 # result = pd.DataFrame(clf.grid_result.cv_results_)
 
-# clf = GBDT(origin_file_)
-# clf.generate_model('GBDT.pickle')
+# clf = SVM(origin_file_)
+# clf.generate_model('SVM.pickle')
+

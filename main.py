@@ -176,7 +176,7 @@ class MainWindow(QMainWindow):
         model_path = QFileDialog.getOpenFileName(
             self,
             '选择分析模型',
-            r'.',
+            r'./model',
             '(*.pickle)'
         )[0]
         if model_path == '':
