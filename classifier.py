@@ -60,7 +60,7 @@ class Classifier:
     def __init__(self, file_path=origin_file_, clf_name='', feature_num=len(mRMR_order), over_sample=False,
                  generate_sample=False, sample_volume=100):
         self.clf = None
-        self.feature_num = feature_num
+        # self.feature_num = feature_num
         self.over_sample = over_sample
         self.generate_sample = generate_sample
         self.sample_volume = sample_volume

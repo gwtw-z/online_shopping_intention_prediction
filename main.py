@@ -418,7 +418,8 @@ class MainWindow(QMainWindow):
         self.start_box_animation(width, widthRightBox, 'left')
 
 
-app = QApplication()
-window = MainWindow()
-window.show()
-app.exec()
+if __name__ == '__main__':
+    app = QApplication()
+    window = MainWindow()
+    window.show()
+    app.exec()
