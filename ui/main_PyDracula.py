@@ -1913,7 +1913,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2079,10 +2079,10 @@ class Ui_MainWindow(object):
         self.label.setText(QCoreApplication.translate("MainWindow", u"No pivot chart is created yet.", None))
         self.labelBoxBlenderInstalation_6.setText(QCoreApplication.translate("MainWindow", u"The default model performed best in our test, while the others(*.pickle) are optional here.", None))
         self.label_save_path_4.setText(QCoreApplication.translate("MainWindow", u"Select model path:", None))
-        self.line_model_path.setText(QCoreApplication.translate("MainWindow", u"(Default)./model/GDBT.pickle", None))
+        self.line_model_path.setText(QCoreApplication.translate("MainWindow", u"(Default)./model/GBDT.pickle", None))
         self.line_model_path.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
         self.btn_select_model.setText(QCoreApplication.translate("MainWindow", u"Select", None))
-        self.label_model.setText(QCoreApplication.translate("MainWindow", u"The current model selected is : (Default)GDBT", None))
+        self.label_model.setText(QCoreApplication.translate("MainWindow", u"The current model selected is : (Default) GBDT", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Meet with another problem? Don't worry, because DIY is supported.", None))
         self.label_save_path_6.setText(QCoreApplication.translate("MainWindow", u"Select the path of new problem data : ", None))
         self.line_file_path_new_data.setText("")
@@ -2093,7 +2093,7 @@ class Ui_MainWindow(object):
         self.model_choice.setItemText(1, QCoreApplication.translate("MainWindow", u"KNN", None))
         self.model_choice.setItemText(2, QCoreApplication.translate("MainWindow", u"Decision Tree", None))
         self.model_choice.setItemText(3, QCoreApplication.translate("MainWindow", u"Random Forest", None))
-        self.model_choice.setItemText(4, QCoreApplication.translate("MainWindow", u"GDBT", None))
+        self.model_choice.setItemText(4, QCoreApplication.translate("MainWindow", u"GBDT", None))
 
         self.btn_train_new_model.setText(QCoreApplication.translate("MainWindow", u"Train", None))
         self.label_train_result.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:10pt;\">  Training result:</span></p></body></html>", None))

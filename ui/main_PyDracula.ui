@@ -1791,7 +1791,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>0</number>
+                      <number>3</number>
                      </property>
                      <widget class="QWidget" name="home_page">
                       <property name="styleSheet">
@@ -2860,7 +2860,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                                    <string notr="true">background-color: rgb(33, 37, 43);</string>
                                   </property>
                                   <property name="text">
-                                   <string>(Default)./model/GDBT.pickle</string>
+                                   <string>(Default)./model/GBDT.pickle</string>
                                   </property>
                                   <property name="placeholderText">
                                    <string>Type here</string>
@@ -2910,7 +2910,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                        <item>
                         <widget class="QLabel" name="label_model">
                          <property name="text">
-                          <string>The current model selected is : (Default)GDBT</string>
+                          <string>The current model selected is : (Default) GBDT</string>
                          </property>
                          <property name="alignment">
                           <set>Qt::AlignCenter</set>
@@ -3101,7 +3101,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                                   </item>
                                   <item>
                                    <property name="text">
-                                    <string>GDBT</string>
+                                    <string>GBDT</string>
                                    </property>
                                   </item>
                                  </widget>
